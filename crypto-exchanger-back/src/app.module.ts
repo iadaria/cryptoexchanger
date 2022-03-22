@@ -5,6 +5,11 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import * as Joi from 'joi';
 import { CommonModule } from './common/common.module';
+import { UsersModule } from './users/users.module';
+import { JwtModule } from './jwt/jwt.module';
+import { AuthModule } from './auth/auth.module';
+import { User } from './users/entities/user.entity';
+import { Verification } from './users/entities/verification.entity';
 
 @Module({
   imports: [
@@ -30,7 +35,7 @@ import { CommonModule } from './common/common.module';
       database: process.env.DB_NAME,
       synchronize: process.env.NODE_ENV !== 'prod',
       logging: process.env.NODE_ENV === 'dev',
-      entities: [],
+      entities: [User, Verification],
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       installSubscriptionHandlers: true,
@@ -38,6 +43,9 @@ import { CommonModule } from './common/common.module';
       autoSchemaFile: true,
     }),
     CommonModule,
+    UsersModule,
+    //JwtModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
