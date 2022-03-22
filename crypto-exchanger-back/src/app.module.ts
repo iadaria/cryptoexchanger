@@ -42,9 +42,11 @@ import { Verification } from './users/entities/verification.entity';
       driver: ApolloDriver,
       autoSchemaFile: true,
     }),
+    JwtModule.forRoot({
+      privateKey: process.env.PRIVATE_KEY,
+    }),
     CommonModule,
     UsersModule,
-    //JwtModule,
     AuthModule,
   ],
   controllers: [],

@@ -5,3 +5,10 @@
 type Query {
   isPizzaGood: Boolean!
 }
+
+mutation {
+  createAccount(input:{ email:"Dasha@mail.ru", password:"1234"}) {
+    ok
+    error
+  }
+}
