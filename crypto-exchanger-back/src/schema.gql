@@ -12,3 +12,10 @@ mutation {
     error
   }
 }
+
+query {
+  me() {
+    role
+    email
+  }
+}

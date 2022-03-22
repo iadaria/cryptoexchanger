@@ -41,6 +41,11 @@ import { Verification } from './users/entities/verification.entity';
       installSubscriptionHandlers: true,
       driver: ApolloDriver,
       autoSchemaFile: true,
+      context: ({ req, connection }) => {
+        return {
+          token: req ? req.headers['x-jwt'] : connection.context['X-JWT'],
+        }
+      }
     }),
     JwtModule.forRoot({
       privateKey: process.env.PRIVATE_KEY,
