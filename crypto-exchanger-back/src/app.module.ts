@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import * as Joi from 'joi';
@@ -10,6 +10,8 @@ import { JwtModule } from './jwt/jwt.module';
 import { AuthModule } from './auth/auth.module';
 import { User } from './users/entities/user.entity';
 import { Verification } from './users/entities/verification.entity';
+import { TelegramModule } from './telegram/telegram.module';
+import { getTelegramConfig } from './configs/telegram.config';
 
 @Module({
   imports: [
@@ -24,6 +26,8 @@ import { Verification } from './users/entities/verification.entity';
         DB_USERNAME: Joi.string().required(),
         DB_PASSWORD: Joi.string().required(),
         DB_NAME: Joi.string().required(),
+        TELEGRAM_TOKEN: Joi.string().required(),
+        CHAT_ID: Joi.string().required(),
       }),
     }),
     TypeOrmModule.forRoot({
@@ -53,6 +57,12 @@ import { Verification } from './users/entities/verification.entity';
     CommonModule,
     UsersModule,
     AuthModule,
+    TelegramModule,
+    TelegramModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: getTelegramConfig
+    }),
   ],
   controllers: [],
   providers: [],
