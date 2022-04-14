@@ -14,6 +14,7 @@ import { Verification } from './users/entities/verification.entity';
 //import { getTelegramConfig } from './configs/telegram.config';
 import { TelegrafModule } from 'nestjs-telegraf';
 import { BotModule } from './bot/bot.module';
+import { BotName } from './bot/bot.constants';
 
 @Module({
   imports: [
@@ -66,6 +67,7 @@ import { BotModule } from './bot/bot.module';
       useFactory: getTelegramConfig
     }), */
     TelegrafModule.forRoot({
+      botName: BotName,
       token: process.env.TELEGRAM_TOKEN,
       include: [BotModule],
     }),
