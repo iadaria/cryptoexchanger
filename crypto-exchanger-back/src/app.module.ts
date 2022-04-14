@@ -10,8 +10,10 @@ import { JwtModule } from './jwt/jwt.module';
 import { AuthModule } from './auth/auth.module';
 import { User } from './users/entities/user.entity';
 import { Verification } from './users/entities/verification.entity';
-import { TelegramModule } from './telegram/telegram.module';
-import { getTelegramConfig } from './configs/telegram.config';
+//import { TelegramModule } from './telegram/telegram.module';
+//import { getTelegramConfig } from './configs/telegram.config';
+import { TelegrafModule } from 'nestjs-telegraf';
+import { BotModule } from './bot/bot.module';
 
 @Module({
   imports: [
@@ -57,11 +59,17 @@ import { getTelegramConfig } from './configs/telegram.config';
     CommonModule,
     UsersModule,
     AuthModule,
-    TelegramModule.forRootAsync({
+    // telegram
+   /*  TelegramModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: getTelegramConfig
+    }), */
+    TelegrafModule.forRoot({
+      token: process.env.TELEGRAM_TOKEN,
+      include: [BotModule],
     }),
+    BotModule,
   ],
   controllers: [],
   providers: [],
