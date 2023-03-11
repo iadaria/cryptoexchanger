@@ -15,6 +15,7 @@ import { Verification } from './users/entities/verification.entity';
 import { TelegrafModule } from 'nestjs-telegraf';
 import { BotModule } from './bot/bot.module';
 import { TelegramBotName } from './bot/bot.constants';
+import { sessionMiddleware } from './bot/middleware/session.middleware';
 
 @Module({
   imports: [
@@ -69,6 +70,7 @@ import { TelegramBotName } from './bot/bot.constants';
     TelegrafModule.forRoot({
       botName: TelegramBotName,
       token: process.env.TELEGRAM_TOKEN,
+      middlewares: [sessionMiddleware],
       include: [BotModule],
     }),
     BotModule,
