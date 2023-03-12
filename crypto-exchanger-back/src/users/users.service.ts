@@ -24,7 +24,8 @@ export class UsersService {
     email,
     password,
   }: CreateAccountInput): Promise<{ ok: boolean; error?: string }> {
-    try {
+    return null
+   /*  try {
       const exists = await this.users.findOne({ email });
       if (exists) {
         return { ok: false, error: 'There is a user with that email already' };
@@ -37,11 +38,12 @@ export class UsersService {
       return { ok: true };
     } catch (e) {
       return { ok: false, error: "Coulndn't create account " };
-    }
+    } */
   }
 
   async login({ email, password }: LoginInput): Promise<{ ok: boolean; error?: string; token?: string }> {
-    try {
+    return null
+    /* try {
       const user = await this.users.findOne({ email }, { select: ['id', 'password']});
       if (!user) {
         return { ok: false, error: 'User not found'};
@@ -56,20 +58,22 @@ export class UsersService {
       return { ok: true, token };
     } catch (error) {
       return { ok: false, error };
-    }
+    } */
   }
 
   async findById(id: number): Promise<UserProfileOutput> {
-    try {
+    return null;
+   /*  try {
       const user = await this.users.findOneOrFail({ id });
       return { ok: true, user };
     } catch (error) {
       return { ok: false, error: 'User Not Found'};
-    }
+    } */
   }
 
   async editProfile(userId: number, { email, password }: EditProfileInput) {
-    try {
+    return null
+    /* try {
       const user = await this.users.findOne(userId);
       if (email) {
         user.email = email;
@@ -87,7 +91,7 @@ export class UsersService {
       return { ok: true };
     } catch (error) {
       return { ok: false, error };
-    }
+    } */
   }
 
 }
