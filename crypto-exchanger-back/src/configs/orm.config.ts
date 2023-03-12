@@ -8,7 +8,7 @@ export const isDev = process.env.NODE_ENV === 'dev';
 export const ormClientOptions = (): TypeOrmModuleAsyncOptions => ({
   imports: [ConfigModule],
   useFactory: (configService: ConfigService) => {
-    console.log(configService)
+    //console.log(configService)
     return {
     type: 'postgres',
     host: configService.get<string>('DB_HOST'),
