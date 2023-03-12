@@ -5,6 +5,13 @@ import { BotModule } from "src/bot/bot.module";
 import { sessionMiddleware } from "src/bot/middleware/session.middleware";
 import { ITelegramOptions } from "src/telegram/telegram.interface";
 
+export const telegramConfig = ():TelegrafModuleOptions => ({
+    botName: TelegramBotName,
+    token: process.env.TELEGRAM_TOKEN,
+    middlewares: [sessionMiddleware],
+    include: [BotModule],
+});
+
 export const getTelegramConfig = (configService: ConfigService): ITelegramOptions => {
     const token = configService.get('TELEGRAM_TOKEN');
     if (!token) {
@@ -26,10 +33,3 @@ export const telegramAsyncConfig = (): TelegrafModuleAsyncOptions => ({
     }),
     inject: [ConfigService],
 })
-
-export const telegramConfig = ():TelegrafModuleOptions => ({
-    botName: TelegramBotName,
-    token: process.env.TELEGRAM_TOKEN,
-    middlewares: [sessionMiddleware],
-    include: [BotModule],
-});
