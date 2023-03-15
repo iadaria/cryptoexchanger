@@ -23,8 +23,9 @@ export class BotUpdate {
 
   @Start()
   async onStart(@Ctx() ctx: Context): Promise<void> {
+    console.log(ctx)
+    console.log(ctx.message)
     await ctx.scene.enter(MENU_MAIN);
-    
     //await ctx.replyWithSticker('123123jkbhj6b');
   }
   
@@ -44,8 +45,9 @@ export class BotUpdate {
     @UpdateType() updateType: TelegrafUpdateType,
     @Sender('first_name') firstName: string,
     ): string {
+      console.log('***')
       console.log(updateType);
-      return `Hey ${firstName}`;
+      return `Hey hey ${firstName}`;
     }
     
   @Command('scene')

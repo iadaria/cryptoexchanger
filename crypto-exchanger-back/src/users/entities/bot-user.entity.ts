@@ -1,26 +1,41 @@
-import { Column } from 'typeorm';
-import { Field } from '@nestjs/graphql';
+import { Column, Entity } from 'typeorm';
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
 
 import { CoreEntity } from 'src/common/entities/core.entity';
 import { IsBoolean, IsString } from 'class-validator';
 
+export enum BotUserField {
+  is_bot = 'isBot',
+  first_name = 'firstName',
+  last_name = "lastName",
+  language_code = "languageCode",
+  is_premium = "isPremium",
+  added_to_attachment_menu = "addedToAttachmentMenu",
+  can_join_groups = "canJoinGroups",
+  can_read_all_group_messages = "canReadAllGroupMessages",
+  supports_inline_queries = "supportsInlineQueries"
+}
+
+@InputType('BotUser', { isAbstract: true })
+@ObjectType()
+@Entity({ name: 'BotUser'})
 export class BotUser extends CoreEntity {
   //id - Unique identifier for this user or bot.
 
-  @Column({ comment: 'True, if this user is a bot', default: false })
-  @Field((type) => Boolean, { defaultValue: false})
+  @Column({ name: 'isBot', comment: 'is_bot: True, if this user is a bot', default: false })
+  @Field((type) => Boolean, { name: 'isBot', defaultValue: false})
   @IsBoolean()
-  is_bot: boolean;
+  [BotUserField.is_bot]: boolean;
 
-  @Column({ comment: "User's or bot's first name" })
-  @Field((type) => String)
+  @Column({ name: 'firstName', comment: "first_name: User's or bot's first name" })
+  @Field((type) => String, { name: 'firstName'})
   @IsString()
-  first_name: string;
+  [BotUserField.first_name]: string;
 
-  @Column({ comment: "Optional. User's or bot's last name", nullable: true })
-  @Field((type) => String, { nullable: true })
+  @Column({ name: 'lastName', comment: "last_name: Optional. User's or bot's last name", nullable: true })
+  @Field((type) => String, { name: 'lastName', nullable: true })
   @IsString()
-  last_name?: string;
+  [BotUserField.last_name]?: string;
 
   @Column({ comment: "Optional. Use's or bot's username", nullable: true })
   @Field((type) => String, { nullable: true })
@@ -28,18 +43,19 @@ export class BotUser extends CoreEntity {
   username?: string;
 
   // https://en.wikipedia.org/wiki/IETF_language_tag
-  @Column({ comment: "Optional. IETF language tag of the user's language", nullable: true })
-  @Field((type) => String, { nullable: true })
+  @Column({ name: 'languageCode', comment: "language_code: Optional. IETF language tag of the user's language", nullable: true })
+  @Field((type) => String, { name: 'languageCode', nullable: true })
   @IsString()
-  language_code?: string;
+  [BotUserField.language_code]?: string;
 
   @Column({
+    name: 'isPremium',
     comment: 'Optional. True, if this user is a Telegram Premium user',
     default: false,
   })
-  @Field((type) => Boolean, { defaultValue: false })
+  @Field((type) => Boolean, { name: 'isPremium', defaultValue: false })
   @IsBoolean()
-  is_premium: boolean;
+  [BotUserField.is_premium]: boolean;
   
   @Column({
     comment: 'Optional. True, if this user added the bot to the attachment menu',
@@ -47,7 +63,7 @@ export class BotUser extends CoreEntity {
   })
   @Field((type) => Boolean, { defaultValue: false })
   @IsBoolean()
-  added_to_attachment_menu: boolean;
+  [BotUserField.added_to_attachment_menu]: boolean;
 
   // https://core.telegram.org/bots/api#getme
   @Column({
@@ -56,7 +72,7 @@ export class BotUser extends CoreEntity {
   })
   @Field((type) => Boolean, { defaultValue: false })
   @IsBoolean()
-  can_join_groups: boolean;
+  [BotUserField.can_join_groups]: boolean;
 
   // https://core.telegram.org/bots/features#privacy-mode
   // https://core.telegram.org/bots/api#getme
@@ -66,7 +82,7 @@ export class BotUser extends CoreEntity {
   })
   @Field((type) => Boolean, { defaultValue: false })
   @IsBoolean()
-  can_read_all_group_messages: boolean;
+ [BotUserField.can_read_all_group_messages]: boolean;
 
   // https://core.telegram.org/bots/api#getme
   @Column({
@@ -75,5 +91,5 @@ export class BotUser extends CoreEntity {
   })
   @Field((type) => Boolean, { defaultValue: false })
   @IsBoolean()
-  supports_inline_queries: boolean;
+  [BotUserField.supports_inline_queries]: boolean;
 }
