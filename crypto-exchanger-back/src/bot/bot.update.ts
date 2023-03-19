@@ -1,6 +1,6 @@
 import { UseFilters, UseGuards, UseInterceptors } from '@nestjs/common';
 import { Command, Ctx, Hears, Help, InjectBot, Message, On, Sender, Start, Update } from 'nestjs-telegraf';
-import { Input, Telegraf } from 'telegraf';
+import { Telegraf } from 'telegraf';
 import { UpdateType as TelegrafUpdateType } from 'telegraf/typings/telegram-types';
 import { HELLO_SCENE_1, MENU_MAIN, TelegramBotName } from './bot.constants';
 import { BotService } from './bot.service';
@@ -14,7 +14,6 @@ import { ReverseTextPipe } from './pipes/reverse-text.pipe';
 
 @Update()
 @UseInterceptors(StoreUserInterceptor)
-
 @UseFilters(TelegrafExceptionFilter)
 export class BotUpdate {
   constructor(

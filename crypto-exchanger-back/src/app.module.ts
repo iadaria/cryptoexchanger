@@ -11,7 +11,7 @@ import { BotModule } from './bot/bot.module';
 import { getEnvConfig } from './configs/env.config';
 import { ormClientOptions } from './configs/orm.config';
 import { telegramConfig } from './configs/telegram.config';
-
+import { BotUsersModule } from './bot/users/bot-user.module';
 
 @Module({
   imports: [
@@ -22,6 +22,7 @@ import { telegramConfig } from './configs/telegram.config';
     CommonModule,
     UsersModule,
     AuthModule,
+    BotUsersModule,
     BotModule,
   ],
   controllers: [],

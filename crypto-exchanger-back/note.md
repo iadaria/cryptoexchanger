@@ -22,4 +22,8 @@ Current - save user (may be use middleware)
 
 ### 1.4 Frontend admin
 
+## Between 1 and 2
+### Add redis
+### Check existed users
+
 ## 2 Chat info + Message from user

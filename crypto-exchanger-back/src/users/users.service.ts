@@ -16,7 +16,7 @@ export class UsersService {
   constructor(
     @InjectRepository(User) private readonly users: Repository<User>,
     @InjectRepository(Verification) private readonly verifications: Repository<Verification>,
-   private readonly jwtService: JwtService,
+   //private readonly jwtService: JwtService,
   )
   {}
 
@@ -24,9 +24,8 @@ export class UsersService {
     email,
     password,
   }: CreateAccountInput): Promise<{ ok: boolean; error?: string }> {
-    return null
-   /*  try {
-      const exists = await this.users.findOne({ email });
+   try {
+      const exists = await this.users.findOneBy({ email });
       if (exists) {
         return { ok: false, error: 'There is a user with that email already' };
       }
@@ -38,13 +37,13 @@ export class UsersService {
       return { ok: true };
     } catch (e) {
       return { ok: false, error: "Coulndn't create account " };
-    } */
+    }
   }
 
   async login({ email, password }: LoginInput): Promise<{ ok: boolean; error?: string; token?: string }> {
     return null
-    /* try {
-      const user = await this.users.findOne({ email }, { select: ['id', 'password']});
+   /*  try {
+      const user = await this.users.findOneBy({ email }, { select: ['id', 'password']});
       if (!user) {
         return { ok: false, error: 'User not found'};
       }
@@ -63,7 +62,7 @@ export class UsersService {
 
   async findById(id: number): Promise<UserProfileOutput> {
     return null;
-   /*  try {
+  /*  try {
       const user = await this.users.findOneOrFail({ id });
       return { ok: true, user };
     } catch (error) {
@@ -72,9 +71,8 @@ export class UsersService {
   }
 
   async editProfile(userId: number, { email, password }: EditProfileInput) {
-    return null
-    /* try {
-      const user = await this.users.findOne(userId);
+    try {
+      const user = await this.users.findOneBy({ id: userId });
       if (email) {
         user.email = email;
         user.verified = false;
@@ -91,7 +89,7 @@ export class UsersService {
       return { ok: true };
     } catch (error) {
       return { ok: false, error };
-    } */
+    }
   }
 
 }
