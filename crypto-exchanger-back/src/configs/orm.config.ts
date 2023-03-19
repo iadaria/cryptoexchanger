@@ -1,6 +1,6 @@
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModuleAsyncOptions } from "@nestjs/typeorm";
-import { BotUser } from "src/users/entities/bot-user.entity";
+import { BotUser } from "src/bot/users/entities/bot-user.entity";
 import { User } from "src/users/entities/user.entity";
 import { Verification } from "src/users/entities/verification.entity";
 

@@ -8,11 +8,13 @@ import { UpdateType } from './decorators/update-type.decorator';
 import { TelegrafExceptionFilter } from './filters/telegraf-exception.filter';
 import { AdminGuard } from './guards/admin.guard';
 import { ResponseTimeInterceptor } from './interceptors/response-time.interceptor';
+import { StoreUserInterceptor } from './interceptors/store-user.interceptor';
 import { Context } from './interfaces/context.interface';
 import { ReverseTextPipe } from './pipes/reverse-text.pipe';
 
 @Update()
-@UseInterceptors(ResponseTimeInterceptor)
+@UseInterceptors(StoreUserInterceptor)
+
 @UseFilters(TelegrafExceptionFilter)
 export class BotUpdate {
   constructor(
@@ -23,8 +25,8 @@ export class BotUpdate {
 
   @Start()
   async onStart(@Ctx() ctx: Context): Promise<void> {
-    console.log(ctx)
-    console.log(ctx.message)
+    /* console.log(ctx)
+    console.log(ctx.message) */
     await ctx.scene.enter(MENU_MAIN);
     //await ctx.replyWithSticker('123123jkbhj6b');
   }
@@ -45,15 +47,15 @@ export class BotUpdate {
     @UpdateType() updateType: TelegrafUpdateType,
     @Sender('first_name') firstName: string,
     ): string {
-      console.log('***')
-      console.log(updateType);
+  /*     console.log('***')
+      console.log(updateType); */
       return `Hey hey ${firstName}`;
     }
     
   @Command('scene')
   async onSceneCommand(@Ctx() ctx: Context): Promise<void> {
     const me = await this.bot.telegram.getMe();
-    console.log('command scene ' + me.username)
+    //console.log('command scene ' + me.username)
     //console.log(ctx.scene);
     //console.log(this.bot.context.scene);
       await ctx.scene.enter(HELLO_SCENE_1);
@@ -61,7 +63,7 @@ export class BotUpdate {
 
   @On('text')
   onMessage(@Message('text', new ReverseTextPipe()) reversedText: string): string {
-    console.log('text and echo')
+    //console.log('text and echo')
     return this.botService.echo(reversedText);
   }
   

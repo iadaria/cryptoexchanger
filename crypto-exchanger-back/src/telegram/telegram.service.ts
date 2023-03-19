@@ -1,5 +1,4 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { getTelegramConfig } from 'src/configs/telegram.config';
 import { Telegraf } from 'telegraf';
 import { TELEGRAM_MODULE_OPTIONS } from './telegram.constants';
 import { ITelegramOptions } from './telegram.interface';

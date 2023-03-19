@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module} from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 
@@ -11,6 +11,7 @@ import { BotModule } from './bot/bot.module';
 import { getEnvConfig } from './configs/env.config';
 import { ormClientOptions } from './configs/orm.config';
 import { telegramConfig } from './configs/telegram.config';
+
 
 @Module({
   imports: [
@@ -26,4 +27,11 @@ import { telegramConfig } from './configs/telegram.config';
   controllers: [],
   providers: [],
 })
+
 export class AppModule {}
+/* export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(DbMiddleware).forRoutes({ path: '*', method: RequestMethod.ALL});
+    //throw new Error('Method not implemented.');
+  }
+} */
