@@ -13,7 +13,7 @@ import { Context } from './interfaces/context.interface';
 import { ReverseTextPipe } from './pipes/reverse-text.pipe';
 
 @Update()
-@UseInterceptors(StoreUserInterceptor)
+//@UseInterceptors(StoreUserInterceptor)
 @UseFilters(TelegrafExceptionFilter)
 export class BotUpdate {
   constructor(
@@ -24,8 +24,8 @@ export class BotUpdate {
 
   @Start()
   async onStart(@Ctx() ctx: Context): Promise<void> {
-    /* console.log(ctx)
-    console.log(ctx.message) */
+    console.log(ctx.scene)
+    //console.log(ctx.message)
     await ctx.scene.enter(MENU_MAIN);
     //await ctx.replyWithSticker('123123jkbhj6b');
   }

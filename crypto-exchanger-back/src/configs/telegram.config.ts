@@ -6,6 +6,6 @@ import { sessionMiddleware } from "src/bot/middleware/session.middleware";
 export const telegramConfig = ():TelegrafModuleOptions => ({
     botName: TelegramBotName,
     token: process.env.TELEGRAM_TOKEN,
-    //middlewares: [dbMiddleware, sessionMiddleware],
+    middlewares: [sessionMiddleware],
     include: [BotModule],
 });

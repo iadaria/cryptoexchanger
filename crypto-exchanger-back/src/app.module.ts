@@ -30,9 +30,3 @@ import { BotUsersModule } from './bot/users/bot-user.module';
 })
 
 export class AppModule {}
-/* export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(DbMiddleware).forRoutes({ path: '*', method: RequestMethod.ALL});
-    //throw new Error('Method not implemented.');
-  }
-} */

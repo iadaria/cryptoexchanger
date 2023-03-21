@@ -10,6 +10,7 @@ export class MenuMainScene {
   @SceneEnter()
   async onSceneEnter(ctx: Context) {
     const first_name = ctx.from?.first_name;
+    console.log({ first_name})
     await ctx.reply(`${first_name}, Welcome to the main menu`, {
       reply_markup: {
         inline_keyboard: [
