@@ -10,6 +10,7 @@
     "nx-shared-ui-build": "pnpm nx build shared-ui",
     "nx-all-build": "pnpm nx run-many --target=build --all",
     "nx-all-build-projects": "pnpm nx run-many --target=build --projects=admin-panel, shared-ui",
+    "graph": "npx nx graph",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

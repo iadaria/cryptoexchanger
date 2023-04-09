@@ -1,6 +1,13 @@
 ## nx
 - running: > npx nx <target> <project> or pnpm nx <target> <project>
 
+- running just what changed: >npx nx affected:<target>
+npx nx affected:build
+npx nx affected:test
+npx nx affected:lint
+npx nx affected:publish
+
+
 ### pnpm
 > pnpm init
 
