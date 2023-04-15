@@ -32,8 +32,8 @@ export class User extends CoreEntity {
   @IsBoolean()
   verified: boolean;
 
-  @Column({ type: 'enum', enum: UserRole })
-  @Field((type) => UserRole)
+  @Column({ type: 'enum', enum: UserRole, default: UserRole.Client })
+  @Field((type) => UserRole, { defaultValue: UserRole.Client})
   @IsEnum(UserRole)
   role: UserRole;
 
@@ -55,6 +55,7 @@ export class User extends CoreEntity {
       const ok = await bcrypt.compare(aPassword, this.password);
       return ok;
     } catch (e) {
+      console.error('[users.entity.ts/checkPassword]', e);
       throw new InternalServerErrorException();
     }
   }

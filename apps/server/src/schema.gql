@@ -7,9 +7,20 @@ type Query {
 }
 
 mutation {
-  createAccount(input:{ email:"Dasha@mail.ru", password:"1234"}) {
+  createAccount(input:{ email:"Dasha@mail.ru", password:"1234", role: Admin}) {
     ok
     error
+  }
+}
+
+mutation {
+  login(input:{
+    email:"Dasha@mail.ru",
+    password:"1234"
+  }) {
+    ok
+    error
+    token
   }
 }
 
@@ -17,5 +28,16 @@ query {
   me() {
     role
     email
+  }
+}
+
+query{
+  userProfile(userId:2) {
+    ok
+    error
+    user {
+      email
+      role
+    }
   }
 }

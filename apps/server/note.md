@@ -27,3 +27,7 @@ Current - save user (may be use middleware)
 ### Check existed users
 
 ## 2 Chat info + Message from user
+
+
+### Server connection refused is the server running on that host and accepting TCP/IP connections?
+> brew services start postgresql@14

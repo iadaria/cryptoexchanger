@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "admin-panel-dev": "pnpm --filter admin-panel dev",
-    "shared-ui-build": "pnpm --filter shared-ui dev",
+    "server-dev": "pnpm --filter server start:dev",
+    "shared-ui-dev": "pnpm --filter shared-ui dev",
     "all-build": "pnpm run -r build",
     "nx-shared-ui-build": "pnpm nx build shared-ui",
     "nx-all-build": "pnpm nx run-many --target=build --all",

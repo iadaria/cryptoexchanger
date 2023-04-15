@@ -17,5 +17,6 @@ export const getEnvConfig = (): ConfigModuleOptions => ({
 		DB_NAME: Joi.string().required(),
 		TELEGRAM_TOKEN: Joi.string().required(),
 		CHAT_ID: Joi.string().required(),
+		PORT: Joi.string().required(),
 	})
 });

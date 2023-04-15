@@ -8,17 +8,18 @@ import { JwtModule } from './jwt/jwt.module';
 import { AuthModule } from './auth/auth.module';
 import { TelegrafModule } from 'nestjs-telegraf';
 import { BotModule } from './bot/bot.module';
-import { getEnvConfig } from './configs/env.config';
-import { ormClientOptions } from './configs/orm.config';
-import { telegramConfig } from './configs/telegram.config';
 import { BotUsersModule } from './bot/users/bot-user.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import * as configs from './configs'
+
 
 @Module({
   imports: [
-    ConfigModule.forRoot(getEnvConfig()),
-    TypeOrmModule.forRootAsync(ormClientOptions()),
-    TelegrafModule.forRoot(telegramConfig()),
+    ConfigModule.forRoot(configs.getEnvConfig()),
+    TypeOrmModule.forRootAsync(configs.ormClientOptions()),
+    TelegrafModule.forRoot(configs.telegramConfig()),
     JwtModule.forRoot({ privateKey: process.env.PRIVATE_KEY }),
+    GraphQLModule.forRoot(configs.getGraphQLConfig()),
     CommonModule,
     UsersModule,
     AuthModule,

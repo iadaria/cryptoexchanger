@@ -13,8 +13,8 @@ import { Context } from './interfaces/context.interface';
 import { ReverseTextPipe } from './pipes/reverse-text.pipe';
 
 @Update()
-//@UseInterceptors(StoreUserInterceptor)
-@UseFilters(TelegrafExceptionFilter)
+@UseInterceptors(StoreUserInterceptor)
+//@UseFilters(TelegrafExceptionFilter)
 export class BotUpdate {
   constructor(
     @InjectBot(TelegramBotName)
