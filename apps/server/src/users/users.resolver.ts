@@ -1,5 +1,5 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { Role } from 'src/auth/role.decorator';
+import { Roles } from 'src/auth/role.decorator';
 import { CreateAccountInput, CreateAccountOutput } from './dtos/create-account.dto';
 import { LoginInput, LoginOutput } from './dtos/login.dto';
 import { User } from './entities/user.entity';
@@ -23,19 +23,19 @@ export class UsersResolver {
   }
   
   @Query((returns) => User)
-  @Role(['Any'])
+  @Roles(['Any'])
   me(@AuthUser() authUser: User) {
     return authUser;
   }
 
   @Query((returns) => UserProfileOutput)
-  @Role(['Any'])
+  @Roles(['Any'])
   userProfile(@Args() UserProfileInput: UserProfileInput): Promise<UserProfileOutput> {
     return this.userService.findById(UserProfileInput.userId);
   }
 
   @Mutation((returns) => EditProfileOutput)
-  @Role(['Any'])
+  @Roles(['Any'])
   editProfile(
     @AuthUser() authUser: User,
     @Args('input') editProfileInput: EditProfileInput,
