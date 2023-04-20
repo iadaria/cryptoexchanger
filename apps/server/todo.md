@@ -25,6 +25,9 @@ Mutations, queries
 - видео webauth, webstore, docker, github actions
 - тесты для бота teleton
 - тесты для интрерфейса
+- курсы по docker purple, github actions, gitlab + docker + ci/cd
+- автоматизируем деплой
+- автоматизируем тестирование
 
 ### google auth
 - https://medium.com/@flavtech/google-oauth2-authentication-with-nestjs-explained-ab585c53edec
