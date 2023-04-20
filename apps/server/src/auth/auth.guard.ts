@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
     context: ExecutionContext,
   ): Promise<boolean> {
     const roles = this.relfector.get<AllowedRoles>('roles', context.getHandler());
-    console.log({ roles })
+
     if(!roles) {
       return true;
     }

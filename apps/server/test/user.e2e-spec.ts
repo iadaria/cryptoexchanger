@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import {  Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { TypeOrmModule, getRepositoryToken } from '@nestjs/typeorm';
-import { User } from 'src/users/entities/user.entity';
+import { User, UserRole } from 'src/users/entities/user.entity';
 import { Verification } from 'src/users/entities/verification.entity';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from 'src/jwt/jwt.module';
@@ -30,12 +30,12 @@ describe('UserModule (e2e)', () => {
   const publicTest = (query: string) => baseTest().send({ query });
   const privateTest = (query: string) =>
     baseTest()
-      .set('X-JWT', jwtToken)
-      .set({ query });
+      .set('x-jwt', jwtToken)
+      .send({ query });
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [ 
+      imports: [
         ConfigModule.forRoot(configs.getEnvConfig()),
         TypeOrmModule.forRootAsync(configs.ormClientOptions()),
         JwtModule.forRoot({ privateKey: process.env.PRIVATE_KEY }),
@@ -48,7 +48,7 @@ describe('UserModule (e2e)', () => {
     usersRepository = module.get<Repository<User>>(getRepositoryToken(User));
     await app.init();
   })
-  
+
   afterAll(async () => {
     const connection = usersRepository.manager.connection;
     await connection.synchronize(true);
@@ -81,11 +81,134 @@ describe('UserModule (e2e)', () => {
         });
     });
 
-    it.todo('should fail if accout already exists');
-  })
+    it('should fail if account already exists', () => {
+      return publicTest(`
+        mutation {
+          createAccount(input: {
+            email:"${testUser.email}",
+            password:"${testUser.password}",
+            role:Admin
+          }) {
+            ok
+            error
+          }
+        }
+      `)
+        .expect(200)
+        .expect(res => {
+          console.log(res.body.data)
+          const {
+            body: {
+              data: {
+                createAccount: { ok, error },
+              },
+            },
+          } = res;
+          console.log({ error })
+          expect(ok).toBe(false);
+          expect(error).toBe('There is a user with that email already');
+        });
+    });
+  });
 
-  it.todo('userProfile');
-  it.todo('login');
+  describe('login', () => {
+    it('should login with correct credentials', () => {
+      return publicTest(`
+          mutation {
+            login(input:{
+              email:"${testUser.email}",
+              password:"${testUser.password}",
+            }) {
+              ok
+              error
+              token
+            }
+          }
+        `)
+        .expect(200)
+        .expect(res => {
+          console.log(res.body.data);
+          const {
+            body: {
+              data: { login },
+            },
+          } = res;
+          expect(login.ok).toBe(true);
+          expect(login.error).toBe(null);
+          expect(login.token).toEqual(expect.any(String));
+          jwtToken = login.token;
+        });
+    });
+
+    it('should not be able to login with wrong credentials', () => {
+      return publicTest(`
+          mutation {
+            login(input:{
+              email:"${testUser.email}",
+              password:"xxx",
+            }) {
+              ok
+              error
+              token
+            }
+          }
+        `)
+        .expect(200)
+        .expect(res => {
+          const {
+            body: {
+              data: { login },
+            },
+          } = res;
+          expect(login.ok).toBe(false);
+          expect(login.error).toBe('Wrong password');
+          expect(login.token).toBe(null);
+        });
+    });
+  });
+
+
+  describe('userProfile', () => {
+    let userId: number;
+    beforeAll(async () => {
+      const [user] = await usersRepository.find();
+      userId = user.id;
+      console.log({ userId, jwtToken });
+    });
+    
+    it("should see a user's profile", () => {
+      return privateTest(`
+          {
+            userProfile(userId:${userId}){
+              ok
+              error
+              user {
+                email
+              }
+            }
+          }
+        `)
+        .expect(200)
+        .expect(res => {
+          console.log('userProfile', res.body.data);
+          const {
+            body: {
+              data: {
+                userProfile: {
+                  ok,
+                  error,
+                  user: { email },
+                },
+              },
+            },
+          } = res;
+          expect(ok).toBe(true);
+          expect(error).toBe(null);
+          expect(email).toBe(testUser.email);
+        });
+    });
+  });
+
   it.todo('me');
   it.todo('verifyEmail');
   it.todo('editProfile');
