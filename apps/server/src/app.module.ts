@@ -10,7 +10,7 @@ import { TelegrafModule } from 'nestjs-telegraf';
 import { BotModule } from './bot/bot.module';
 import { BotUsersModule } from './bot/users/bot-user.module';
 import { GraphQLModule } from '@nestjs/graphql';
-import * as configs from './configs'
+import * as configs from 'src/configs';
 
 
 @Module({

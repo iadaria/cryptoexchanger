@@ -1,11 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from '../src/app.module';
-import { getConnection, Repository } from 'typeorm';
-import { getRepositoryToken } from '@nestjs/typeorm';
+import {  Repository } from 'typeorm';
+import { TypeOrmModule, getRepositoryToken } from '@nestjs/typeorm';
 import { User } from 'src/users/entities/user.entity';
 import { Verification } from 'src/users/entities/verification.entity';
+import { ConfigModule } from '@nestjs/config';
+import { JwtModule } from 'src/jwt/jwt.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import { CommonModule } from 'src/common/common.module';
+import { AuthModule } from 'src/auth/auth.module';
+import { UsersModule } from 'src/users/users.module';
+import * as configs from 'src/configs';
 
 const GRAPHQL_ENDPOINT = '/graphql';
 
@@ -29,16 +35,24 @@ describe('UserModule (e2e)', () => {
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [ 
+        ConfigModule.forRoot(configs.getEnvConfig()),
+        TypeOrmModule.forRootAsync(configs.ormClientOptions()),
+        JwtModule.forRoot({ privateKey: process.env.PRIVATE_KEY }),
+        GraphQLModule.forRoot(configs.getGraphQLConfig()),
+        CommonModule,
+        AuthModule,
+        UsersModule,],
     }).compile();
     app = module.createNestApplication();
     usersRepository = module.get<Repository<User>>(getRepositoryToken(User));
     await app.init();
   })
-
+  
   afterAll(async () => {
-    await getConnection().dropDatabase();
-    app.close();
+    const connection = usersRepository.manager.connection;
+    await connection.synchronize(true);
+    await app.close();
   });
 
   /* it('/ (GET)', () => {
@@ -61,6 +75,7 @@ describe('UserModule (e2e)', () => {
         `)
         .expect(200)
         .expect(res => {
+          console.log(res.body.data);
           expect(res.body.data.createAccount.ok).toBe(true);
           expect(res.body.data.createAccount.error).toBe(null);
         });
