@@ -20,23 +20,23 @@ export class AuthGuard implements CanActivate {
   async canActivate(
     context: ExecutionContext,
   ): Promise<boolean> {
-
     const roles = this.relfector.get<AllowedRoles>('roles', context.getHandler());
+    console.log({ roles })
     if(!roles) {
       return true;
     }
     const gqlContext = GqlExecutionContext.create(context).getContext();
     const token = gqlContext.token;
     if (token) {
-      //const user = gqlContext['user'];
+      console.log(token)
       const decoded = this.jwtService.verify(token.toString());
       if (typeof decoded === 'object' && decoded.hasOwnProperty('id')) {
         const { user } = await this.userSerivice.findById(decoded['id']);
-
+        
         if (!user) {
           return false;
         }
-
+        
         gqlContext['user'] = user;
         if (roles.includes('Any')) {
           return true

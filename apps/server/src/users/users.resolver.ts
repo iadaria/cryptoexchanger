@@ -11,17 +11,17 @@ import { EditProfileInput, EditProfileOutput } from './dtos/edit-profile.dto';
 @Resolver((of) => User)
 export class UsersResolver {
   constructor(private readonly userService: UsersService) {}
-
+  
   @Mutation((returns) => CreateAccountOutput)
   createAccount(@Args('input') createAccountInput: CreateAccountInput): Promise<CreateAccountOutput> {
     return this.userService.createAccount(createAccountInput);
   }
-
+  
   @Mutation(returns => LoginOutput)
   login(@Args('input') loginInput: LoginInput): Promise<LoginOutput> {
     return this.userService.login(loginInput);
   }
-
+  
   @Query((returns) => User)
   @Role(['Any'])
   me(@AuthUser() authUser: User) {

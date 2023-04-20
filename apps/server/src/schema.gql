@@ -24,12 +24,16 @@ mutation {
   }
 }
 
-query {
-  me() {
+{
+  me{
     role
     email
   }
 }
+
+and { "x-jwt" : "<token>" }
+
+
 
 query{
   userProfile(userId:2) {
