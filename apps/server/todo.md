@@ -15,9 +15,12 @@ Resolvers - api:
 
 Mutations, queries
 
-### TODO
-- graphql для получения/создания/редактирования пользователей + тест
-- на стороне сервера google auth
+### TODO 1
++ graphql для получения/создания/редактирования пользователей + тест
+- на стороне сервера google auth: searching request in github "nestjs google auth"
+-- what is passport lib nodejs?
+-- google auth nodejs posts?
+-- https://cloud.google.com/nodejs/docs/reference/google-auth-library/latest
 - краш курс по nextjs
 - выбираем admin panel готовую, что накачала
 - на фронте отображаем пользователей nextjs + admin-panel
@@ -29,7 +32,19 @@ Mutations, queries
 - автоматизируем деплой
 - автоматизируем тестирование
 
+Next step
+- разделить на два сервиса: web и telegram bot, api-gate
+
+Reseaching:
+- Joi  or validate ?
+
+### TODO 2
+- изучить библиотеку passport nodejs
+- изучить библиотеку @nestjs/passport
+
 ### google auth
 - https://medium.com/@flavtech/google-oauth2-authentication-with-nestjs-explained-ab585c53edec
 - https://javascript.plainenglish.io/oauth2-in-nestjs-for-social-login-google-facebook-twitter-etc-8b405d570fd2
 - see the next auth 
+Article:
+https://tomanagle.medium.com/google-oauth-with-node-js-4bff90180fe6

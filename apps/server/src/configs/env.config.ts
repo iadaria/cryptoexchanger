@@ -1,5 +1,6 @@
 import { ConfigModuleOptions } from "@nestjs/config";
 import * as Joi from "joi";
+import { validate } from "./env.validation";
 
 export const isDev = process.env.NODE_ENV === 'dev';
 export const isProd = process.env.NODE_ENV === 'prod';
@@ -8,6 +9,7 @@ export const getEnvConfig = (): ConfigModuleOptions => ({
 	isGlobal: true, 
 	envFilePath: isDev ? '.env.dev' : '.env.test',
 	ignoreEnvFile: isProd,
+	validate,
 	validationSchema: Joi.object({
 		NODE_ENV: Joi.string().valid('dev', 'prod', 'test'),
 		DB_HOST: Joi.string().required(),
