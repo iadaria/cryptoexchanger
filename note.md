@@ -79,3 +79,6 @@ If the build succeeds, you should see the compiled output in the packages/shared
 ### Consuming our new package from the <apps/app-name>
 
 >pnpm add <package> --filter <app-name> --workspace 
+
+### Cleaning
+>npm cache clean --force

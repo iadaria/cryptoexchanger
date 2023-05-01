@@ -31,12 +31,13 @@ Mutations, queries
 - курсы по docker purple, github actions, gitlab + docker + ci/cd
 - автоматизируем деплой
 - автоматизируем тестирование
+- change npm to yarn
 
 Next step
 - разделить на два сервиса: web и telegram bot, api-gate
 
 Reseaching:
-- Joi  or validate ?
+- Joi or validate ?
 
 ### TODO 2
 - изучить библиотеку passport nodejs
