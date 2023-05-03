@@ -13,9 +13,9 @@ export class AuthResolver {
     return this.authService.googleAuth(input);
   }
 
-  @Query(() => String)
+  /* @Query(() => String)
   async getGoogleAuthURL() {
     return this.authService.getGoogleURL();
-  }
+  } */
 
 }

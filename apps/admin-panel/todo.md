@@ -8,6 +8,12 @@ https://www.youtube.com/@PurpleSchool/videos
 
 
 ### Course NextJS PurpleSchool
+courses nextjs 13:
+- https://www.youtube.com/watch?v=4lUkSgvmTYM
+- https://www.youtube.com/watch?v=c_-b_isI4vg
+- https://github.com/panaverse/learn-nextjs
+- https://beta.nextjs.org/docs
+
 pages - для роутинга
 
 1 Debugging
