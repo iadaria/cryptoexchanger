@@ -1,20 +1,20 @@
-import { gql } from "@apollo/client";
+import { graphql } from "@/__generated__/gql";
 
-export const CREATE_ACCOUNT_MUTATION = gql`
-mutation createAccount($input: CreateAccountInput!) {
-  createAccount(input: $input) {
-    ok
-    error
-  }
-}
-`;
+export const CREATE_ACCOUNT_MUTATION = graphql(`
+  mutation createAccount($input: CreateAccountInput!) {
+    createAccount(input: $input) {
+      ok
+      error
+    }
+  }`
+);
 
-export const LOGIN_MUTATION = gql`
-  mutation login($input: LoginInput!) {
-    login(input: $input) {
+export const LOGIN_MUTATION = graphql(`
+  mutation login($loginInput: LoginInput!) {
+    login(input: $loginInput) {
       ok
       error
       token
     }
   }
-`;
+`);

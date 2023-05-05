@@ -3,10 +3,7 @@ import { TypeOrmModuleAsyncOptions } from "@nestjs/typeorm";
 import { BotUser } from "src/bot/users/entities/bot-user.entity";
 import { User } from "src/users/entities/user.entity";
 import { Verification } from "src/users/entities/verification.entity";
-
-const nodeEnv = process.env.NODE_ENV;
-const isDev = nodeEnv === 'dev';
-const isProd = nodeEnv === 'prod';
+import { IS_DEV, IS_PROD } from "./env.config";
 
 export const ormClientOptions = (): TypeOrmModuleAsyncOptions => ({
   imports: [ConfigModule],
@@ -21,8 +18,8 @@ export const ormClientOptions = (): TypeOrmModuleAsyncOptions => ({
     password: configService.get('DB_PASSWORD'),
     database: configService.get('DB_NAME'),
     
-    synchronize: !isProd,
-    logging: isDev,
+    synchronize: !IS_PROD,
+    logging: IS_DEV,
     entities: [User, BotUser, Verification],
   }},
   inject: [ConfigService]

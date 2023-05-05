@@ -2,10 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
 import { google } from 'googleapis';
-import { CORS_ORIGIN, GOOGLE_USER_INFO_URL } from 'src/configs/constants';
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from 'src/configs/secrets';
 import { SocialAuthInput } from './dtos/social-code.dto';
 import { UserRole } from 'src/users/entities/user.entity';
+import { CORS_ORIGIN, GOOGLE_USER_INFO_URL } from 'src/configs';
 
 const oauth2Client = new google.auth.OAuth2(
   GOOGLE_CLIENT_ID,
