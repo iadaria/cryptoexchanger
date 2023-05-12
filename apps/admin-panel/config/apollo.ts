@@ -21,7 +21,7 @@ const httpLink = createHttpLink({ uri: ENVS.graphqlUrl });
 //const authLink = setContext({});
 //const SERVER_API_ENDPOIN = 'http://localhost:3000'
 
-export const client = new ApolloClient({
+export const apolloClient = new ApolloClient({
   link: httpLink,
   ssrMode: IS_SERVER,
   cache: new InMemoryCache(),

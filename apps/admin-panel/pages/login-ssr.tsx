@@ -1,44 +1,39 @@
-import { LoginInput } from "@/__generated__/graphql";
+import { LoginInput, LoginOutput } from "@/__generated__/graphql";
 import { EMAIL_PATTERN } from "@/common/common.constants";
 import { FormError } from "@/components/FormError";
+import { apolloClient } from "@/config/apollo";
 import { LOGIN_MUTATION } from "@/graphql/mutation";
-import { ApolloError, useMutation } from "@apollo/client";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 
 interface ILoginForm extends LoginInput {}
 
-export default function LoginPage() {
+export async function getServerSideProps({ email, password }: LoginInput) {
+  if (email && password) {
+    const response = await apolloClient.mutate({
+      mutation: LOGIN_MUTATION,
+      variables: { loginInput : { email, password }},
+    });
+    let data = response.data?.login;
+    //error = response.data?.login.error;
+    
+    return { props: { data }}
+  }
+  return { props: { data: { error: null, ok: null, token: null}} };
+}
 
-  const [loginMutation, loginMutationResult] = useMutation(LOGIN_MUTATION)
-  const { loading, error, data } = loginMutationResult;
+export default function LoginPage(data: LoginOutput) {
 
   const form = useForm<ILoginForm>({
     mode: 'onChange',
     defaultValues: {},
   });
-
-  console.log({ error, data });
-
   const { errors: formErrors } = form.formState;
 
   const onSubmit = async () => {
-    console.log({ loading });
-    if (!loading) {
-      const { email, password } = form.getValues();
-      await loginMutation({ 
-        variables: { loginInput: { email, password } }, 
-         onCompleted: ({ login: data}) => {
-          console.log('onCompleeed')
-          if (data?.token) {
-            console.log({ token: data.token });
-          }
-        },
-        onError: (error: ApolloError) => {
-          console.log('error', error.message);
-        }
-       });
-    }
+    const response = await getServerSideProps(form.getValues());
+    console.log(response)
+    
   };
 
   return (
@@ -92,7 +87,7 @@ export default function LoginPage() {
               >
                 Register
               </button>
-              {error && <FormError errorMessage={error.message} />}
+              {data.error && <FormError errorMessage={data.error} />}
               <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
                 <p className="text-center font-semibold mx-4 mb-0">OR</p>
               </div>

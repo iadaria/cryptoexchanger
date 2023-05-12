@@ -14,7 +14,7 @@ export default function Home() {
         </Link>
         <br></br>
         <br></br>
-        <Link href="/login-server">
+        <Link href="/login-ssr">
           Login Server
         </Link>
         <br></br>

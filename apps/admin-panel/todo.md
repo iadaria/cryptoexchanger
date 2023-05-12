@@ -11,8 +11,11 @@ https://www.youtube.com/@PurpleSchool/videos
 1.8 Сделать старницв по-новомогу по курсу purpleshool
 1.9 Посмотреть краш курс nestjs
 
+# 2 
+Делаем уже на стороне сервера, инициализируем тестирование telegraph python
+1.1 Это нужно создать отдельную репу для этого
 
-### 2
+### Common
 1 SSR, others ?
 2 Google Auth
 3 Choose UX
@@ -23,7 +26,9 @@ https://www.youtube.com/@PurpleSchool/videos
 
 
 ### Course NextJS PurpleSchool
+Скачать github и все изучить под видео:
 courses nextjs 13:
+-https://www.youtube.com/watch?v=wm5gMKuwSYk
 - https://www.youtube.com/watch?v=4lUkSgvmTYM
 - https://www.youtube.com/watch?v=c_-b_isI4vg
 - https://github.com/panaverse/learn-nextjs
