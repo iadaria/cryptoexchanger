@@ -1,4 +1,3 @@
-'use client'
 import { LoginInput } from "@/__generated__/graphql";
 import { EMAIL_PATTERN } from "@/common/common.constants";
 import { FormError } from "@/components/FormError";

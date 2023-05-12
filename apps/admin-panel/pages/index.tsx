@@ -13,6 +13,12 @@ export default function Home() {
           Login
         </Link>
         <br></br>
+        <br></br>
+        <Link href="/login-server">
+          Login Server
+        </Link>
+        <br></br>
+        <br></br>
         <Link href="/about">
           About
         </Link>
