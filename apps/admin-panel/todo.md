@@ -22,13 +22,25 @@ https://www.youtube.com/@PurpleSchool/videos
 4 Show users
 5 Search users
 
+### UI
+
+- tailwind
+  - https://www.youtube.com/watch?v=ft30zcMlFao
+  - русский чувак https://www.youtube.com/watch?v=rW38WPa4ekA
+
+- https://tailwindcss.com/docs/installation
+- daisy 20.5k https://github.com/saadeghi/daisyui
+- https://headlessui.com/react/menu#using-render-props
+- tailwind 11k 
+- hyperui 5.1k
+
 
 
 
 ### Course NextJS PurpleSchool
 Скачать github и все изучить под видео:
 courses nextjs 13:
--https://www.youtube.com/watch?v=wm5gMKuwSYk
+- https://www.youtube.com/watch?v=wm5gMKuwSYk
 - https://www.youtube.com/watch?v=4lUkSgvmTYM
 - https://www.youtube.com/watch?v=c_-b_isI4vg
 - https://github.com/panaverse/learn-nextjs
