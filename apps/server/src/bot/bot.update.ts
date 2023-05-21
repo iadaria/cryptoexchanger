@@ -57,7 +57,7 @@ export class BotUpdate {
     //console.log('command scene ' + me.username)
     //console.log(ctx.scene);
     //console.log(this.bot.context.scene);
-      await ctx.scene.enter(HELLO_SCENE_1);
+      await ctx.scene.enter(MENU_MAIN);
   }
 
   @On('text')

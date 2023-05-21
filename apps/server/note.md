@@ -31,3 +31,7 @@ Current - save user (may be use middleware)
 
 ### Server connection refused is the server running on that host and accepting TCP/IP connections?
 > brew services start postgresql@14
+
+>  nest generate service users --no-spec
+
+- https://docs.nestjs.com/cli/usages

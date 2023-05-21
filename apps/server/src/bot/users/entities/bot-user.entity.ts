@@ -24,8 +24,8 @@ export const transformUserDto = (form: User) => {};
 @Entity({ name: 'BotUser' })
 export class BotUser {
 
-  @PrimaryColumn({ comment: 'id - Unique identifier for this user or bot'})
-  @Field((type) => Number)
+  @PrimaryColumn({ comment: 'id - Unique identifier for this user or bot', type:"bigint" })
+  @Field((type) => BigInt)
   id: number;
 
   @Column({ comment: 'is_bot: True, if this user is a bot', default: false, })
