@@ -1,6 +1,6 @@
 'use client';
 import { LoginInput } from '@/__generated__/graphql';
-import { EMAIL_PATTERN } from '@/common/common.constants';
+import { EMAIL_PATTERN, LOCALSTORAGE_TOKEN } from '@/common/common.constants';
 import { FormError } from '@/components/FormError';
 import { authTokenVar, isLoggedInVar } from '@/config/apollo';
 import { LOGIN_MUTATION } from '@/graphql/mutation';
@@ -32,6 +32,7 @@ export default function LoginPage() {
         onCompleted: ({ login: data }) => {
           console.log('onCompleted', { data });
           if (data.ok && data?.token) {
+            localStorage.setItem(LOCALSTORAGE_TOKEN, data.token);
             authTokenVar(data?.token);
             isLoggedInVar(true);
             console.log({ isLoggedIn: isLoggedInVar(), token: authTokenVar() })

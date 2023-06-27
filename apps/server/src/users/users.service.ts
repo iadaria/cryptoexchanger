@@ -10,6 +10,7 @@ import { JwtService } from 'src/jwt/jwt.service';
 import { UserProfileOutput } from './dtos/user-profile.dto';
 import { EditProfileInput } from './dtos/edit-profile.dto';
 import { Verification } from './entities/verification.entity';
+import { AllUsersOutput } from './dtos/all-users.dto';
 
 @Injectable()
 export class UsersService {
@@ -88,6 +89,21 @@ export class UsersService {
       return { ok: true };
     } catch (error) {
       return { ok: false, error: 'Could not update profile.' };
+    }
+  }
+
+  async allUsers(): Promise<AllUsersOutput> {
+    try {
+      const users = await this.users.find();
+      return {
+        ok: true,
+        users,
+      }
+    } catch {
+      return {
+        ok: false,
+        error: 'Could not load users',
+      };
     }
   }
 

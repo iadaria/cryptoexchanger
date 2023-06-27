@@ -9,6 +9,18 @@ export const ME_QUERY = graphql(`
   }
 `);
 
+export const ALL_USERS = graphql(`
+  query allUsers {
+    allUsers {
+      ok
+      users {
+        email
+        role
+      }
+    }
+  }
+`);
+
 /* export const GOOGLE_LOGIN_QUERY = graphql(`
   query googleAuth($input: SocialAuthInput!) {
     googleAuth(input: $input) {

@@ -7,21 +7,22 @@ import { AuthUser } from 'src/auth/auth-user.decorator';
 import { UsersService } from './users.service';
 import { UserProfileInput, UserProfileOutput } from './dtos/user-profile.dto';
 import { EditProfileInput, EditProfileOutput } from './dtos/edit-profile.dto';
+import { AllUsersOutput } from './dtos/all-users.dto';
 
 @Resolver((of) => User)
 export class UsersResolver {
   constructor(private readonly userService: UsersService) {}
-  
+
   @Mutation((returns) => CreateAccountOutput)
   createAccount(@Args('input') createAccountInput: CreateAccountInput): Promise<CreateAccountOutput> {
     return this.userService.createAccount(createAccountInput);
   }
-  
-  @Mutation(returns => LoginOutput)
+
+  @Mutation((returns) => LoginOutput)
   login(@Args('input') loginInput: LoginInput): Promise<LoginOutput> {
     return this.userService.login(loginInput);
   }
-  
+
   @Query((returns) => User)
   @Roles(['Any'])
   me(@AuthUser() authUser: User) {
@@ -42,5 +43,9 @@ export class UsersResolver {
   ): Promise<EditProfileOutput> {
     return this.userService.editProfile(authUser.id, editProfileInput);
   }
-}
 
+  @Query((returns) => AllUsersOutput)
+  allUsers(): Promise<AllUsersOutput> {
+    return this.userService.allUsers();
+  }
+}

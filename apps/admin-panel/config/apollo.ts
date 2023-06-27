@@ -5,6 +5,7 @@ import {
   createHttpLink,
   makeVar,
 } from '@apollo/client';
+import { setContext } from "@apollo/client/link/context";
 
 let token;
 if (!IS_SERVER) {
@@ -15,11 +16,18 @@ export const authTokenVar = makeVar(token);
 
 const httpLink = createHttpLink({ uri: ENVS.graphqlUrl });
 
+const authLink = setContext((_, { headers }) => ({
+  headers: {
+    ...headers,
+    "x-jwt": authTokenVar() || ""
+  }
+}));
+
 //const authLink = setContext({});
 //const SERVER_API_ENDPOIN = 'http://localhost:3000'
 
 export const apolloClient = new ApolloClient({
-  link: httpLink,
+  link: authLink.concat(httpLink),
   ssrMode: IS_SERVER,
   cache: new InMemoryCache({
     typePolicies: {
