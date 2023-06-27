@@ -9,7 +9,7 @@ export const ME_QUERY = graphql(`
   }
 `);
 
-export const ALL_USERS = graphql(`
+export const ALL_USERS_QUERY = graphql(`
   query allUsers {
     allUsers {
       ok

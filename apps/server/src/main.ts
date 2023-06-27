@@ -10,7 +10,7 @@ async function bootstrap() {
   app.enableCors({
     origin: CORS_ORIGIN,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    allowedHeaders: 'Content-Type, Accept',
+    allowedHeaders: 'Content-Type, Accept, x-jwt',
     credentials: true,
   });
   app.useGlobalPipes(new ValidationPipe());
