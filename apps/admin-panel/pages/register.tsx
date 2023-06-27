@@ -1,51 +1,49 @@
-'use client';
-import { LoginInput } from '@/__generated__/graphql';
+import { CreateAccountInput } from '@/__generated__/graphql';
 import { EMAIL_PATTERN } from '@/common/common.constants';
 import { FormError } from '@/components/FormError';
-import { authTokenVar, isLoggedInVar } from '@/config/apollo';
-import { LOGIN_MUTATION } from '@/graphql/mutation';
+import { CREATE_ACCOUNT_MUTATION } from '@/graphql/mutation';
 import { ApolloError, useMutation } from '@apollo/client';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
-interface ILoginForm extends LoginInput {}
+interface ICreateAccountForm extends CreateAccountInput {}
 
-export default function LoginPage() {
-  const [loginMutation, loginMutationResult] = useMutation(LOGIN_MUTATION);
-  const { loading, error, data } = loginMutationResult;
+export default function RegisterPage() {
+  const [createAccountMutation, createAccountMutationResult] = useMutation(
+    CREATE_ACCOUNT_MUTATION
+  );
+  const { loading, error, data } = createAccountMutationResult;
 
   const router = useRouter();
 
-  const form = useForm<ILoginForm>({
-    mode: 'onChange',
-    defaultValues: {},
-  });
-  const { errors: formErrors } = form.formState;
+	const form = useForm<ICreateAccountForm>({
+		mode: 'onChange',
+		defaultValues: {},
+	});
+	const { errors: formErrors } = form.formState;
 
-  const onSubmit = async () => {
-    console.log({ loading });
-    if (!loading) {
-      const { email, password } = form.getValues();
-      await loginMutation({
-        variables: { loginInput: { email, password } },
-        onCompleted: ({ login: data }) => {
-          console.log('onCompleted', { data });
-          if (data.ok && data?.token) {
-            authTokenVar(data?.token);
-            isLoggedInVar(true);
-            console.log({ isLoggedIn: isLoggedInVar(), token: authTokenVar() })
-            router.push('/users');
-          }
-        },
-        onError: (error: ApolloError) => {
-          console.log('error', error.message);
-        },
-      });
-    }
-  };
+	const onSubmit = async () => {
+		console.log({ loading });
+		if (!loading) {
+			const { email, password, role } = form.getValues();
+			await createAccountMutation({
+				variables: { input: { email, password, role } },
+				onCompleted: ({ createAccount: data }) => {
+					console.log('onCompleted', { data });
+					if (data?.ok) {
+						console.log({ data });
+            router.push('/login');
+					}
+				},
+				onError: (error: ApolloError) => {
+					console.log('error', error.message);
+				}
+			})
+		}
+	}
 
-  return (
+	return (
     <section className="h-screen">
       <div className="container h-full">
         <div className="flex justify-center items-center flex-wrap h-full">
@@ -96,12 +94,12 @@ export default function LoginPage() {
                 className="btn btn-primary w-full"
                 disabled={form.formState.isSubmitting}
               >
-                Login
+                Register
               </button>
               {error && <FormError errorMessage={error.message} />}
               <div className='divider'>OR</div>
               <p className="text-center">
-                <Link href="/register" className="font-medium">
+                <Link href="/login" className="font-medium">
                   Have you registered?
                 </Link>
               </p>

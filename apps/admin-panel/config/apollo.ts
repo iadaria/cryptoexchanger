@@ -7,14 +7,11 @@ import {
 } from '@apollo/client';
 
 let token;
-
 if (!IS_SERVER) {
   token = localStorage.getItem(LOCALSTORAGE_TOKEN);
 }
-
 export const isLoggedInVar = makeVar(Boolean(token));
 export const authTokenVar = makeVar(token);
-
 
 const httpLink = createHttpLink({ uri: ENVS.graphqlUrl });
 
@@ -24,7 +21,24 @@ const httpLink = createHttpLink({ uri: ENVS.graphqlUrl });
 export const apolloClient = new ApolloClient({
   link: httpLink,
   ssrMode: IS_SERVER,
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          isLoggedIn: {
+            read() {
+              return isLoggedInVar();
+            }
+          },
+          token: {
+            read() {
+              return authTokenVar();
+            }
+          }
+        }
+      }
+    }
+  }),
   queryDeduplication: false,
   defaultOptions: {
     watchQuery: { fetchPolicy: 'cache-and-network' },

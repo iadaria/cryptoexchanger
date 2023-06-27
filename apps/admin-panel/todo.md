@@ -3,7 +3,7 @@ https://www.youtube.com/@PurpleSchool/videos
 ### 1
 1.1 Решить с ошибками error
 1.2 Сохранять где-то token and others. effector? recoil?
-1.3 Выносим useMutation в отедльнюу библиотеку data
+1.3 Выносим useMutation в отдельную библиотеку data
 1.4 Попробовать выполнение запроса через apollo.query без 'use client' в nextjs
 1.5 Вызвать goolge login
 1.6 Отобразить пользователей
