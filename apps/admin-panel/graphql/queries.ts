@@ -16,6 +16,7 @@ export const ALL_USERS_QUERY = graphql(`
       users {
         email
         role
+        verified
       }
     }
   }

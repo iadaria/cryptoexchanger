@@ -17,16 +17,15 @@ export class UsersService {
   constructor(
     @InjectRepository(User) private readonly users: Repository<User>,
     @InjectRepository(Verification) private readonly verifications: Repository<Verification>,
-   private readonly jwtService: JwtService,
-  )
-  {}
+    private readonly jwtService: JwtService,
+  ) {}
 
   async createAccount({
     email,
     password,
     role,
   }: CreateAccountInput): Promise<{ ok: boolean; error?: string }> {
-   try {
+    try {
       const exists = await this.users.findOneBy({ email });
       if (exists) {
         return { ok: false, error: 'There is a user with that email already' };
@@ -42,16 +41,19 @@ export class UsersService {
     }
   }
 
-  async login({ email, password }: LoginInput): Promise<{ ok: boolean; error?: string; token?: string }> {
-   try {
-      const user = await this.users.findOne({ where: { email }, select: { id: true, password: true }});
+  async login({
+    email,
+    password,
+  }: LoginInput): Promise<{ ok: boolean; error?: string; token?: string }> {
+    try {
+      const user = await this.users.findOne({ where: { email }, select: { id: true, password: true } });
       if (!user) {
-        return { ok: false, error: 'User not found'};
+        return { ok: false, error: 'User not found' };
       }
 
       const passwordCorrect = await user.checkPassword(password);
       if (!passwordCorrect) {
-        return { ok: false, error: 'Wrong password'};
+        return { ok: false, error: 'Wrong password' };
       }
       const token = this.jwtService.sign(user.id);
 
@@ -62,11 +64,11 @@ export class UsersService {
   }
 
   async findById(id: number): Promise<UserProfileOutput> {
-  try {
+    try {
       const user = await this.users.findOneOrFail({ where: { id } });
       return { ok: true, user };
     } catch (error) {
-      return { ok: false, error: 'User Not Found'};
+      return { ok: false, error: 'User Not Found' };
     }
   }
 
@@ -76,7 +78,7 @@ export class UsersService {
       if (email) {
         user.email = email;
         user.verified = false;
-        await this.verifications.delete({ user: { id: user.id }});
+        await this.verifications.delete({ user: { id: user.id } });
         const verifications = await this.verifications.save(this.verifications.create({ user }));
         // this.mailService.sendVerificationEmail(user.email, verifications.code);
       }
@@ -94,11 +96,13 @@ export class UsersService {
 
   async allUsers(): Promise<AllUsersOutput> {
     try {
-      const users = await this.users.find();
+      const users = await this.users.find({
+        select: { id: true, email: true, verified: true, role: true },
+      });
       return {
         ok: true,
         users,
-      }
+      };
     } catch {
       return {
         ok: false,
@@ -106,5 +110,4 @@ export class UsersService {
       };
     }
   }
-
 }

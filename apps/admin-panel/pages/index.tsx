@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <main className="min-h-screen items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm">
-        <div>{isLoggedIn ? 'You are logged in' : 'You need to log in'}</div>
+        <div>{isLoggedIn ? "You are logged in" : "You need to log in"}</div>
         <br />
         <Link href="/login">
           Login
