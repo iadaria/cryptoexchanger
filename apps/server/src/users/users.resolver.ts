@@ -8,6 +8,7 @@ import { UsersService } from './users.service';
 import { UserProfileInput, UserProfileOutput } from './dtos/user-profile.dto';
 import { EditProfileInput, EditProfileOutput } from './dtos/edit-profile.dto';
 import { AllUsersOutput } from './dtos/all-users.dto';
+import { TelegaAllUsersOutput } from './dtos/telega-all-users.dto';
 
 @Resolver((of) => User)
 export class UsersResolver {
@@ -48,4 +49,10 @@ export class UsersResolver {
   allUsers(): Promise<AllUsersOutput> {
     return this.userService.allUsers();
   }
+
+  // can't need services
+  // @Query((returns) => TelegaAllUsersOutput)
+  // telegaAllUsers(): Promise<TelegaAllUsersOutput> {
+  //   return this.userService.allUsers();
+  // }
 }

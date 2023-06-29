@@ -17,7 +17,16 @@ export class BotUsersService {
         console.log('created user successfuly', { user });
       }
     } catch (e) {
-      console.log("Couldn't create account");
+      console.log("Couldn't create account", e);
+    }
+  }
+
+  async allBotUsers() {
+    try {
+      const users = await this.users.find();
+      return users;
+    } catch (error) {
+      console.log("Couldn't get bot users", { error });
     }
   }
 }
