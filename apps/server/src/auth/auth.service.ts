@@ -51,7 +51,7 @@ export class AuthService {
     }
   }
 
-  getGoogleAuth() {
+  getGoogleAuthURL() {
     /*
      * Generate a url that asks permissions to the user's email and profile
      */

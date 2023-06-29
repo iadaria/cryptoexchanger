@@ -81,6 +81,7 @@ export type MutationLoginArgs = {
 export type Query = {
   __typename?: 'Query';
   allUsers: AllUsersOutput;
+  getGoogleAuthURL: Scalars['String'];
   googleAuth: User;
   me: User;
   userProfile: UserProfileOutput;

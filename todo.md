@@ -6,6 +6,7 @@
 5 Front: Show inputs => after microservices
 6 ! Test: add new input to postgress and check it
 7 ! split in microservices
+8 ! split code of users and auth (see NextJS-NestJS-Graphql example)
 
 # 1.1
 1 test: send a message from test number (99663..) and fix it on db
