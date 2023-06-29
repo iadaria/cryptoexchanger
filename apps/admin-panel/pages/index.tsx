@@ -6,7 +6,11 @@ import Link from 'next/link';
 
 export default function Home() {
   console.log({ pid: process?.pid});
-  
+
+  function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void {
+    throw new Error('Function not implemented.');
+  }
+
   return (
     <main className="min-h-screen items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm">
@@ -15,17 +19,20 @@ export default function Home() {
         <Link href="/login">
           Login
         </Link>
-        <br></br>
-        <br></br>
+        <br />
+        <br />
         <Link href="/register">
           Register
         </Link>
-        <br></br>
-        <br></br>
+        <br />
+        <br />
         <Link href="/about">
           About
         </Link>
+        <br />
+        <br />
+        <a onClick={handleClick}>Google auth</a>
       </div>
     </main>
-  )
+  );
 }
