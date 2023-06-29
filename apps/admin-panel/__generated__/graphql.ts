@@ -5,55 +5,57 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
 };
 
 export type AllUsersOutput = {
   __typename?: 'AllUsersOutput';
-  error?: Maybe<Scalars['String']>;
-  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']['output']>;
+  ok: Scalars['Boolean']['output'];
   users?: Maybe<Array<User>>;
 };
 
 export type CreateAccountInput = {
-  email: Scalars['String'];
-  password: Scalars['String'];
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
   role?: UserRole;
 };
 
 export type CreateAccountOutput = {
   __typename?: 'CreateAccountOutput';
-  error?: Maybe<Scalars['String']>;
-  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']['output']>;
+  ok: Scalars['Boolean']['output'];
 };
 
 export type EditProfileInput = {
-  email?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  password?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type EditProfileOutput = {
   __typename?: 'EditProfileOutput';
-  error?: Maybe<Scalars['String']>;
-  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']['output']>;
+  ok: Scalars['Boolean']['output'];
 };
 
 export type LoginInput = {
-  email: Scalars['String'];
-  password: Scalars['String'];
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
 };
 
 export type LoginOutput = {
   __typename?: 'LoginOutput';
-  error?: Maybe<Scalars['String']>;
-  ok: Scalars['Boolean'];
-  token?: Maybe<Scalars['String']>;
+  error?: Maybe<Scalars['String']['output']>;
+  ok: Scalars['Boolean']['output'];
+  token?: Maybe<Scalars['String']['output']>;
 };
 
 export type Mutation = {
@@ -81,7 +83,7 @@ export type MutationLoginArgs = {
 export type Query = {
   __typename?: 'Query';
   allUsers: AllUsersOutput;
-  getGoogleAuthURL: Scalars['String'];
+  getGoogleAuthURL: Scalars['String']['output'];
   googleAuth: User;
   me: User;
   userProfile: UserProfileOutput;
@@ -94,25 +96,25 @@ export type QueryGoogleAuthArgs = {
 
 
 export type QueryUserProfileArgs = {
-  userId: Scalars['Int'];
+  userId: Scalars['Int']['input'];
 };
 
 export type SocialAuthInput = {
-  code?: InputMaybe<Scalars['String']>;
+  code?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type User = {
   __typename?: 'User';
-  email: Scalars['String'];
-  password: Scalars['String'];
+  email: Scalars['String']['output'];
+  password: Scalars['String']['output'];
   role: UserRole;
-  verified: Scalars['Boolean'];
+  verified: Scalars['Boolean']['output'];
 };
 
 export type UserProfileOutput = {
   __typename?: 'UserProfileOutput';
-  error?: Maybe<Scalars['String']>;
-  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']['output']>;
+  ok: Scalars['Boolean']['output'];
   user?: Maybe<User>;
 };
 
