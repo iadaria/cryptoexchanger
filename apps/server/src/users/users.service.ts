@@ -11,11 +11,13 @@ import { UserProfileOutput } from './dtos/user-profile.dto';
 import { EditProfileInput } from './dtos/edit-profile.dto';
 import { Verification } from './entities/verification.entity';
 import { AllUsersOutput } from './dtos/all-users.dto';
+import { GoogleUser } from './entities/google-user.entity';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private readonly users: Repository<User>,
+    @InjectRepository(GoogleUser) private readonly googleUsers: Repository<GoogleUser>,
     @InjectRepository(Verification) private readonly verifications: Repository<Verification>,
     private readonly jwtService: JwtService,
   ) {}
@@ -41,12 +43,34 @@ export class UsersService {
     }
   }
 
+  // Internal function - ? - May be go out to a separate function/service
+  async createGoogleAccount(googleUserGot: GoogleUser) {
+    const { email } = googleUserGot;
+    try {
+      const exists = await this.googleUsers.findOneBy({ email });
+      if (!exists) {
+        const newG = await this.googleUsers.create(googleUserGot);
+        const newU= await this.users.create(newG.getBasicUser());
+        newG.user = newU;
+        const googleUser = await this.googleUsers.save(newG);
+        const user = await this.users.save(newU);
+        const token = this.jwtService.sign(user.id);
+        return { ok: true, token };
+      }
+    } catch (error) {
+      return { ok: false, error };
+    }
+  }
+
   async login({
     email,
     password,
   }: LoginInput): Promise<{ ok: boolean; error?: string; token?: string }> {
     try {
-      const user = await this.users.findOne({ where: { email }, select: { id: true, password: true } });
+      const user = await this.users.findOne({
+        where: { email },
+        select: { id: true, password: true },
+      });
       if (!user) {
         return { ok: false, error: 'User not found' };
       }
@@ -79,7 +103,9 @@ export class UsersService {
         user.email = email;
         user.verified = false;
         await this.verifications.delete({ user: { id: user.id } });
-        const verifications = await this.verifications.save(this.verifications.create({ user }));
+        const verifications = await this.verifications.save(
+          this.verifications.create({ user }),
+        );
         // this.mailService.sendVerificationEmail(user.email, verifications.code);
       }
 

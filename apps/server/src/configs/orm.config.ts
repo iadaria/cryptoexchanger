@@ -4,6 +4,7 @@ import { BotUser } from "src/bot/users/entities/bot-user.entity";
 import { User } from "src/users/entities/user.entity";
 import { Verification } from "src/users/entities/verification.entity";
 import { IS_DEV, IS_PROD } from "./env.config";
+import { GoogleUser } from "src/users/entities/google-user.entity";
 
 export const ormClientOptions = (): TypeOrmModuleAsyncOptions => ({
   imports: [ConfigModule],
@@ -20,7 +21,7 @@ export const ormClientOptions = (): TypeOrmModuleAsyncOptions => ({
     
     synchronize: !IS_PROD,
     logging: IS_DEV,
-    entities: [User, BotUser, Verification],
+    entities: [User, BotUser, Verification, GoogleUser],
   }},
   inject: [ConfigService]
 });

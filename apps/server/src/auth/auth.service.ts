@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { google } from 'googleapis';
 import { SocialAuthInput } from './dtos/social-code.dto';
 import { UserRole } from 'src/users/entities/user.entity';
-import { GOOGLE_USER_INFO_URL } from 'src/configs';
 import { AuthConfigService } from 'src/auth/authConfig.service';
 import axios from 'axios';
 
@@ -26,6 +25,18 @@ export class AuthService {
     const googleUser = await this.getGoogleUser({ code });
 
     console.log('auth.service', { googleUser });
+    /**
+     *  {
+    id: '106000197497240957427',
+    email: 'dahunichka@gmail.com',
+    verified_email: true,
+    name: 'Dariana Orlova',
+    given_name: 'Dariana',
+    family_name: 'Orlova',
+    picture: 'https://lh3.googleusercontent.com/a/AAcHTtdYfYNFNO2I10jrGTahrAxIVjYP5FZATizvObVKDdN-lbs=s96-c',
+    locale: 'ru'
+  }
+     */
 
     return {
       email: 'test@email',
@@ -37,43 +48,23 @@ export class AuthService {
     /*
      * Generate a url that asks permissions to the user's email and profile
      */
-
-    const scopes = [
-      'https://www.googleapis.com/auth/userinfo.profile',
-      'https://www.googleapis.com/auth/userinfo.email',
-    ];
-
     return this.oauth2Client.generateAuthUrl({
       // eslint-disable-next-line @typescript-eslint/camelcase
       access_type: 'offline',
       prompt: 'consent',
-      scope: scopes, // If you only need one scope you can pass it as string
+      scope: this.config.GoogleAuthScopes, // If you only need one scope you can pass it as string
     });
   }
 
   private async getGoogleUser({ code }) {
 		const { tokens } = await this.oauth2Client.getToken(code);
-		console.log('auth.service tokens', tokens);
-	
 		this.oauth2Client.setCredentials(tokens);
-	
-		// Fetch the user's profile with the access token and bearer
-		/* const googleUser = axios
-			.get(`${this.config.GoogleUserInfoURL}?alt=json&access_token=${tokens.access_token}`, {
-				headers: { Authorization: `Bearer ${tokens.id_token}` },
-			})
-			.then((res) => res.data)
-			.catch((error) => {
-				throw new Error(error.message);
-			}); */
+
     const url = `${this.config.GoogleUserInfoURL}?alt=json&access_token=${tokens.access_token}`;
     const headers = { Authorization: `Bearer ${tokens.id_token}` };
     try {
       const googleUser = await axios.get(url, { headers });
-      console.log({ googleUser });
-      const data = googleUser.data;
-      console.log({ data });
-      return data;
+      return googleUser.data;
     } catch (error) {
       console.log('Can\'t auth through Google account', { error });
     }

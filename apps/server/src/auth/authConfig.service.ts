@@ -23,4 +23,8 @@ export class AuthConfigService {
   get GoogleUserInfoURL(): string {
     return this.configService.get('GOOGLE_USER_INFO_URL');
   }
+
+  get GoogleAuthScopes(): string[] {
+    return JSON.parse(this.configService.get('GOOGLE_AUTH_SCOPES'));
+  }
 }

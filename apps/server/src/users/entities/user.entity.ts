@@ -11,7 +11,16 @@ export enum UserRole {
   Admin = 'Admin',
 }
 
+export enum AuthWay {
+  Google = 'Google',
+  Github = 'Github',
+  Telegram = 'Telegram',
+  Yandex = 'Yandex',
+  Site = 'Site',
+}
+
 registerEnumType(UserRole, { name: 'UserRole' });
+registerEnumType(AuthWay, { name: 'AuthWay'});
 
 @InputType('UserInputType', { isAbstract: true })
 @ObjectType()
@@ -36,6 +45,11 @@ export class User extends CoreEntity {
   @Field((type) => UserRole, { defaultValue: UserRole.Client})
   @IsEnum(UserRole)
   role: UserRole;
+
+  @Column({ type: 'enum', enum: AuthWay, default: AuthWay.Site })
+  @Field((type) => AuthWay, { defaultValue: AuthWay.Site})
+  @IsEnum(AuthWay)
+  authWay: AuthWay;
 
   @BeforeInsert()
   @BeforeUpdate()

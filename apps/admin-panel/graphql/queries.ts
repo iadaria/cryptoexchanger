@@ -22,14 +22,14 @@ export const ALL_USERS_QUERY = graphql(`
   }
 `);
 
-/* export const GOOGLE_LOGIN_QUERY = graphql(`
+export const GOOGLE_LOGIN_QUERY = graphql(`
   query googleAuth($input: SocialAuthInput!) {
     googleAuth(input: $input) {
-      _id
+      email
     }
   }
 `);
-*/
+
 export const GET_GOOGLE_LOG_LINK = graphql(`
   query getGoogleAuthURL {
     getGoogleAuthURL

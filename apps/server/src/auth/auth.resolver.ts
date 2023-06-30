@@ -17,5 +17,4 @@ export class AuthResolver {
   async getGoogleAuthURL() {
     return this.authService.getGoogleAuthURL();
   }
-
 }

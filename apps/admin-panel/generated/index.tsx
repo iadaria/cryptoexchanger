@@ -149,6 +149,13 @@ export type AllUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type AllUsersQuery = { readonly __typename?: 'Query', readonly allUsers: { readonly __typename?: 'AllUsersOutput', readonly ok: boolean, readonly users?: ReadonlyArray<{ readonly __typename?: 'User', readonly email: string, readonly role: UserRole, readonly verified: boolean }> | null } };
 
+export type GoogleAuthQueryVariables = Exact<{
+  input: SocialAuthInput;
+}>;
+
+
+export type GoogleAuthQuery = { readonly __typename?: 'Query', readonly googleAuth: { readonly __typename?: 'User', readonly email: string } };
+
 export type GetGoogleAuthUrlQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -298,6 +305,41 @@ export function useAllUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<A
 export type AllUsersQueryHookResult = ReturnType<typeof useAllUsersQuery>;
 export type AllUsersLazyQueryHookResult = ReturnType<typeof useAllUsersLazyQuery>;
 export type AllUsersQueryResult = Apollo.QueryResult<AllUsersQuery, AllUsersQueryVariables>;
+export const GoogleAuthDocument = gql`
+    query googleAuth($input: SocialAuthInput!) {
+  googleAuth(input: $input) {
+    email
+  }
+}
+    `;
+
+/**
+ * __useGoogleAuthQuery__
+ *
+ * To run a query within a React component, call `useGoogleAuthQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGoogleAuthQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGoogleAuthQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useGoogleAuthQuery(baseOptions: Apollo.QueryHookOptions<GoogleAuthQuery, GoogleAuthQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GoogleAuthQuery, GoogleAuthQueryVariables>(GoogleAuthDocument, options);
+      }
+export function useGoogleAuthLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GoogleAuthQuery, GoogleAuthQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GoogleAuthQuery, GoogleAuthQueryVariables>(GoogleAuthDocument, options);
+        }
+export type GoogleAuthQueryHookResult = ReturnType<typeof useGoogleAuthQuery>;
+export type GoogleAuthLazyQueryHookResult = ReturnType<typeof useGoogleAuthLazyQuery>;
+export type GoogleAuthQueryResult = Apollo.QueryResult<GoogleAuthQuery, GoogleAuthQueryVariables>;
 export const GetGoogleAuthUrlDocument = gql`
     query getGoogleAuthURL {
   getGoogleAuthURL

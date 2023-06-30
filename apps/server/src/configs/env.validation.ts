@@ -1,4 +1,4 @@
-import { IsDataURI, IsDefined, IsNumber, IsString, validateSync } from "class-validator";
+import { IsDefined, IsNumber, IsString, validateSync } from "class-validator";
 import { plainToClass } from 'class-transformer';
 
 // https://github.com/typestack/class-validator
@@ -22,6 +22,9 @@ class EnvironmentVariables {
 
   @IsString({ message: 'Invalid CORS_ORIGIN '})
   CORS_ORIGIN: string;
+
+  @IsString()
+  GOOGLE_AUTH_SCOPES: string[];
 }
 
 export const validate = (config: Record<string, unknown>) => {
