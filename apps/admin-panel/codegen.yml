@@ -4,7 +4,6 @@ documents: "graphql/**/*.ts"
 generates:
   generated/index.tsx:
     plugins:
-      - add: '// THIS IS A GENERATED FILE, use `yarn codegen to regenerate'
       - "typescript"
       - "typescript-operations"
       - "typescript-react-apollo"

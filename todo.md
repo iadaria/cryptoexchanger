@@ -15,6 +15,10 @@
 1 Services: bot, api-web, back-for-web
 2 Docker  
 
+# 3 Reserching
+1 https://the-guild.dev/graphql/codegen/docs/guides/react-vue
+2 libs from NextJS-NestJS-GraphQL-Starter: @graphql-codegen/typescript-operations and ..
+
 # courses
 1 Nextjs purple
 2 Nomade

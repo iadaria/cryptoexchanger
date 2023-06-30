@@ -29,10 +29,9 @@ export const ALL_USERS_QUERY = graphql(`
     }
   }
 `);
-
+*/
 export const GET_GOOGLE_LOG_LINK = graphql(`
   query getGoogleAuthURL {
     getGoogleAuthURL
   }
 `);
- */

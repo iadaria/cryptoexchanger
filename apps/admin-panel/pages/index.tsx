@@ -2,13 +2,26 @@
 //import { Inter } from 'next/font/google'
 import { Button } from 'shared-ui'
 import Link from 'next/link';
+import { useGetGoogleAuthUrlQuery } from '@/generated';
 //const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   console.log({ pid: process?.pid});
 
+  const href = useGetGoogleAuthUrlQuery();
+
   function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void {
-    throw new Error('Function not implemented.');
+    let win;
+    const _href = href?.data?.getGoogleAuthURL;
+    if (_href) {
+      console.log({ _href});
+
+      win = window.open(
+        _href,
+        '_blank',
+        'location=yes,height=570,width=520,scrollbars=yes,status=yes'
+      );
+    }
   }
 
   return (
