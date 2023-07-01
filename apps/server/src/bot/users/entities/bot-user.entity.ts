@@ -115,5 +115,5 @@ export class BotUser {
 
   @UpdateDateColumn({ precision: 7})
   @Field((type) => Date)
-  updateAt: Date;
+  updatedAt: Date;
 }

@@ -1,15 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { google } from 'googleapis';
 import { SocialAuthInput } from './dtos/social-code.dto';
-import { UserRole } from 'src/users/entities/user.entity';
 import { AuthConfigService } from 'src/auth/authConfig.service';
 import axios from 'axios';
+
+//* Should be out in another shared lib
+import { Jwt } from 'src/users/interfaces/jwt.interface';
+import { GoogleUser } from 'src/users/entities/google-user.entity';
+import { UsersService } from 'src/users/users.service';
+import { CreateGoogleUser } from 'src/users/interfaces/create-google-user';
+
+//? Why UsersService may be it is better UserService ?
 
 @Injectable()
 export class AuthService {
   private readonly oauth2Client;
 
-  constructor(private readonly config: AuthConfigService) {
+  constructor(
+    private readonly config: AuthConfigService,
+    private readonly usersService: UsersService) {
     this.oauth2Client = new google.auth.OAuth2(
       this.config.GoogleClientID,
       this.config.GoogleClientSecret,
@@ -21,27 +30,32 @@ export class AuthService {
     );
   }
 
-  async googleAuth({ code }: SocialAuthInput) {
-    const googleUser = await this.getGoogleUser({ code });
+  async googleAuth({ code }: SocialAuthInput): Promise<Jwt> {
+    //const googleUser = await this.getGoogleUser({ code });
 
-    console.log('auth.service', { googleUser });
+    //console.log('auth.service', { googleUser });
     /**
-     *  {
-    id: '106000197497240957427',
-    email: 'dahunichka@gmail.com',
-    verified_email: true,
-    name: 'Dariana Orlova',
-    given_name: 'Dariana',
-    family_name: 'Orlova',
-    picture: 'https://lh3.googleusercontent.com/a/AAcHTtdYfYNFNO2I10jrGTahrAxIVjYP5FZATizvObVKDdN-lbs=s96-c',
-    locale: 'ru'
-  }
+     *
      */
 
-    return {
+    const user: CreateGoogleUser = {
+      googleId: '106000197497240957427',
+      email: 'dahunichka@gmail.com',
+      verified_email: true,
+      name: 'Dariana Orlova',
+      given_name: 'Dariana',
+      family_name: 'Orlova',
+      picture:
+        'https://lh3.googleusercontent.com/a/AAcHTtdYfYNFNO2I10jrGTahrAxIVjYP5FZATizvObVKDdN-lbs=s96-c',
+      locale: 'ru',
+    };
+
+    return this.usersService.createGoogleAccount(user);
+
+    /* return {
       email: 'test@email',
       role: UserRole.Admin,
-    };
+    }; */
   }
 
   getGoogleAuthURL() {
@@ -57,8 +71,8 @@ export class AuthService {
   }
 
   private async getGoogleUser({ code }) {
-		const { tokens } = await this.oauth2Client.getToken(code);
-		this.oauth2Client.setCredentials(tokens);
+    const { tokens } = await this.oauth2Client.getToken(code);
+    this.oauth2Client.setCredentials(tokens);
 
     const url = `${this.config.GoogleUserInfoURL}?alt=json&access_token=${tokens.access_token}`;
     const headers = { Authorization: `Bearer ${tokens.id_token}` };
@@ -66,7 +80,7 @@ export class AuthService {
       const googleUser = await axios.get(url, { headers });
       return googleUser.data;
     } catch (error) {
-      console.log('Can\'t auth through Google account', { error });
+      console.log("Can't auth through Google account", { error });
     }
-	}
+  }
 }

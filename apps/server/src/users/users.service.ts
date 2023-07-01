@@ -12,6 +12,8 @@ import { EditProfileInput } from './dtos/edit-profile.dto';
 import { Verification } from './entities/verification.entity';
 import { AllUsersOutput } from './dtos/all-users.dto';
 import { GoogleUser } from './entities/google-user.entity';
+import { Jwt } from './interfaces/jwt.interface';
+import { CreateGoogleUser } from './interfaces/create-google-user';
 
 @Injectable()
 export class UsersService {
@@ -44,17 +46,18 @@ export class UsersService {
   }
 
   // Internal function - ? - May be go out to a separate function/service
-  async createGoogleAccount(googleUserGot: GoogleUser) {
-    const { email } = googleUserGot;
+  async createGoogleAccount(googleUserDto: CreateGoogleUser): Promise<Jwt> {
+    const { email } = googleUserDto;
     try {
       const exists = await this.googleUsers.findOneBy({ email });
       if (!exists) {
-        const newG = await this.googleUsers.create(googleUserGot);
-        const newU= await this.users.create(newG.getBasicUser());
-        newG.user = newU;
-        const googleUser = await this.googleUsers.save(newG);
-        const user = await this.users.save(newU);
+        const newGoogleUser = await this.googleUsers.create(googleUserDto);
+        const newBasicUser= await this.users.create(newGoogleUser.basicUser());
+        const user = await this.users.save(newBasicUser);
+        await this.googleUsers.save({...newGoogleUser, user });
+        
         const token = this.jwtService.sign(user.id);
+
         return { ok: true, token };
       }
     } catch (error) {
@@ -65,7 +68,7 @@ export class UsersService {
   async login({
     email,
     password,
-  }: LoginInput): Promise<{ ok: boolean; error?: string; token?: string }> {
+  }: LoginInput): Promise<Jwt> {
     try {
       const user = await this.users.findOne({
         where: { email },

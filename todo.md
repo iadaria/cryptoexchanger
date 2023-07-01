@@ -1,3 +1,8 @@
+# 0 Stopped
+1 Добавить нового пользователя привязанного к гугл пользователю
+2 Отдавать токен
+3 Далее 1.6 может луччше 1.7 иначе забуду что хотела разделить
+
 # 1
 1 Front: Show users (css)
 2 (After split in few services)Front: Tabs or others to switch users <-> BotUsers

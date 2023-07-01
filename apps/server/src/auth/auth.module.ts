@@ -5,6 +5,7 @@ import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 import { AuthResolver } from './auth.resolver';
 import { AuthConfigService } from './authConfig.service';
+import { UsersService } from 'src/users/users.service';
 
 @Module({
   imports: [UsersModule],
@@ -13,6 +14,7 @@ import { AuthConfigService } from './authConfig.service';
     AuthService,
     AuthResolver,
     AuthConfigService,
+    UsersService,
   ],
 })
 export class AuthModule {}

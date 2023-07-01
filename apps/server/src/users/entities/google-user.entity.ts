@@ -15,12 +15,12 @@ export class GoogleUser extends CoreEntity {
   @Column({ unique: true })
   @Field((type) => String)
   @IsEmail()
-  email: string;
+  googleId: string;
 
-  @Column({ select: false })
+  @Column({ unique: true })
   @Field((type) => String)
-  @IsString()
-  password: string;
+  @IsEmail()
+  email: string;
 
   @Column({ default: false })
   @Field((type) => Boolean)
@@ -56,7 +56,7 @@ export class GoogleUser extends CoreEntity {
   @JoinColumn()
   user: User;
 
-  getBasicUser(): CreateUser {
+  basicUser(): CreateUser {
     return {
       email: this.email,
       verified: this.verified_email,
