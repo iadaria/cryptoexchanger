@@ -6,7 +6,6 @@ import axios from 'axios';
 
 //* Should be out in another shared lib
 import { Jwt } from 'src/users/interfaces/jwt.interface';
-import { GoogleUser } from 'src/users/entities/google-user.entity';
 import { UsersService } from 'src/users/users.service';
 import { CreateGoogleUser } from 'src/users/interfaces/create-google-user';
 
@@ -32,11 +31,7 @@ export class AuthService {
 
   async googleAuth({ code }: SocialAuthInput): Promise<Jwt> {
     //const googleUser = await this.getGoogleUser({ code });
-
     //console.log('auth.service', { googleUser });
-    /**
-     *
-     */
 
     const user: CreateGoogleUser = {
       googleId: '106000197497240957427',
@@ -51,11 +46,6 @@ export class AuthService {
     };
 
     return this.usersService.createGoogleAccount(user);
-
-    /* return {
-      email: 'test@email',
-      role: UserRole.Admin,
-    }; */
   }
 
   getGoogleAuthURL() {

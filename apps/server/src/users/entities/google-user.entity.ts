@@ -1,6 +1,6 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { IsBoolean, IsEmail, IsEnum, IsString } from 'class-validator';
-import { AfterInsert, AfterUpdate, BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, OneToOne } from 'typeorm';
+import { IsBoolean, IsEmail, IsString } from 'class-validator';
+import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 import { CoreEntity } from 'src/common/entities/core.entity';
 import { AuthWay, User, UserRole } from './user.entity';
 import { CreateUser } from '../interfaces/create-user.interface';
@@ -9,7 +9,7 @@ import { CreateUser } from '../interfaces/create-user.interface';
 
 @InputType('GoogleInputType', { isAbstract: true })
 @ObjectType()
-@Entity()
+@Entity({ name: 'GoogleUser'})
 export class GoogleUser extends CoreEntity {
 
   @Column({ unique: true })

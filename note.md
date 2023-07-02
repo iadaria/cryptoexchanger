@@ -82,3 +82,8 @@ If the build succeeds, you should see the compiled output in the packages/shared
 
 ### Cleaning
 >npm cache clean --force
+
+>pnpm store prune
+
+> pnpm store path
+> rm -rf
