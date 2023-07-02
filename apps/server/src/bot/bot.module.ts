@@ -1,13 +1,11 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { BotService } from './bot.service';
 import { BotUpdate } from './bot.update';
 import { MenuMainScene } from './scenes/menu-main.scene';
-import { BotUsersService } from './users/bot-users.service';
-import { BotUser } from './users/entities/bot-user.entity';
+import { BotUsersModule } from './users/bot-user.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([BotUser])],
-  providers: [BotService, BotUpdate, MenuMainScene, BotUsersService],
+  imports: [BotUsersModule],
+  providers: [BotService, BotUpdate, MenuMainScene],
 })
 export class BotModule {}

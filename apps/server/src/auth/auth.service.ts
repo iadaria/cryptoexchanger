@@ -7,7 +7,6 @@ import axios from 'axios';
 //* Should be out in another shared lib
 import { Jwt } from 'src/users/interfaces/jwt.interface';
 import { UsersService } from 'src/users/users.service';
-import { CreateGoogleUser } from 'src/users/interfaces/create-google-user';
 
 //? Why UsersService may be it is better UserService ?
 
@@ -30,10 +29,10 @@ export class AuthService {
   }
 
   async googleAuth({ code }: SocialAuthInput): Promise<Jwt> {
-    //const googleUser = await this.getGoogleUser({ code });
-    //console.log('auth.service', { googleUser });
+    const googleUser = await this.getGoogleUser({ code });
+    console.log('auth.service', { googleUser });
 
-    const user: CreateGoogleUser = {
+   /*  const user: CreateGoogleUser = {
       googleId: '106000197497240957427',
       email: 'dahunichka@gmail.com',
       verified_email: true,
@@ -43,9 +42,9 @@ export class AuthService {
       picture:
         'https://lh3.googleusercontent.com/a/AAcHTtdYfYNFNO2I10jrGTahrAxIVjYP5FZATizvObVKDdN-lbs=s96-c',
       locale: 'ru',
-    };
+    }; */
 
-    return this.usersService.createGoogleAccount(user);
+    return this.usersService.createGoogleAccount(googleUser);
   }
 
   getGoogleAuthURL() {
