@@ -4,6 +4,10 @@
 4 Для пользователя с паролем создать отдельную таблицу, иначе меняется смысл(пароль, почта)
 5 Имена баз данных ? Погуглить
 
+? Micro-telega Может Micro-telega-back тк у нас будет и фронт часть для нового веб-бота
+И backend лучше как back так короче
+
+
 # 1
 1 Front: Show users (css)
 2 (After split in few services)Front: Tabs or others to switch users <-> BotUsers
