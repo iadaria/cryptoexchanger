@@ -1,7 +1,7 @@
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from "@nestjs/common";
 import { TelegrafExecutionContext } from "nestjs-telegraf";
 
-import { Context } from "../interfaces/context.interface";
+import { Context } from "../../common/interfaces/context.interface";
 import { UsersService } from "../../users/users.service";
 
 // TODO 'Add redis for check existed users'

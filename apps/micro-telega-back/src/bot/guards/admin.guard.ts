@@ -1,7 +1,7 @@
 import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { TelegrafException, TelegrafExecutionContext } from "nestjs-telegraf";
 import { Observable } from "rxjs";
-import { Context } from "../interfaces/context.interface";
+import { Context } from "../../common/interfaces/context.interface";
 
 @Injectable()
 export class AdminGuard implements CanActivate {
