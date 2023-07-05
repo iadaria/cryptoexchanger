@@ -35,3 +35,6 @@ Current - save user (may be use middleware)
 >  nest generate service users --no-spec
 
 - https://docs.nestjs.com/cli/usages
+
+### Motivations, posts
+- https://partnerkin.com/blog/stati/skolko-zarabativayut-vladelci

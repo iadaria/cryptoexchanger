@@ -1,6 +1,8 @@
 # 0 Stopped
+1 Делим на микросервисы api-gate, telega, web-server
 3 Далее 1.6 может луччше 1.7 иначе забуду что хотела разделить
 4 Для пользователя с паролем создать отдельную таблицу, иначе меняется смысл(пароль, почта)
+5 Имена баз данных ? Погуглить
 
 # 1
 1 Front: Show users (css)
@@ -11,6 +13,8 @@
 6 ! Test: add new input to postgress and check it
 7 ! split in microservices
 8 ! split code of users and auth (see NextJS-NestJS-Graphql example)
+...
+1001 Microfrontend (video, courses, chats info, books)
 
 # 1.1
 1 test: send a message from test number (99663..) and fix it on db

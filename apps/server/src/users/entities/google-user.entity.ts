@@ -9,7 +9,7 @@ import { CreateUser } from '../interfaces/create-user.interface';
 
 @InputType('GoogleInputType', { isAbstract: true })
 @ObjectType()
-@Entity({ name: 'GoogleUser'})
+@Entity()
 export class GoogleUser extends CoreEntity {
 
   @Column({ unique: true })
