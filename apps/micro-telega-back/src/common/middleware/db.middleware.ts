@@ -1,7 +1,7 @@
 import { ExecutionContext, Injectable, NestMiddleware } from '@nestjs/common';
 import { NextFunction } from 'express';
 import { Observable } from 'rxjs';
-import { BotUsersService } from 'src/bot/users/bot-users.service';
+import { UsersService } from 'src/users/users.service';
 import { Context, Middleware, MiddlewareFn } from 'telegraf';
 
 // TODO set the type middleware in telegraf-options.interface.ts in nestjs-telegraf
@@ -9,7 +9,7 @@ import { Context, Middleware, MiddlewareFn } from 'telegraf';
 
 @Injectable()
 export class DbMiddleware implements NestMiddleware {
-  constructor(private readonly userService: BotUsersService) {}
+  constructor(private readonly userService: UsersService) {}
 
   async use(req: Request, res: Response, next: NextFunction) {
     console.log('*** DbMiddleware ***');

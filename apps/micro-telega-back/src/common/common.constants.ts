@@ -1,1 +1,1 @@
-export const TelegramBotName = 'CryptoTelega';
+export const TELEGRAM_BOT_NAME = 'CryptoTelega';

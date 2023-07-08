@@ -2,9 +2,11 @@ import { Module } from '@nestjs/common';
 import { BotService } from './bot.service';
 import { BotUpdate } from './bot.update';
 import { MenuMainScene } from './scenes/menu-main.scene';
+import { UsersModule } from 'src/users/users.module';
 
 @Module({
-  imports: [BotModule],
-  providers: [BotService, BotUpdate, MenuMainScene],
+  imports: [UsersModule],
+  //providers: [BotService, BotUpdate, MenuMainScene],
+  providers: [BotService, BotUpdate]
 })
 export class BotModule {}
