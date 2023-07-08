@@ -6,7 +6,6 @@ import { UsersModule } from 'src/users/users.module';
 
 @Module({
   imports: [UsersModule],
-  //providers: [BotService, BotUpdate, MenuMainScene],
-  providers: [BotService, BotUpdate]
+  providers: [BotService, BotUpdate, MenuMainScene],
 })
 export class BotModule {}
