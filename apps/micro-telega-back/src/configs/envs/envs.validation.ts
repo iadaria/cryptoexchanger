@@ -1,4 +1,4 @@
-import { IsEnum, IsNumber, IsString, validateSync } from "class-validator";
+import { IsBoolean, IsEnum, IsNumber, IsString, validateSync } from "class-validator";
 import { plainToClass } from 'class-transformer';
 import { Env } from "src/common/types/env.types";
 
@@ -28,6 +28,9 @@ class EnvironmentVariables {
 
   @IsString()
   TELEGRAM_TOKEN: string;
+
+  @IsBoolean()
+  TELEGRAM_TEST: boolean;
 }
 
 export const validate = (config: Record<string, unknown>) => {
