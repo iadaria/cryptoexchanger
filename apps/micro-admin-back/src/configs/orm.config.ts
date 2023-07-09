@@ -1,14 +1,14 @@
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModuleAsyncOptions } from "@nestjs/typeorm";
-import { Env } from "src/common/types/env.types";
-import { User } from "src/users/entities/user.entity";
+import { Environment } from "common";
+
 
 export const ormClientOptions = (): TypeOrmModuleAsyncOptions => ({
   imports: [ConfigModule],
   
   useFactory: (configService: ConfigService) => {
-    const IS_PROD = configService.get('NODE_ENV') === Env.Production;
-    const IS_DEV = configService.get('NODE_ENV') === Env.Developer;
+    const IS_PROD = configService.get('NODE_ENV') === Environment.Production;
+    const IS_DEV = configService.get('NODE_ENV') === Environment.Developer;
 
     return {
     type: 'postgres',
