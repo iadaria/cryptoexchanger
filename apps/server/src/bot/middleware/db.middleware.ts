@@ -12,8 +12,8 @@ export class DbMiddleware implements NestMiddleware {
   constructor(private readonly userService: BotUsersService) {}
 
   async use(req: Request, res: Response, next: NextFunction) {
-    console.log('*** DbMiddleware ***');
-    console.log(req);
+    //console.log('*** DbMiddleware ***');
+    //console.log(req);
     next();
   }
 }

@@ -8,8 +8,8 @@ import * as configs from 'src/configs';
 
 @Module({
   imports: [
-    TelegrafModule.forRootAsync(configs.telegramAsyncOptions()),
     ConfigModule.forRoot(configs.getEnvConfig()),
+    TelegrafModule.forRootAsync(configs.telegramAsyncOptions()),
     TypeOrmModule.forRootAsync(configs.ormClientOptions()),
     UsersModule,
     BotModule,

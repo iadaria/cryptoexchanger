@@ -1,4 +1,13 @@
-import { Action, Command, Ctx, Hears, Scene, SceneEnter, SceneLeave, Sender } from 'nestjs-telegraf';
+import {
+  Action,
+  Command,
+  Ctx,
+  Hears,
+  Scene,
+  SceneEnter,
+  SceneLeave,
+  Sender,
+} from 'nestjs-telegraf';
 import { Update } from 'telegraf/typings/core/types/typegram';
 import { SceneContext } from 'telegraf/typings/scenes';
 
@@ -10,7 +19,7 @@ export class MenuMainScene {
   @SceneEnter()
   async onSceneEnter(ctx: Context) {
     const first_name = ctx.from?.first_name;
-    console.log({ first_name})
+    //console.log({ first_name})
     await ctx.reply(`${first_name}, Welcome to the main menu`, {
       reply_markup: {
         inline_keyboard: [

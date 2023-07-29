@@ -1,5 +1,17 @@
 import { UseFilters, UseGuards, UseInterceptors } from '@nestjs/common';
-import { Command, Ctx, Hears, Help, InjectBot, Message, On, Sender, Start, Update } from 'nestjs-telegraf';
+import {
+  Action,
+  Command,
+  Ctx,
+  Hears,
+  Help,
+  InjectBot,
+  Message,
+  On,
+  Sender,
+  Start,
+  Update,
+} from 'nestjs-telegraf';
 import { Telegraf } from 'telegraf';
 import { UpdateType as TelegrafUpdateType } from 'telegraf/typings/telegram-types';
 import { HELLO_SCENE_1, MENU_MAIN, TelegramBotName } from './bot.constants';
@@ -24,40 +36,47 @@ export class BotUpdate {
 
   @Start()
   async onStart(@Ctx() ctx: Context): Promise<void> {
-    console.log(ctx.scene)
+    console.log(ctx.scene);
     //console.log(ctx.message)
     await ctx.scene.enter(MENU_MAIN);
     //await ctx.replyWithSticker('123123jkbhj6b');
   }
-  
+
   @Help()
   async onHelp(): Promise<string> {
     return 'Send me any text';
   }
-  
+
   @Command('admin')
   @UseGuards(AdminGuard)
   onAdminCommand(): string {
     return 'Welcome judge';
   }
-  
+
   @Hears(['hi', 'hello', 'hey', 'qq'])
   onGreetings(
     @UpdateType() updateType: TelegrafUpdateType,
     @Sender('first_name') firstName: string,
-    ): string {
-  /*     console.log('***')
+  ): string {
+    /*     console.log('***')
       console.log(updateType); */
-      return `Hey hey ${firstName}`;
-    }
-    
+    return `Hey hey ${firstName}`;
+  }
+
   @Command('scene')
   async onSceneCommand(@Ctx() ctx: Context): Promise<void> {
     const me = await this.bot.telegram.getMe();
     //console.log('command scene ' + me.username)
     //console.log(ctx.scene);
     //console.log(this.bot.context.scene);
-      await ctx.scene.enter(MENU_MAIN);
+    await ctx.scene.enter(MENU_MAIN);
+  }
+
+  @On('web_app_data')
+  async onActon(@Ctx() ctx: Context) {
+    console.log('!!!!', { ctx });
+
+    return 'ok';
   }
 
   @On('text')
@@ -65,5 +84,4 @@ export class BotUpdate {
     //console.log('text and echo')
     return this.botService.echo(reversedText);
   }
-  
 }
