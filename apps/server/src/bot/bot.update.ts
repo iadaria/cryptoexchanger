@@ -66,10 +66,18 @@ export class BotUpdate {
   @Command('scene')
   async onSceneCommand(@Ctx() ctx: Context): Promise<void> {
     const me = await this.bot.telegram.getMe();
-    //console.log('command scene ' + me.username)
-    //console.log(ctx.scene);
-    //console.log(this.bot.context.scene);
     await ctx.scene.enter(MENU_MAIN);
+  }
+
+  @Hears('bot')
+  async onBot(@Ctx() ctx: Context) {
+    await ctx.reply('bot', {
+      reply_markup: {
+        keyboard: [
+          [{ text: 'open bot', web_app: { url: 'https://bot.iadaria.keenetic.name' } }],
+        ],
+      },
+    });
   }
 
   @On('web_app_data')
