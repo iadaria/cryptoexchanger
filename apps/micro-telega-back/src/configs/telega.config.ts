@@ -1,8 +1,7 @@
 import { TELEGRAF_BOT_NAME, TelegrafModuleAsyncOptions } from 'nestjs-telegraf';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-
-//import { BotModule } from 'src/bot/bot.module';
 import { sessionMiddleware } from 'src/common/middleware/session.middleware';
+import { BotModule } from 'src/bot/bot.module';
 
 export const telegramAsyncOptions = (): TelegrafModuleAsyncOptions => ({
   imports: [ConfigModule],
@@ -11,13 +10,8 @@ export const telegramAsyncOptions = (): TelegrafModuleAsyncOptions => ({
     console.log({ config });
     return {
       middlewares: [sessionMiddleware],
-      //include: [BotModule],
+      include: [BotModule],
       token: config.get<string>('TELEGRAM_TOKEN'),
-      // options: {
-      //   telegram: {
-      //     testEnv: config.get<boolean>('TELEGRAM_TEST'),
-      //   },
-      // },
     };
   },
   inject: [ConfigService],

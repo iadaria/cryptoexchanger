@@ -24,8 +24,8 @@ import { BotService } from './bot.service';
 import { TelegrafExceptionFilter } from 'src/common/filters/telegraf-exception.filter';
 
 @Update()
-//@UseInterceptors(StoreUserInterceptor)
-@UseFilters(TelegrafExceptionFilter)
+@UseInterceptors(StoreUserInterceptor)
+//@UseFilters(TelegrafExceptionFilter)
 export class BotUpdate {
   constructor(
     @InjectBot(TELEGRAF_BOT_NAME) private readonly bot: Telegraf<Context>,
