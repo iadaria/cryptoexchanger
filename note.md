@@ -1,14 +1,15 @@
 ## nx
+
 - running: > npx nx <target> <project> or pnpm nx <target> <project>
 
 - running just what changed: >npx nx affected:<target>
-npx nx affected:build
-npx nx affected:test
-npx nx affected:lint
-npx nx affected:publish
-
+  npx nx affected:build
+  npx nx affected:test
+  npx nx affected:lint
+  npx nx affected:publish
 
 ### pnpm
+
 > pnpm init
 
 - recursively -r all projects: pnpm run -r build
@@ -16,15 +17,18 @@ npx nx affected:publish
 - parallelize: >pnpm run --parallel -r build
 
 - Now let’s configure PNPM to properly recognize the monorepo workspace:
-> mkdir pnpm-worksapce.yaml
+
+  > mkdir pnpm-worksapce.yaml
 
 - add new project to workspace: pnpm --filter <package-name> <command>
-> pnpm --filter admin-panel dev
 
-- create package: 
-> cd packages && mdkir <new-package-name>
-> touch packagae.json or pnpm init
-Next content as private:
+  > pnpm --filter admin-panel dev
+
+- create package:
+  > cd packages && mdkir <new-package-name>
+  > touch packagae.json or pnpm init
+  > Next content as private:
+
 ```json
 {
   "private": true,
@@ -34,12 +38,11 @@ Next content as private:
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-  },
-  "devDependencies": {
-  }
+  "dependencies": {},
+  "devDependencies": {}
 }
 ```
+
 Note, we declare it as private because we don't want to publish it to NPM or somewhere else, but rather just reference and use it locally within our workspace.
 
 Add libs to the package:
@@ -47,6 +50,7 @@ Add libs to the package:
 ❯ pnpm add --filter shared-ui typescript -D
 
 add tsconfig.json
+
 ```json
 {
   "compilerOptions": {
@@ -63,11 +67,12 @@ add tsconfig.json
 ```
 
 As you can see the outDir points to a package-local dist folder. So we should add a main entry point in the shared-ui package's package.json:
+
 ```json
 {
   "private": true,
   "name": "shared-ui",
-  "main": "dist/index.js",
+  "main": "dist/index.js"
 }
 ```
 
@@ -78,12 +83,24 @@ If the build succeeds, you should see the compiled output in the packages/shared
 
 ### Consuming our new package from the <apps/app-name>
 
->pnpm add <package> --filter <app-name> --workspace 
+> pnpm add <package> --filter <app-name> --workspace
 
 ### Cleaning
->npm cache clean --force
 
->pnpm store prune
+> npm cache clean --force
+
+> pnpm store prune
 
 > pnpm store path
 > rm -rf
+
+### Update nestjs
+
+https://dev.to/amirfakour/how-to-upgrade-nestjs-9-to-10-a-developers-guide-32kk
+
+> npm install -g @nestjs/cli
+> nest -v
+> npm i -g npm-check-updates
+> cd project-folder
+> ncu -u -f /^@nestjs/
+> pnpm install
