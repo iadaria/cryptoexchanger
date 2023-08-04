@@ -2,11 +2,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Field, InputType, ObjectType } from "@nestjs/graphql";
 import { IsBoolean, IsString } from "class-validator";
+import { Message } from "./message.entity";
 
 @InputType("UserInputType", { isAbstract: true })
 @ObjectType()
@@ -107,4 +109,8 @@ export class User {
   @UpdateDateColumn({ precision: 7 })
   @Field((type) => Date)
   updated_at: Date;
+
+  @Field((type) => [Message])
+  @OneToMany((type) => Message, (message) => message.from)
+  messages: Message[];
 }
