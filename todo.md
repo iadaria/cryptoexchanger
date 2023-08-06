@@ -14,6 +14,7 @@ Ended on micro-admin-back, doing resolves and what should be in api-gateway
 
 ? Подумать над похожим кодом, например подключение к бд, может вынести в отдельную либу
 посмотреть примеры
+! env repeats in a few projects
 
 Закончили на micro-telega-back нужно закончить перенос и запустить
 
