@@ -1,5 +1,13 @@
 # ended
 
+4 pomodoro front
+4 pomodor back
+
+https://graphql.org/graphql-js/graphql-clients/
+https://stepzen.com/docs/using-graphql/making-queries-with-fetch
+Fetch users from graphql https://hygraph.com/blog/nextjs-graphql
+https://github.com/effector/next
+add effector for result of queries or simple effector
 Todo users getting form in front-end by nextjs. Edit too.
 Ended on micro-admin-back, doing resolves and what should be in api-gateway
 
