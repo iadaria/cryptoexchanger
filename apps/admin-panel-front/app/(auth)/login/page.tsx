@@ -6,7 +6,7 @@ import { authTokenVar, isLoggedInVar } from '@/config/apollo';
 import { LOGIN_MUTATION } from '@/graphql/mutation';
 import { ApolloError, useMutation } from '@apollo/client';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
 interface ILoginForm extends LoginInput {}

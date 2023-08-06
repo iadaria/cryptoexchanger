@@ -1,5 +1,6 @@
 # ended
 
+Todo users getting form in front-end by nextjs. Edit too.
 Ended on micro-admin-back, doing resolves and what should be in api-gateway
 
 # 0 Stopped
