@@ -1,11 +1,7 @@
+'use client';
 import { ENVS, IS_SERVER, LOCALSTORAGE_TOKEN } from '@/common/common.constants';
-import {
-  ApolloClient,
-  InMemoryCache,
-  createHttpLink,
-  makeVar,
-} from '@apollo/client';
-import { setContext } from "@apollo/client/link/context";
+import { ApolloClient, InMemoryCache, createHttpLink, makeVar } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 
 let token;
 if (!IS_SERVER) {
@@ -19,8 +15,8 @@ const httpLink = createHttpLink({ uri: ENVS.graphqlUrl });
 const authLink = setContext((_, { headers }) => ({
   headers: {
     ...headers,
-    "x-jwt": authTokenVar() || ""
-  }
+    'x-jwt': authTokenVar() || '',
+  },
 }));
 
 //const authLink = setContext({});
@@ -36,16 +32,16 @@ export const apolloClient = new ApolloClient({
           isLoggedIn: {
             read() {
               return isLoggedInVar();
-            }
+            },
           },
           token: {
             read() {
               return authTokenVar();
-            }
-          }
-        }
-      }
-    }
+            },
+          },
+        },
+      },
+    },
   }),
   queryDeduplication: false,
   defaultOptions: {
