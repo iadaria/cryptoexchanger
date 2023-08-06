@@ -459,7 +459,16 @@ importers:
       '@nestjs/typeorm':
         specifier: ^10.0.0
         version: 10.0.0(@nestjs/common@10.1.3)(@nestjs/core@10.1.3)(reflect-metadata@0.1.13)(rxjs@7.8.1)(typeorm@0.3.17)
+<<<<<<< HEAD
 >>>>>>> aa03ce7 (init telega bot)
+=======
+      axios:
+        specifier: ^1.4.0
+        version: 1.4.0
+      bcrypt:
+        specifier: ^5.1.0
+        version: 5.1.0
+>>>>>>> 8ce24ae (fix issues in admin back part)
       class-transformer:
         specifier: ^0.5.1
         version: 0.5.1
@@ -477,6 +486,9 @@ importers:
       googleapis:
         specifier: ^118.0.0
         version: 118.0.0
+      jsonwebtoken:
+        specifier: ^9.0.0
+        version: 9.0.0
       reflect-metadata:
         specifier: ^0.1.13
         version: 0.1.13
@@ -486,6 +498,9 @@ importers:
       typeorm:
         specifier: ^0.3.17
         version: 0.3.17(ts-node@10.9.1)
+      uuid:
+        specifier: ^9.0.0
+        version: 9.0.0
     devDependencies:
       '@nestjs/cli':
         specifier: ^10.1.11
