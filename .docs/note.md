@@ -1,3 +1,7 @@
+### GraphQL queries without hooks
+
+- https://www.apollographql.com/blog/graphql/examples/4-simple-ways-to-call-a-graphql-api/
+
 ## nx
 
 - running: > npx nx <target> <project> or pnpm nx <target> <project>
