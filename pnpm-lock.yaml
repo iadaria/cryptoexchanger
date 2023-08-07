@@ -51,6 +51,9 @@ importers:
         specifier: 5.1.6
         version: 5.1.6
     devDependencies:
+      '@graphql-typed-document-node/core':
+        specifier: ^3.2.0
+        version: 3.2.0(graphql@16.7.1)
       daisyui:
         specifier: ^3.5.1
         version: 3.5.1

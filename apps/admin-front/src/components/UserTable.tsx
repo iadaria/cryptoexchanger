@@ -5,7 +5,7 @@ type User = {
 };
 
 interface UsersProps {
-  users?: User[] | null;
+  users?: User[];
 }
 
 export const UserTable = ({ users }: UsersProps) => {

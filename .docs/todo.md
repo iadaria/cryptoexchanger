@@ -3,6 +3,13 @@
 4 | 2 pomodoro front
 4 | 2 pomodoro back
 
+- add prettier for admin-front + debug error
+
+- common envs for all projects
+
+- added @graphql-typed-document-node/core temporary. May be need to delete.
+
+- https://graphql.org/learn/queries/
 - https://www.apollographql.com/blog/graphql/examples/4-simple-ways-to-call-a-graphql-api/
 - https://graphql.org/graphql-js/graphql-clients/
 - https://stepzen.com/docs/using-graphql/making-queries-with-fetch

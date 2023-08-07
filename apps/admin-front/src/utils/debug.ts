@@ -1,7 +1,7 @@
 import { IS_BROWSER, IS_SERVER } from "@/common/constants";
 import { IS_DEV } from "@/config/envs.get";
 
-export const log = (message: string) => {
+export const log = (message: unknown) => {
   if (IS_SERVER) {
     console.log("📘", "\x1b[36m", JSON.stringify(message, null, 4), "\x1b[0m");
   }
