@@ -8,7 +8,7 @@ export const ormClientOptions = (): TypeOrmModuleAsyncOptions => ({
 
   useFactory: (configService: ConfigService) => {
     const IS_PROD = configService.get('NODE_ENV') === Environment.Production;
-    const IS_DEV = configService.get('NODE_ENV') === Environment.Developer;
+    const IS_DEV = configService.get('NODE_ENV') === Environment.Development;
 
     return {
       type: 'postgres',

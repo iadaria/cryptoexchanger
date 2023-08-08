@@ -287,6 +287,9 @@ importers:
       class-validator:
         specifier: ^0.14.0
         version: 0.14.0
+      common:
+        specifier: workspace:^
+        version: link:../../packages/common
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3

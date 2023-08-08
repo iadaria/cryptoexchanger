@@ -6,7 +6,7 @@ import {
   validateSync,
 } from 'class-validator';
 import { plainToClass } from 'class-transformer';
-import { Environment } from 'src/common/types/env.types';
+import { Environment } from 'common';
 
 // https://github.com/typestack/class-validator
 
