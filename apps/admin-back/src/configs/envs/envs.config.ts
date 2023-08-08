@@ -1,6 +1,6 @@
 import { ConfigModuleOptions } from '@nestjs/config';
 import { validate } from './envs.validation';
-import { IS_DEV, IS_PROD } from './envs.get';
+import { IS_DEV, IS_PROD } from 'common';
 
 console.log('$envs.config.ts', { IS_DEV, IS_PROD });
 

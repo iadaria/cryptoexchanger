@@ -1,1 +1,2 @@
-export * from './envs.get';
+export * from './envs.config';
+export * from './envs.validation';
