@@ -1,10 +1,6 @@
 import { ConfigModuleOptions } from '@nestjs/config';
-
 import { validate } from './env.validation';
-
-export const NODE_ENV = process.env.NODE_ENV;
-export const IS_DEV = NODE_ENV === 'dev';
-export const IS_PROD = NODE_ENV === 'prod';
+import { IS_DEV, IS_PROD } from 'common';
 
 export const getEnvConfig = (): ConfigModuleOptions => ({
   isGlobal: true,
