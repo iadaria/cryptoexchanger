@@ -1,7 +1,11 @@
 # ended
 
-4 | 2 pomodoro front
-4 | 2 pomodoro back
+4 | 3 | 2 pomodoro front
+4 | 3 | 2 pomodoro back
+
+- start with back
+
+- front: effector-next: https://github.com/effector/next
 
 - add prettier for admin-front + debug error
 

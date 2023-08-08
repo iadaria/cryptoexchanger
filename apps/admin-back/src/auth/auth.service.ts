@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { google } from 'googleapis';
 import { SocialAuthInput } from './dtos/social-code.dto';
-import { AuthConfigService } from 'src/auth/authConfig.service';
+import { AuthConfigService } from 'src/auth/auth-config.service';
 import axios from 'axios';
 
 //* Should be out in another shared lib
@@ -16,7 +16,8 @@ export class AuthService {
 
   constructor(
     private readonly config: AuthConfigService,
-    private readonly usersService: UsersService) {
+    private readonly usersService: UsersService,
+  ) {
     this.oauth2Client = new google.auth.OAuth2(
       this.config.GoogleClientID,
       this.config.GoogleClientSecret,
@@ -32,7 +33,7 @@ export class AuthService {
     const googleUser = await this.getGoogleUser({ code });
     console.log('auth.service', { googleUser });
 
-   /*  const user: CreateGoogleUser = {
+    /*  const user: CreateGoogleUser = {
       googleId: '106000197497240957427',
       email: 'dahunichka@gmail.com',
       verified_email: true,

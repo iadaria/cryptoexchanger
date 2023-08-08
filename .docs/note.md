@@ -115,3 +115,66 @@ Table names and field names use snake_case.
 You will also come across it when working with databases, as it is used for creating table and column names.
 
 If we face with name like snake_case we understand that is field name.
+
+### after course
+
+(site) and (auth) не добавляется в путь, но используем для группировки
+Корень будет в (site) т/е index Но должен быть один
+() - не видны для next
+
+[] - динамический роут
+
+template - если анимация между страничками ?
+Что-то, что триггерится при переходе межу роутерами
+
+Папка с нижним подчеркиваем будет полностью игнорироваться роутингом, даже если там
+есть файл page.tsx. Все внутри игнорируется
+
+@ параллельная загрузка
+
+### Переменные окружения
+
+Загружаем все переменные окружения по пути
+
+```typescript
+import { loadEnvConfig } from "@next/env";
+export default async () => {
+  const projectDir = process.cwd();
+  loadEnvConfig(projectDir);
+};
+```
+
+### ssr
+
+- Генерация страницы на лету
+- можно использовать cookies и другие персональные данные
+- вся нагрузка на сервер, если 100 тыс пользователей - решаем с помощью ssg
+- Всегда актуальны
+- требует много ресурсов
+
+### ssg
+
+- генерация на этапе сборки
+- Актуализируется с задержкой
+- Нельзя использовать персональную информацию
+- не требует много ресурсов
+- использовать по максимуму, если есть персонализация то используем ssr
+
+###
+
+```typescript
+// Для статической генерации
+function getStaticProps() {}
+function getStaticPaths() {}
+
+// Для SSR
+function getServerSideProps() {}
+
+// next 13
+async function generateStaticParams() {}
+
+// npm run build !
+```
+
+- Используются только на сервере
+- Могут быть только на страницах (не в компонентах) до 13, в 13 уже даже в компоненте
