@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package crypto.auth;
+
+service AuthService {
+  rpc Login(LoginRequest) returns (LoginResponse) {}
+}
+
+message LoginRequest {
+  string password = 1;
+  string email = 2;
+}
+
+/* message LoginResponse {
+  bool ok = 1;
+  optional string token = 2;
+  optional string error = 3;
+} */
+
+message LoginResponse {
+  optional string token = 2;
+}

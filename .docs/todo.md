@@ -1,9 +1,12 @@
 # ended
 
-4 | 3 | 2 pomodoro front
-4 | 3 | 2 pomodoro back
+4 / 3 / 2 p. front
+4 / 3 / 2 p. back
 
 - start with back
+- generate types from proto:
+  -- https://www.npmjs.com/package/nestjs-proto-gen-ts
+- todo microservice in admin-back
 
 - front: effector-next: https://github.com/effector/next
 
@@ -29,7 +32,7 @@
 2 Отображаем пользователей, можно через ssr
 3 Далее 1.6 может лучше 1.7 иначе забуду что хотела разделить
 4 Для пользователя с паролем создать отдельную таблицу, иначе меняется смысл(пароль, почта)
-5 Имена баз данных ? Погуглить
+5 Имена баз данных ? Google it
 6 nestjs/graphql не нужен в micro-telegram
 7 пройтись по всем проектам и найти неиспользуемые библиотеки и сразу удалить
 
