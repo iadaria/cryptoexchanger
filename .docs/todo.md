@@ -3,6 +3,8 @@
 4 / 3 / 2 p. front
 4 / 3 / 2 p. back
 
+- proto https://www.npmjs.com/package/ts-proto#nestjs-support
+
 - start with back
 - generate types from proto:
   -- https://www.npmjs.com/package/nestjs-proto-gen-ts
