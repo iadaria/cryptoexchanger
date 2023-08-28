@@ -1,4 +1,9 @@
-import { Field, InputType, ObjectType, registerEnumType } from '@nestjs/graphql';
+import {
+  Field,
+  InputType,
+  ObjectType,
+  registerEnumType,
+} from '@nestjs/graphql';
 import { IsBoolean, IsEmail, IsEnum, IsString } from 'class-validator';
 import { BeforeInsert, BeforeUpdate, Column, Entity } from 'typeorm';
 import * as bcrypt from 'bcrypt';
@@ -20,7 +25,7 @@ export enum AuthWay {
 }
 
 registerEnumType(UserRole, { name: 'UserRole' });
-registerEnumType(AuthWay, { name: 'AuthWay'});
+registerEnumType(AuthWay, { name: 'AuthWay' });
 
 @InputType('UserInputType', { isAbstract: true })
 @ObjectType()
@@ -42,12 +47,12 @@ export class User extends CoreEntity {
   verified: boolean;
 
   @Column({ type: 'enum', enum: UserRole, default: UserRole.Client })
-  @Field((type) => UserRole, { defaultValue: UserRole.Client})
+  @Field((type) => UserRole, { defaultValue: UserRole.Client })
   @IsEnum(UserRole)
   role: UserRole;
 
   @Column({ type: 'enum', enum: AuthWay, default: AuthWay.Site })
-  @Field((type) => AuthWay, { defaultValue: AuthWay.Site})
+  @Field((type) => AuthWay, { defaultValue: AuthWay.Site })
   @IsEnum(AuthWay)
   authWay: AuthWay;
 

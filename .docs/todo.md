@@ -77,3 +77,11 @@
 2 Nomade
 3 Docker purple
 4 Mickroservice purple repeat
+
+# nginx proxy manager
+
+https://nginxproxymanager.com/guide/#quick-setup
+
+# docker
+
+portainer.io

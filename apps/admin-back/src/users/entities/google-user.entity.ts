@@ -11,7 +11,6 @@ import { CreateUser } from '../interfaces/create-user.interface';
 @ObjectType()
 @Entity()
 export class GoogleUser extends CoreEntity {
-
   @Column({ unique: true })
   @Field((type) => String)
   @IsEmail()
@@ -52,7 +51,7 @@ export class GoogleUser extends CoreEntity {
   @IsString()
   locale: string;
 
-  @OneToOne(type => User, { onDelete: 'CASCADE'})
+  @OneToOne((type) => User, { onDelete: 'CASCADE' })
   @JoinColumn()
   user: User;
 
@@ -61,7 +60,7 @@ export class GoogleUser extends CoreEntity {
       email: this.email,
       verified: this.verified_email,
       authWay: AuthWay.Google,
-      password: 'google password'
-    }
+      password: 'google password',
+    };
   }
 }

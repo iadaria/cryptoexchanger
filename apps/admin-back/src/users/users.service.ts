@@ -19,8 +19,10 @@ import { CreateGoogleUser } from './interfaces/create-google-user';
 export class UsersService {
   constructor(
     @InjectRepository(User) private readonly users: Repository<User>,
-    @InjectRepository(GoogleUser) private readonly googleUsers: Repository<GoogleUser>,
-    @InjectRepository(Verification) private readonly verifications: Repository<Verification>,
+    @InjectRepository(GoogleUser)
+    private readonly googleUsers: Repository<GoogleUser>,
+    @InjectRepository(Verification)
+    private readonly verifications: Repository<Verification>,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -34,8 +36,12 @@ export class UsersService {
       if (exists) {
         return { ok: false, error: 'There is a user with that email already' };
       }
-      const user = await this.users.save(this.users.create({ email, password, role }));
-      const verification = await this.verifications.save(this.verifications.create({ user }));
+      const user = await this.users.save(
+        this.users.create({ email, password, role }),
+      );
+      const verification = await this.verifications.save(
+        this.verifications.create({ user }),
+      );
 
       // this.mailService.sendVerificationEmail(user.email, verifications.code);
 
@@ -52,10 +58,10 @@ export class UsersService {
       const exists = await this.googleUsers.findOneBy({ email });
       if (!exists) {
         const newGoogleUser = await this.googleUsers.create(googleUserDto);
-        const newBasicUser= await this.users.create(newGoogleUser.basicUser());
+        const newBasicUser = await this.users.create(newGoogleUser.basicUser());
         const user = await this.users.save(newBasicUser);
-        await this.googleUsers.save({...newGoogleUser, user });
-        
+        await this.googleUsers.save({ ...newGoogleUser, user });
+
         const token = this.jwtService.sign(user.id);
 
         return { ok: true, token };
@@ -65,10 +71,7 @@ export class UsersService {
     }
   }
 
-  async login({
-    email,
-    password,
-  }: LoginInput): Promise<Jwt> {
+  async login({ email, password }: LoginInput): Promise<Jwt> {
     try {
       const user = await this.users.findOne({
         where: { email },

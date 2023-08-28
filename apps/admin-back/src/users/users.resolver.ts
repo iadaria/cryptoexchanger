@@ -1,6 +1,9 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Roles } from 'src/auth/role.decorator';
-import { CreateAccountInput, CreateAccountOutput } from './dtos/create-account.dto';
+import {
+  CreateAccountInput,
+  CreateAccountOutput,
+} from './dtos/create-account.dto';
 import { LoginInput, LoginOutput } from './dtos/login.dto';
 import { User } from './entities/user.entity';
 import { AuthUser } from 'src/auth/auth-user.decorator';
@@ -14,7 +17,9 @@ export class UsersResolver {
   constructor(private readonly userService: UsersService) {}
 
   @Mutation((returns) => CreateAccountOutput)
-  createAccount(@Args('input') createAccountInput: CreateAccountInput): Promise<CreateAccountOutput> {
+  createAccount(
+    @Args('input') createAccountInput: CreateAccountInput,
+  ): Promise<CreateAccountOutput> {
     return this.userService.createAccount(createAccountInput);
   }
 
@@ -31,7 +36,9 @@ export class UsersResolver {
 
   @Query((returns) => UserProfileOutput)
   @Roles(['Any'])
-  userProfile(@Args() UserProfileInput: UserProfileInput): Promise<UserProfileOutput> {
+  userProfile(
+    @Args() UserProfileInput: UserProfileInput,
+  ): Promise<UserProfileOutput> {
     return this.userService.findById(UserProfileInput.userId);
   }
 
