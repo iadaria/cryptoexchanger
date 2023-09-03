@@ -12,6 +12,8 @@ export interface LoginRequest {
 
 export interface LoginResponse {
   token?: string | undefined;
+  ok: boolean;
+  error?: string | undefined;
 }
 
 export const AUTH_PACKAGE_NAME = "auth";
@@ -21,7 +23,7 @@ export interface AuthServiceClient {
 }
 
 export interface AuthServiceController {
-  login(request: LoginRequest, metadata?: Metadata): Promise<LoginResponse> | Observable<LoginResponse> | LoginResponse;
+  login(request: LoginRequest, metadata?: Metadata): Observable<LoginResponse>;
 }
 
 export function AuthServiceControllerMethods() {

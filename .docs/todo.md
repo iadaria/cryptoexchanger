@@ -1,4 +1,19 @@
+-- решить что-то с типами между
+
+- resolve и request,
+- between requests,
+- ? bring out declarations of db entities?
+
+# ended 0
+
+- creating AuthController services
+- researching others services,
+
 # ended
+
+Promise vs Observer https://stackoverflow.com/questions/37364973/what-is-the-difference-between-promises-and-observables
+
+#
 
 4 / 3 / 2 p. front
 4 / 3 / 2 p. back

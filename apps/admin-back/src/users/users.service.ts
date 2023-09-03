@@ -2,10 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
-
-//import { JwtService } from '../jwt/jwt.service';
 import { CreateAccountInput } from './dtos/create-account.dto';
-import { LoginInput } from './dtos/login.dto';
 import { JwtService } from 'src/jwt/jwt.service';
 import { UserProfileOutput } from './dtos/user-profile.dto';
 import { EditProfileInput } from './dtos/edit-profile.dto';
@@ -14,6 +11,8 @@ import { AllUsersOutput } from './dtos/all-users.dto';
 import { GoogleUser } from './entities/google-user.entity';
 import { Jwt } from './interfaces/jwt.interface';
 import { CreateGoogleUser } from './interfaces/create-google-user';
+import { LoginRequest, LoginResponse } from 'contracts';
+import { LoginDto } from 'src/auth/dtos/login.dto';
 
 @Injectable()
 export class UsersService {
@@ -71,7 +70,7 @@ export class UsersService {
     }
   }
 
-  async login({ email, password }: LoginInput): Promise<Jwt> {
+  async login({ email, password }: LoginDto): Promise<LoginResponse> {
     try {
       const user = await this.users.findOne({
         where: { email },
