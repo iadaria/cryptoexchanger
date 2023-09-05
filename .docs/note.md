@@ -1,3 +1,12 @@
+### docs
+
+nice proto
+https://github.com/deeplay-io/nice-grpc
+
+### microservice architecture
+
+https://dev.to/behalf/authentication-authorization-in-microservices-architecture-part-i-2cn0
+
 ### GraphQL queries without hooks
 
 - https://www.apollographql.com/blog/graphql/examples/4-simple-ways-to-call-a-graphql-api/

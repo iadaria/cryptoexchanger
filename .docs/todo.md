@@ -1,4 +1,8 @@
+-- переносим в grpc все-что есть и решаем что-то с типами(либо выносим, либо внутри)
 -- решить что-то с типами между
+
+- что такое rxjs изучить, курсы какие
+- rxjs scheduled и from зачем? + новое потом из nestjs docs
 
 - resolve и request,
 - between requests,
@@ -8,6 +12,14 @@
 
 - creating AuthController services
 - researching others services,
+- read and translate doc
+- empty protobuf request. Come up with the decision
+- error https://protobuf.dev/programming-guides/proto3/
+- request github: package auth;/service AuthService language:"Protocol Buffers"
+- https://cloud.google.com/apis/design/errors#error_model
+- https://grpc.io/docs/guides/error/
+- https://github.com/googleapis/googleapis/blob/master/google/rpc/status.proto
+- filter exception https://stackoverflow.com/questions/72518203/nestjs-global-exception-filter-not-catching-anything-thrown-from-a-kafka-based
 
 # ended
 

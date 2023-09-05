@@ -5,6 +5,10 @@ import { asyncScheduler, Observable, scheduled } from 'rxjs';
 import {
   AuthServiceController,
   AuthServiceControllerMethods,
+  Empty,
+  GoogleAuthRequest,
+  GoogleAuthResponse,
+  GoogleAuthURLResponse,
   LoginRequest,
   LoginResponse,
 } from 'contracts';
@@ -18,6 +22,19 @@ export class AuthController implements AuthServiceController {
     private readonly authService: AuthService,
     private readonly userService: UsersService,
   ) {}
+  googleAuth(
+    request: GoogleAuthRequest,
+    metadata?: Metadata,
+  ): Observable<GoogleAuthResponse> {
+    return scheduled(this.authService.googleAuth(request), asyncScheduler);
+  }
+
+  getGoogleAuthUrl(
+    _: Empty,
+    metadata?: Metadata,
+  ): Observable<GoogleAuthURLResponse> {
+    return scheduled(this.authService.getGoogleAuthURL(), asyncScheduler);
+  }
 
   // without auto generation - @GrpcMethod('AuthService', 'login')
   login(request: LoginRequest, metadata?: Metadata): Observable<LoginResponse> {
