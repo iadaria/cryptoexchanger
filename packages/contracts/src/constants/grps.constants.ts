@@ -4,5 +4,5 @@ export enum GrpcClient {
 }
 
 export enum GrpcPackage {
-  AUTH = "auth",
+  AUTH = "cb.auth",
 }
