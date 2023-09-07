@@ -1,11 +1,12 @@
 syntax = "proto3";
 
-package auth;
+package cb.auth;
 
 import "google/protobuf/any.proto";
 
 service AuthService {
   rpc Login(LoginRequest) returns (LoginResponse) {}
+  rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse) {}
   rpc GetGoogleAuthURL(Empty) returns (GoogleAuthURLResponse) {}
   rpc GoogleAuth(GoogleAuthRequest) returns (GoogleAuthResponse) {}
 }
@@ -39,4 +40,21 @@ message GoogleAuthResponse {
   optional string token = 1;
   bool ok = 2;
   optional string error = 3;
+}
+
+enum Role {
+  Client = 0;
+  Assistant = 1;
+  Admin = 2;
+}
+
+message CreateAccountRequest {
+  string email = 1;
+  string password = 2;
+  // todo role
+}
+
+message CreateAccountResponse {
+  optional string error = 1;
+  optional bool ok = 2;
 }

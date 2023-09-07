@@ -3,7 +3,7 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { SocialAuthInput } from './dtos/social-code.dto';
 import { User } from './entities/user.entity';
 import { LoginInput, LoginOutput } from './dtos/login.dto';
-import { AuthServiceClient } from 'contracts';
+import { AUTH_SERVICE_NAME, AuthServiceClient } from 'contracts';
 import { Inject } from '@nestjs/common';
 import { GrpcClient } from 'common';
 import { ClientGrpc } from '@nestjs/microservices';
@@ -14,14 +14,19 @@ export class AuthResolver {
   private authService: AuthServiceClient;
   constructor(@Inject(GrpcClient.AUTH) private auth: ClientGrpc) {}
 
+  onModuleInit() {
+    this.authService =
+      this.auth.getService<AuthServiceClient>(AUTH_SERVICE_NAME);
+  }
+
   @Query(() => User)
   async googleAuth(@Args('input') input: SocialAuthInput) {
-    //return this.authService.googleAuth(input);
+    return this.authService.googleAuth(input);
   }
 
   @Query(() => String)
   async getGoogleAuthURL() {
-    //return this.authService.getGoogleAuthURL();
+    return this.authService.getGoogleAuthUrl({});
   }
 
   @Query((returns) => Boolean)

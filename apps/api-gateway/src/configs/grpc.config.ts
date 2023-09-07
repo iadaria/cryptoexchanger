@@ -3,5 +3,5 @@ import { GrpcClient } from 'common';
 import { grpcAdminClientOptions } from 'contracts';
 
 export const grpcClientConfig = (): ClientsModuleOptions => [
-  { name: GrpcClient.ADMIN, ...grpcAdminClientOptions },
+  { name: GrpcClient.AUTH, ...grpcAdminClientOptions },
 ];

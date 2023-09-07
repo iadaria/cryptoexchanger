@@ -5,6 +5,8 @@ import { asyncScheduler, Observable, scheduled } from 'rxjs';
 import {
   AuthServiceController,
   AuthServiceControllerMethods,
+  CreateAccountRequest,
+  CreateAccountResponse,
   Empty,
   GoogleAuthRequest,
   GoogleAuthResponse,
@@ -22,6 +24,12 @@ export class AuthController implements AuthServiceController {
     private readonly authService: AuthService,
     private readonly userService: UsersService,
   ) {}
+  createAccount(
+    request: CreateAccountRequest,
+    metadata?: Metadata,
+  ): Observable<CreateAccountResponse> {
+    return scheduled(this.userService.createAccount(request), asyncScheduler);
+  }
   googleAuth(
     request: GoogleAuthRequest,
     metadata?: Metadata,

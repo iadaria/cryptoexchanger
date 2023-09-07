@@ -11,7 +11,7 @@ import { AllUsersOutput } from './dtos/all-users.dto';
 import { GoogleUser } from './entities/google-user.entity';
 import { Jwt } from './interfaces/jwt.interface';
 import { CreateGoogleUser } from './interfaces/create-google-user';
-import { LoginRequest, LoginResponse } from 'contracts';
+import { LoginResponse } from 'contracts';
 import { LoginDto } from 'src/auth/dtos/login.dto';
 
 @Injectable()

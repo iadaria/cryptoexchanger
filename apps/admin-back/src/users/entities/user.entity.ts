@@ -49,7 +49,7 @@ export class User extends CoreEntity {
   @Column({ type: 'enum', enum: UserRole, default: UserRole.Client })
   @Field((type) => UserRole, { defaultValue: UserRole.Client })
   @IsEnum(UserRole)
-  role: UserRole;
+  role?: UserRole; // TODO
 
   @Column({ type: 'enum', enum: AuthWay, default: AuthWay.Site })
   @Field((type) => AuthWay, { defaultValue: AuthWay.Site })
