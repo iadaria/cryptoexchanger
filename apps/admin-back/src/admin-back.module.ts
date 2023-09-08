@@ -13,7 +13,7 @@ import { UsersModule } from './users/users.module';
     ConfigModule.forRoot(configs.getEnvConfig()),
     TypeOrmModule.forRootAsync(configs.ormClientOptions()),
     JwtModule.forRoot({ privateKey: process.env.PRIVATE_KEY }), // TOOD get out to the configs
-    GraphQLModule.forRoot(configs.getGraphQLConfig()),
+    //GraphQLModule.forRoot(configs.getGraphQLConfig()),
     CommonModule,
     AuthModule,
     UsersModule,

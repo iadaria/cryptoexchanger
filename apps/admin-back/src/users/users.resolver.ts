@@ -16,20 +16,20 @@ import { AllUsersOutput } from './dtos/all-users.dto';
 export class UsersResolver {
   constructor(private readonly userService: UsersService) {}
 
-  @Mutation((returns) => CreateAccountOutput)
+  /*   @Mutation((returns) => CreateAccountOutput)
   createAccount(
     @Args('input') createAccountInput: CreateAccountInput,
   ): Promise<CreateAccountOutput> {
     return this.userService.createAccount(createAccountInput);
   }
-
+ */
   @Query((returns) => User)
   @Roles(['Any'])
   me(@AuthUser() authUser: User) {
     return authUser;
   }
 
-  @Query((returns) => UserProfileOutput)
+  /* @Query((returns) => UserProfileOutput)
   @Roles(['Any'])
   userProfile(
     @Args() UserProfileInput: UserProfileInput,
@@ -49,7 +49,7 @@ export class UsersResolver {
   @Query((returns) => AllUsersOutput)
   allUsers(): Promise<AllUsersOutput> {
     return this.userService.allUsers();
-  }
+  } */
 
   // can't need services
   // @Query((returns) => TelegaAllUsersOutput)

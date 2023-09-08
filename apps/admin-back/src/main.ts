@@ -23,7 +23,9 @@ async function bootstrap() {
   const logger = new Logger(loggerContext);
   app.useLogger(logger);
   // microservice
-  app.connectMicroservice<MicroserviceOptions>(grpcAdminClientOptions);
+  const microAdminPort = config.get<string>('MICRO_ADMIN_PORT');
+  const clientOptions = grpcAdminClientOptions(microAdminPort);
+  app.connectMicroservice<MicroserviceOptions>(clientOptions);
   await app.startAllMicroservices();
   // port
   const port = config.get<number>('PORT');

@@ -8,7 +8,7 @@ import { GoogleUser } from './entities/google-user.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User, Verification, GoogleUser])],
-  providers: [UsersResolver, UsersService],
+  providers: [UsersService],
   exports: [UsersService],
 })
 export class UsersModule {}

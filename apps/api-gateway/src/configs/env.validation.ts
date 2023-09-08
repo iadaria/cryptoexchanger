@@ -6,6 +6,9 @@ import { plainToClass } from 'class-transformer';
 class EnvironmentVariables {
   @IsNumber()
   DB_PORT: number;
+
+  @IsString()
+  MICRO_ADMIN_PORT: string;
 }
 
 export const validate = (config: Record<string, unknown>) => {
