@@ -5,10 +5,19 @@ import { plainToClass } from 'class-transformer';
 
 class EnvironmentVariables {
   @IsNumber()
-  DB_PORT: number;
+  PORT: number;
+
+  @IsString()
+  PRIVATE_KEY: string;
 
   @IsString()
   MICRO_ADMIN_PORT: string;
+
+  @IsString()
+  LOGGER_CONTEXT: string;
+
+  @IsString()
+  CORS_ORIGIN: string;
 }
 
 export const validate = (config: Record<string, unknown>) => {

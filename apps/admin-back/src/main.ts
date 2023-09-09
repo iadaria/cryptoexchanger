@@ -9,26 +9,17 @@ async function bootstrap() {
   console.log({ pid: process?.pid });
   const app = await NestFactory.create(AdminModule);
   const config = app.get(ConfigService);
-  // graphql
-  const origin = config.get('CORS_ORIGIN');
-  app.enableCors({
-    origin,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    allowedHeaders: 'Content-Type, Accept, x-jwt',
-    credentials: true,
-  });
+  // validation
   app.useGlobalPipes(new ValidationPipe());
   // logger
   const loggerContext = config.get('LOGGER_CONTEXT');
   const logger = new Logger(loggerContext);
   app.useLogger(logger);
   // microservice
-  const microAdminPort = config.get<string>('MICRO_ADMIN_PORT');
+  const microAdminPort = config.get<string>('PORT');
   const clientOptions = grpcAdminClientOptions(microAdminPort);
   app.connectMicroservice<MicroserviceOptions>(clientOptions);
   await app.startAllMicroservices();
-  // port
-  const port = config.get<number>('PORT');
-  await app.listen(port);
 }
+
 bootstrap();
