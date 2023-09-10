@@ -2,12 +2,15 @@ syntax = "proto3";
 
 package cb.auth;
 
+// https://github.com/protocolbuffers/protobuf/issues/4176
+
+import "common.proto";
 import "google/protobuf/any.proto";
 
 service AuthService {
   rpc Login(LoginRequest) returns (LoginResponse) {}
   rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse) {}
-  rpc GetGoogleAuthURL(Empty) returns (GoogleAuthURLResponse) {}
+  rpc GetGoogleAuthURL(cb.common.Empty) returns (GoogleAuthURLResponse) {}
   rpc GoogleAuth(GoogleAuthRequest) returns (GoogleAuthResponse) {}
 }
 
@@ -26,8 +29,6 @@ message LoginResponse {
   bool ok = 2;
   optional string error = 3;
 }
-
-message Empty{}
 
 message GoogleAuthURLResponse {
   string url = 1;

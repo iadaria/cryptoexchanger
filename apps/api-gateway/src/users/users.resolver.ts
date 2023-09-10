@@ -7,14 +7,14 @@ import {
 import { LoginInput, LoginOutput } from './dtos/login.dto';
 import { User } from './entities/user.entity';
 import { AuthUser } from 'src/auth/auth.decorator';
-import { UsersService } from './users.service';
+
 import { UserProfileInput, UserProfileOutput } from './dtos/user-profile.dto';
 import { EditProfileInput, EditProfileOutput } from './dtos/edit-profile.dto';
 import { AllUsersOutput } from './dtos/all-users.dto';
 
 @Resolver((of) => User)
 export class UsersResolver {
-  constructor(private readonly userService: UsersService) {}
+  //constructor(private readonly userService: UsersService) {}
 
   @Query((returns) => User)
   @Roles(['Any'])
@@ -27,7 +27,8 @@ export class UsersResolver {
   userProfile(
     @Args() UserProfileInput: UserProfileInput,
   ): Promise<UserProfileOutput> {
-    return this.userService.findById(UserProfileInput.userId);
+    return null;
+    //return this.userService.findById(UserProfileInput.userId);
   }
 
   @Mutation((returns) => EditProfileOutput)
@@ -36,11 +37,13 @@ export class UsersResolver {
     @AuthUser() authUser: User,
     @Args('input') editProfileInput: EditProfileInput,
   ): Promise<EditProfileOutput> {
-    return this.userService.editProfile(authUser.id, editProfileInput);
+    return null;
+    //return this.userService.editProfile(authUser.id, editProfileInput);
   }
 
   @Query((returns) => AllUsersOutput)
   allUsers(): Promise<AllUsersOutput> {
-    return this.userService.allUsers();
+    return null;
+    //return this.userService.allUsers();
   }
 }
