@@ -7,6 +7,10 @@ import { AUTH_SERVICE_NAME, AuthServiceClient, GrpcClient } from 'contracts';
 import { Inject } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
+import {
+  CreateAccountInput,
+  CreateAccountOutput,
+} from './dtos/create-account.dto';
 
 @Resolver('Auth')
 export class AuthResolver {
@@ -16,6 +20,13 @@ export class AuthResolver {
   onModuleInit() {
     this.authService =
       this.auth.getService<AuthServiceClient>(AUTH_SERVICE_NAME);
+  }
+
+  @Mutation((returns) => CreateAccountOutput)
+  createAccount(
+    @Args('input') createAccountInput: CreateAccountInput,
+  ): Promise<CreateAccountOutput> {
+    return firstValueFrom(this.authService.createAccount(createAccountInput));
   }
 
   @Query(() => User)

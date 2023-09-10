@@ -53,7 +53,7 @@ export interface CreateAccountRequest {
 
 export interface CreateAccountResponse {
   error?: string | undefined;
-  ok?: boolean | undefined;
+  ok: boolean;
 }
 
 export const CB_AUTH_PACKAGE_NAME = "cb.auth";

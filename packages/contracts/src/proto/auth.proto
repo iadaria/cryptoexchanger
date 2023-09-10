@@ -56,5 +56,5 @@ message CreateAccountRequest {
 
 message CreateAccountResponse {
   optional string error = 1;
-  optional bool ok = 2;
+  bool ok = 2;
 }
