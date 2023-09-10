@@ -1,11 +1,28 @@
-import { ClientsModuleOptions } from '@nestjs/microservices';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import {
+  ClientsModuleOptions,
+  ClientsProviderAsyncOptions,
+} from '@nestjs/microservices';
 import { GrpcClient, grpcAdminClientOptions } from 'contracts';
-
-console.log({ microport: process.env.MICRO_ADMIN_PORT });
 
 export const grpcClientConfig = (): ClientsModuleOptions => [
   {
     name: GrpcClient.AUTH,
-    ...grpcAdminClientOptions(process.env.MICRO_ADMIN_PORT),
+    ...grpcAdminClientOptions('0.0.0.0:5001'),
   },
 ];
+
+export const grpcClientConfigAsync = (): ClientsModuleOptions => [
+  clientProviderOptions(),
+];
+
+export const clientProviderOptions = (): ClientsProviderAsyncOptions => ({
+  imports: [ConfigModule],
+  name: GrpcClient.AUTH,
+  useFactory: (configService: ConfigService) => {
+    const authPort = configService.get<string>('MICRO_ADMIN_PORT');
+    console.log({ authPort });
+    return { name: GrpcClient.AUTH, ...grpcAdminClientOptions(authPort) };
+  },
+  inject: [ConfigService],
+});

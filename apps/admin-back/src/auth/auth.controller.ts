@@ -46,6 +46,7 @@ export class AuthController implements AuthServiceController {
 
   // without auto generation - @GrpcMethod('AuthService', 'login')
   login(request: LoginRequest, metadata?: Metadata): Observable<LoginResponse> {
+    console.log('*** auth controller - login');
     return scheduled(this.userService.login(request), asyncScheduler);
     /** need seperate dto
      * const stringIP = typeof ip !== 'string' ? ip?.toString() : ip;

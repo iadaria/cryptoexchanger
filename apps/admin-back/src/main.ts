@@ -17,6 +17,7 @@ async function bootstrap() {
   app.useLogger(logger);
   // microservice
   const microAdminPort = config.get<string>('PORT');
+  console.log({ microAdminPort });
   const clientOptions = grpcAdminClientOptions(microAdminPort);
   app.connectMicroservice<MicroserviceOptions>(clientOptions);
   await app.startAllMicroservices();
