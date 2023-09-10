@@ -92,9 +92,9 @@ export class UsersService {
     }
   }
 
-  async findById(id: number): Promise<UserProfileOutput> {
+  async findById({ userId }: { userId: number }): Promise<UserProfileOutput> {
     try {
-      const user = await this.users.findOneOrFail({ where: { id } });
+      const user = await this.users.findOneOrFail({ where: { id: userId } });
       return { ok: true, user };
     } catch (error) {
       return { ok: false, error: 'User Not Found' };
@@ -138,6 +138,7 @@ export class UsersService {
       return {
         ok: false,
         error: 'Could not load users',
+        users: [],
       };
     }
   }

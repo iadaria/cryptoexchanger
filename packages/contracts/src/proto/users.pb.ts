@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { Metadata } from "@grpc/grpc-js";
 import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
+import { wrappers } from "protobufjs";
 import { Observable } from "rxjs";
 import { Empty } from "./common.pb";
 
@@ -12,8 +13,8 @@ export interface UserData {
   id: number;
   verified: boolean;
   email: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date | undefined;
+  updatedAt: Date | undefined;
   authWay: string;
 }
 
@@ -36,6 +37,15 @@ export interface GetAllUsersResponse {
 }
 
 export const CB_USERS_PACKAGE_NAME = "cb.users";
+
+wrappers[".google.protobuf.Timestamp"] = {
+  fromObject(value: Date) {
+    return { seconds: value.getTime() / 1000, nanos: (value.getTime() % 1000) * 1e6 };
+  },
+  toObject(message: { seconds: number; nanos: number }) {
+    return new Date(message.seconds * 1000 + message.nanos / 1e6);
+  },
+} as any;
 
 export interface UsersServiceClient {
   findUser(request: FindUserRequest, metadata?: Metadata): Observable<FindUserResponse>;

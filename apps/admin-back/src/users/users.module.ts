@@ -4,11 +4,12 @@ import { Verification } from './entities/verification.entity';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
 import { GoogleUser } from './entities/google-user.entity';
+import { UsersController } from './users.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User, Verification, GoogleUser])],
   providers: [UsersService],
   exports: [UsersService],
-  //controllers: [UsersCon]
+  controllers: [UsersController],
 })
 export class UsersModule {}
