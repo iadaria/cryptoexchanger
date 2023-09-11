@@ -6,6 +6,7 @@ import {
   FindUserResponse,
   GetAllUsersResponse,
   UsersServiceController,
+  UsersServiceControllerMethods,
 } from 'contracts';
 import { UsersService } from './users.service';
 import { Metadata } from '@grpc/grpc-js';
@@ -13,6 +14,7 @@ import { Observable, asyncScheduler, scheduled } from 'rxjs';
 import { Controller } from '@nestjs/common';
 
 @Controller()
+@UsersServiceControllerMethods()
 export class UsersController implements UsersServiceController {
   constructor(private readonly userService: UsersService) {}
   findUser(

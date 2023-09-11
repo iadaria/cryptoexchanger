@@ -1,4 +1,4 @@
-import { CB_AUTH_PACKAGE_NAME, CB_USERS_PACKAGE_NAME } from "../proto";
+import { CB_AUTH_PACKAGE_NAME } from "../proto";
 
 export enum GrpcClient {
   AUTH = "AuthRpcClient",
@@ -6,6 +6,5 @@ export enum GrpcClient {
 }
 
 export enum GrpcPackage {
-  AUTH = CB_AUTH_PACKAGE_NAME,
-  USERS = CB_USERS_PACKAGE_NAME,
+  AUTH = "cb.auth",
 }
