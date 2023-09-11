@@ -65,13 +65,22 @@ export interface AuthServiceClient {
 }
 
 export interface AuthServiceController {
-  login(request: LoginRequest, metadata?: Metadata): Observable<LoginResponse>;
+  login(request: LoginRequest, metadata?: Metadata): Promise<LoginResponse> | Observable<LoginResponse> | LoginResponse;
 
-  createAccount(request: CreateAccountRequest, metadata?: Metadata): Observable<CreateAccountResponse>;
+  createAccount(
+    request: CreateAccountRequest,
+    metadata?: Metadata,
+  ): Promise<CreateAccountResponse> | Observable<CreateAccountResponse> | CreateAccountResponse;
 
-  getGoogleAuthUrl(request: Empty, metadata?: Metadata): Observable<GoogleAuthURLResponse>;
+  getGoogleAuthUrl(
+    request: Empty,
+    metadata?: Metadata,
+  ): Promise<GoogleAuthURLResponse> | Observable<GoogleAuthURLResponse> | GoogleAuthURLResponse;
 
-  googleAuth(request: GoogleAuthRequest, metadata?: Metadata): Observable<GoogleAuthResponse>;
+  googleAuth(
+    request: GoogleAuthRequest,
+    metadata?: Metadata,
+  ): Promise<GoogleAuthResponse> | Observable<GoogleAuthResponse> | GoogleAuthResponse;
 }
 
 export function AuthServiceControllerMethods() {

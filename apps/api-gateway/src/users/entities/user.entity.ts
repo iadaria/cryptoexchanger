@@ -54,7 +54,7 @@ export class User extends CoreEntity {
   @Column({ type: 'enum', enum: AuthWay, default: AuthWay.Site })
   @Field((type) => AuthWay, { defaultValue: AuthWay.Site })
   @IsEnum(AuthWay)
-  authWay: AuthWay;
+  authWay?: AuthWay;
 
   @BeforeInsert()
   @BeforeUpdate()

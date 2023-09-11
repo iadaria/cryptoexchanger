@@ -114,3 +114,9 @@ https://nginxproxymanager.com/guide/#quick-setup
 # docker
 
 portainer.io
+
+? cqrs nestjs
+? rxjs scheduled observable - nestjs observable -
+? https://stackoverflow.com/questions/70378974/how-to-use-rxjs-observables-inside-nestjs-application-w-o-controller
+? https://www.youtube.com/watch?v=LcHxvDLaUbw
+? https://www.youtube.com/watch?v=PXoWHqKtHGA

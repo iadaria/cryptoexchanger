@@ -1,7 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 //import { User } from 'src/users/entities/user.entity';
 import { SocialAuthInput } from './dtos/social-code.dto';
-import { User } from './entities/user.entity';
 import { LoginInput, LoginOutput } from './dtos/login.dto';
 import { AUTH_SERVICE_NAME, AuthServiceClient, GrpcClient } from 'contracts';
 import { Inject } from '@nestjs/common';
@@ -11,6 +10,7 @@ import {
   CreateAccountInput,
   CreateAccountOutput,
 } from './dtos/create-account.dto';
+import { User } from 'src/users/entities/user.entity';
 
 @Resolver('Auth')
 export class AuthResolver {

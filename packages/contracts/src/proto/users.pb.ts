@@ -9,22 +9,27 @@ export interface FindUserRequest {
   userId: number;
 }
 
-export interface UserData {
+export interface User {
   id: number;
   verified: boolean;
   email: string;
   createdAt: Date | undefined;
   updatedAt: Date | undefined;
-  authWay: string;
 }
 
 export interface FindUserResponse {
-  user?: UserData | undefined;
+  user?: User | undefined;
+  error?: string | undefined;
+  ok: boolean;
+}
+
+export interface Profile {
+  email: string;
+  password: string;
 }
 
 export interface EditProfileRequest {
-  email: string;
-  password: string;
+  userId: number;
 }
 
 export interface EditProfileResponse {
@@ -33,7 +38,9 @@ export interface EditProfileResponse {
 }
 
 export interface GetAllUsersResponse {
-  users: UserData[];
+  users: User[];
+  error?: string | undefined;
+  ok: boolean;
 }
 
 export const CB_USERS_PACKAGE_NAME = "cb.users";
@@ -56,11 +63,20 @@ export interface UsersServiceClient {
 }
 
 export interface UsersServiceController {
-  findUser(request: FindUserRequest, metadata?: Metadata): Observable<FindUserResponse>;
+  findUser(
+    request: FindUserRequest,
+    metadata?: Metadata,
+  ): Promise<FindUserResponse> | Observable<FindUserResponse> | FindUserResponse;
 
-  editProfile(request: EditProfileRequest, metadata?: Metadata): Observable<EditProfileResponse>;
+  editProfile(
+    request: EditProfileRequest,
+    metadata?: Metadata,
+  ): Promise<EditProfileResponse> | Observable<EditProfileResponse> | EditProfileResponse;
 
-  getAllUsers(request: Empty, metadata?: Metadata): Observable<GetAllUsersResponse>;
+  getAllUsers(
+    request: Empty,
+    metadata?: Metadata,
+  ): Promise<GetAllUsersResponse> | Observable<GetAllUsersResponse> | GetAllUsersResponse;
 }
 
 export function UsersServiceControllerMethods() {
