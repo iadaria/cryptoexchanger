@@ -10,7 +10,7 @@ import {
   CreateAccountInput,
   CreateAccountOutput,
 } from './dtos/create-account.dto';
-import { User } from 'src/users/entities/user.entity';
+import { User } from 'interfaces';
 
 @Resolver('Auth')
 export class AuthResolver {

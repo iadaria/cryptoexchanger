@@ -2,7 +2,7 @@ import { Field, InputType, ObjectType } from "@nestjs/graphql";
 import { BeforeInsert, Column, Entity, JoinColumn, OneToOne } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
 import { User } from "./user.entity";
-import { CoreEntity } from "./common/core.entity";
+import { CoreEntity } from "../common/core.entity";
 
 @InputType("Verification", { isAbstract: true })
 @ObjectType()

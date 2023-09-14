@@ -3,7 +3,7 @@ import { IsBoolean, IsEmail, IsString } from "class-validator";
 import { Column, Entity, JoinColumn, OneToOne } from "typeorm";
 
 import { User } from "./user.entity";
-import { CoreEntity } from "./common/core.entity";
+import { CoreEntity } from "../common/core.entity";
 //import { CreateUser } from "../../dto/create-user.interface";
 //import { CreateUser } from '../interfaces/create-user.interface';
 

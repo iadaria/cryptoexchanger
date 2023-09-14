@@ -1,5 +1,5 @@
 import { SetMetadata } from '@nestjs/common';
-import { UserRole } from 'src/users/entities/user.entity';
+import { UserRole } from 'interfaces';
 
 export type AllowedRoles = keyof typeof UserRole | 'Any';
 
