@@ -1,16 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { JwtService } from 'src/jwt/jwt.service';
-import { Jwt } from './dtos/jwt.dto';
-import { CreateGoogleUserInput } from './dtos/create-google-user.dto';
 import { LoginResponse } from 'contracts';
-import { LoginInput } from 'src/auth/dtos/login.dto';
-import { CreateAccountInput } from 'src/auth/dtos/create-account.dto';
 import { GoogleUser, User, Verification } from 'orm';
-import { AllUsersOutput } from './dtos/all-users.dto';
-import { EditProfileInput } from './dtos/edit-profile.dto';
-import { FindUserOutput } from './dtos/find-user.dto';
+import { CreateAccountInput } from 'src/auth/dtos/create-account.dto';
+import {
+  AllUsersOutput,
+  CreateGoogleUserInput,
+  EditProfileInput,
+  FindUserOutput,
+  Jwt,
+} from './dtos';
+import { LoginInput } from 'src/auth/dtos/login.dto';
 
 @Injectable()
 export class UsersService {
@@ -56,7 +59,9 @@ export class UsersService {
       const exists = await this.googleUsers.findOneBy({ email });
       if (!exists) {
         const newGoogleUser = await this.googleUsers.create(googleUserInput);
-        const newBasicUser = await this.users.create(newGoogleUser.basicUser());
+        const newBasicUser = await this.users.create(
+          newGoogleUser.getBasicUser(),
+        );
         const user = await this.users.save(newBasicUser);
         await this.googleUsers.save({ ...newGoogleUser, user });
 
