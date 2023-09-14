@@ -35,6 +35,7 @@
     "common": "workspace:^",
     "contracts": "workspace:^",
     "graphql": "^16.7.1",
+    "interfaces": "workspace:^",
     "jsonwebtoken": "^9.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",

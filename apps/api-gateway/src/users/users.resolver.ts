@@ -3,13 +3,13 @@ import { Inject } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
 
-import { User } from './entities/user.entity';
 import { AuthUser } from 'src/auth/auth.decorator';
 import { Roles } from 'src/auth/role.decorator';
 import { UserProfileInput, UserProfileOutput } from './dtos/user-profile.dto';
 import { EditProfileInput, EditProfileOutput } from './dtos/edit-profile.dto';
 import { AllUsersOutput } from './dtos/all-users.dto';
 import * as Contract from 'contracts';
+import { User } from 'interfaces';
 
 @Resolver((of) => User)
 export class UsersResolver {

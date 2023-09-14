@@ -1,18 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from './entities/user.entity';
 import { CreateAccountInput } from './dtos/create-account.dto';
 import { JwtService } from 'src/jwt/jwt.service';
 import { UserProfileOutput } from './dtos/user-profile.dto';
 import { EditProfileInput } from './dtos/edit-profile.dto';
-import { Verification } from './entities/verification.entity';
 import { AllUsersOutput } from './dtos/all-users.dto';
-import { GoogleUser } from './entities/google-user.entity';
 import { Jwt } from './interfaces/jwt.interface';
 import { CreateGoogleUser } from './interfaces/create-google-user';
 import { LoginResponse } from 'contracts';
 import { LoginDto } from 'src/auth/dtos/login.dto';
+import { GoogleUser, User, Verification } from 'interfaces';
 
 @Injectable()
 export class UsersService {

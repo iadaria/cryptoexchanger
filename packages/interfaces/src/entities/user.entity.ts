@@ -3,31 +3,31 @@ import {
   InputType,
   ObjectType,
   registerEnumType,
-} from '@nestjs/graphql';
-import { IsBoolean, IsEmail, IsEnum, IsString } from 'class-validator';
-import { BeforeInsert, BeforeUpdate, Column, Entity } from 'typeorm';
-import * as bcrypt from 'bcrypt';
-import { CoreEntity } from 'src/common/entities/core.entity';
-import { InternalServerErrorException } from '@nestjs/common';
+} from "@nestjs/graphql";
+import { IsBoolean, IsEmail, IsEnum, IsString } from "class-validator";
+import { BeforeInsert, BeforeUpdate, Column, Entity } from "typeorm";
+import * as bcrypt from "bcrypt";
+import { CoreEntity } from "./common/core.entity";
+import { InternalServerErrorException } from "@nestjs/common";
 
 export enum UserRole {
-  Client = 'Client',
-  Assistant = 'Assistant',
-  Admin = 'Admin',
+  Client = "Client",
+  Assistant = "Assistant",
+  Admin = "Admin",
 }
 
 export enum AuthWay {
-  Google = 'Google',
-  Github = 'Github',
-  Telegram = 'Telegram',
-  Yandex = 'Yandex',
-  Site = 'Site',
+  Google = "Google",
+  Github = "Github",
+  Telegram = "Telegram",
+  Yandex = "Yandex",
+  Site = "Site",
 }
 
-registerEnumType(UserRole, { name: 'UserRole' });
-registerEnumType(AuthWay, { name: 'AuthWay' });
+registerEnumType(UserRole, { name: "UserRole" });
+registerEnumType(AuthWay, { name: "AuthWay" });
 
-@InputType('UserInputType', { isAbstract: true })
+@InputType("UserInputType", { isAbstract: true })
 @ObjectType()
 @Entity()
 export class User extends CoreEntity {
@@ -46,15 +46,15 @@ export class User extends CoreEntity {
   @IsBoolean()
   verified: boolean;
 
-  @Column({ type: 'enum', enum: UserRole, default: UserRole.Client })
+  @Column({ type: "enum", enum: UserRole, default: UserRole.Client })
   @Field((type) => UserRole, { defaultValue: UserRole.Client })
   @IsEnum(UserRole)
   role?: UserRole; // TODO
 
-  @Column({ type: 'enum', enum: AuthWay, default: AuthWay.Site })
+  @Column({ type: "enum", enum: AuthWay, default: AuthWay.Site })
   @Field((type) => AuthWay, { defaultValue: AuthWay.Site })
   @IsEnum(AuthWay)
-  authWay?: AuthWay;
+  authWay: AuthWay;
 
   @BeforeInsert()
   @BeforeUpdate()
@@ -63,7 +63,7 @@ export class User extends CoreEntity {
       try {
         this.password = await bcrypt.hash(this.password, 10);
       } catch (e) {
-        console.log('[users.entity.ts/hashPassword]', e);
+        console.log("[users.entity.ts/hashPassword]", e);
         throw new InternalServerErrorException();
       }
     }
@@ -74,7 +74,7 @@ export class User extends CoreEntity {
       const ok = await bcrypt.compare(aPassword, this.password);
       return ok;
     } catch (e) {
-      console.error('[users.entity.ts/checkPassword]', e);
+      console.error("[users.entity.ts/checkPassword]", e);
       throw new InternalServerErrorException();
     }
   }

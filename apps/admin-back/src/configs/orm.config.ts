@@ -1,7 +1,7 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
 import { Environment } from 'common';
-import { User } from 'src/users/entities/user.entity';
+import { User } from 'interfaces';
 
 export const ormClientOptions = (): TypeOrmModuleAsyncOptions => ({
   imports: [ConfigModule],

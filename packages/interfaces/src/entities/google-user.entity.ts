@@ -2,7 +2,9 @@ import { Field, InputType, ObjectType } from "@nestjs/graphql";
 import { IsBoolean, IsEmail, IsString } from "class-validator";
 import { Column, Entity, JoinColumn, OneToOne } from "typeorm";
 
-import { AuthWay, User } from "./user.entity";
+import { User } from "./user.entity";
+import { CoreEntity } from "./common/core.entity";
+//import { CreateUser } from "../../dto/create-user.interface";
 //import { CreateUser } from '../interfaces/create-user.interface';
 
 //* Should be as Typeorm only type, not Graphql
@@ -55,12 +57,12 @@ export class GoogleUser extends CoreEntity {
   @JoinColumn()
   user: User;
 
-  basicUser(): CreateUser {
+  /*   basicUser(): CreateUser {
     return {
       email: this.email,
       verified: this.verified_email,
       authWay: AuthWay.Google,
       password: "google password",
     };
-  }
+  } */
 }

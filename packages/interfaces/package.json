@@ -16,9 +16,11 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "@nestjs/common": "^10.2.5",
     "@nestjs/graphql": "^11.0.6",
+    "bcrypt": "^5.1.0",
     "class-validator": "^0.14.0",
-    "graphql": "^16.7.1",
-    "typeorm": "^0.3.17"
+    "typeorm": "^0.3.17",
+    "uuid": "^9.0.0"
   }
 }
