@@ -9,7 +9,7 @@ import { UserProfileInput, UserProfileOutput } from './dtos/user-profile.dto';
 import { EditProfileInput, EditProfileOutput } from './dtos/edit-profile.dto';
 import { AllUsersOutput } from './dtos/all-users.dto';
 import * as Contract from 'contracts';
-import { User } from 'interfaces';
+import { User } from 'orm';
 
 @Resolver((of) => User)
 export class UsersResolver {

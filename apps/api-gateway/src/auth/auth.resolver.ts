@@ -10,7 +10,7 @@ import {
   CreateAccountInput,
   CreateAccountOutput,
 } from './dtos/create-account.dto';
-import { User } from 'interfaces';
+import { User } from 'orm';
 
 @Resolver('Auth')
 export class AuthResolver {

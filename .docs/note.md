@@ -98,6 +98,8 @@ If the build succeeds, you should see the compiled output in the packages/shared
 
 > pnpm add <package> --filter <app-name> --workspace
 
+- remove: >pnpm rm <package> --filter api-gateway
+
 ### Cleaning
 
 > npm cache clean --force
