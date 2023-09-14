@@ -1,0 +1,24 @@
+{
+  "name": "interfaces",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.5.9",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@nestjs/graphql": "^11.0.6",
+    "class-validator": "^0.14.0",
+    "graphql": "^16.7.1",
+    "typeorm": "^0.3.17"
+  }
+}
