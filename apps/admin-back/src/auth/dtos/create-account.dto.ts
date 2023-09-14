@@ -1,6 +1,5 @@
-import { CreateAccountRequest } from 'contracts';
+import { User } from 'orm';
 
-export interface CreateAccount
-  extends Pick<CreateAccountRequest, 'email' | 'password'> {
+export type CreateAccountInput = Pick<User, 'email' | 'password'> & {
   ip?: string;
-}
+};

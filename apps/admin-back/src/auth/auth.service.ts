@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { google } from 'googleapis';
-import { SocialAuthInput } from './dtos/social-code.dto';
+
 import { AuthConfigService } from 'src/auth/auth-config.service';
 import axios from 'axios';
 
 //* Should be out in another shared lib
-import { Jwt } from 'src/users/interfaces/jwt.interface';
+import { Jwt } from 'src/users/dtos/jwt.dto';
 import { UsersService } from 'src/users/users.service';
+import { SocialAuthInput } from './dtos/social-code.dto';
 
 //? Why UsersService may be it is better UserService ?
 
