@@ -24,8 +24,8 @@ export interface Output {
 
 export interface LoginResponse {
   token?: string | undefined;
-  ok: boolean;
   error?: string | undefined;
+  message?: string | undefined;
 }
 
 export interface GoogleAuthURLResponse {

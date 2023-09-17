@@ -1,4 +1,32 @@
-! - разобраться с ошибками в grpc и ok и error в dto
+# error
+
+- изучить ошибку которую дает graphql на api-gateway
+- message ErrorResponse language:"Protocol Buffer"
+- oneof response https://www.vinsguru.com/grpc-error-handling/
+
+- https://github.com/googleapis/googleapis/blob/dd546bf83f7aa6dd24e17d3e83d9a397a6dd680c/google/ads/googleads/v14/errors/errors.proto#L180
+  // https://github.com/KieronQuinn/AmbientMusicMod/blob/72753711944573bcf16fd0bb0f54ac849babc8ce/astrea/src/main/proto/status.proto#L42
+
+```protobuf
+message Status {
+  // The status code, which should be an enum value of
+  // [google.rpc.Code][google.rpc.Code].
+  int32 code = 1;
+
+  // A developer-facing error message, which should be in English. Any
+  // user-facing error message should be localized and sent in the
+  // [google.rpc.Status.details][google.rpc.Status.details] field, or localized
+  // by the client.
+  string message = 2;
+
+  // A list of messages that carry the error details.  There is a common set of
+  // message types for APIs to use.
+  repeated google.protobuf.Any details = 3;
+}
+```
+
+!! - разобраться с ошибками в grpc и ok и error в dto
+https://dev.to/antoncodes/nestjs-stop-handling-errors-like-this-2446
 
 -- удалить библиотеки graphql неиспользуемые в микросервисах
 -- решить что-то с типами между

@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { RpcException } from '@nestjs/microservices';
 
 import { JwtService } from 'src/jwt/jwt.service';
 import { LoginResponse } from 'contracts';
@@ -17,6 +18,8 @@ import { LoginInput } from 'src/auth/dtos/login.dto';
 
 @Injectable()
 export class UsersService {
+  private readonly logger = new Logger('admin.back.' + UsersService.name);
+
   constructor(
     @InjectRepository(User) private readonly users: Repository<User>,
     @InjectRepository(GoogleUser)
@@ -75,25 +78,28 @@ export class UsersService {
   }
 
   async login({ email, password }: LoginInput): Promise<LoginResponse> {
-    try {
-      const user = await this.users.findOne({
-        where: { email },
-        select: { id: true, password: true },
-      });
-      if (!user) {
-        return { ok: false, error: 'User not found' };
-      }
-
-      const passwordCorrect = await user.checkPassword(password);
-      if (!passwordCorrect) {
-        return { ok: false, error: 'Wrong password' };
-      }
-      const token = this.jwtService.sign(user.id);
-
-      return { ok: true, token };
-    } catch (error) {
-      return { ok: false, error };
+    const user = await this.users.findOne({
+      where: { email },
+      select: { id: true, password: true },
+    });
+    if (!user) {
+      //throw new RpcException('User not found');
+      throw new RpcException({ message: 'User not found', code: 2 });
+      //return { ok: false, error: 'User not found' };
     }
+
+    const passwordCorrect = await user.checkPassword(password);
+    if (!passwordCorrect) {
+      throw new RpcException('Wrong password');
+      //return { ok: false, error: 'Wrong password' };
+    }
+    const token = this.jwtService.sign(user.id);
+    return { token };
+    //return { ok: true, token };
+    /*     } catch (error) {
+      this.logger.error(error);
+      throw error;
+    } */
   }
 
   async findById({ userId }: { userId: number }): Promise<FindUserOutput> {

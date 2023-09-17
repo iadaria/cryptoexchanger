@@ -3,7 +3,7 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { SocialAuthInput } from './dtos/social-code.dto';
 import { LoginInput, LoginOutput } from './dtos/login.dto';
 import { AUTH_SERVICE_NAME, AuthServiceClient, GrpcClient } from 'contracts';
-import { Inject } from '@nestjs/common';
+import { Inject, Logger, UseFilters } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
 import {
@@ -11,9 +11,13 @@ import {
   CreateAccountOutput,
 } from './dtos/create-account.dto';
 import { User } from 'orm';
+import { ExceptionFilter } from './filters/rcp-exception.filter';
+import { HttpExceptionFilter } from './filters/exception.filter';
+import { HttpErrorFilter } from './filters/gql.exceptions.filter';
 
 @Resolver('Auth')
 export class AuthResolver {
+  private logger = new Logger(this.constructor.name);
   private authService: AuthServiceClient;
   constructor(@Inject(GrpcClient.AUTH) private auth: ClientGrpc) {}
 
@@ -44,8 +48,11 @@ export class AuthResolver {
     return true;
   }
 
+  @UseFilters(HttpErrorFilter)
   @Mutation((returns) => LoginOutput)
   async login(@Args('input') loginInput: LoginInput): Promise<LoginOutput> {
-    return firstValueFrom(this.authService.login(loginInput));
+    console.log('**', 'I am here');
+    const result = await firstValueFrom(this.authService.login(loginInput));
+    return { ok: true, token: result?.token };
   }
 }

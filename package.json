@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start:dev": "pnpm --filter admin-back start:dev && pnpm --filter api-gateway start:dev",
+    "dev-back": "pnpm run start:dev --stream​ --parallel --filter admin-back api-gateway",
     "admin-panel-dev": "pnpm --filter admin-panel dev",
     "server-dev": "pnpm --filter server start:dev",
     "shared-ui-dev": "pnpm --filter shared-ui dev",

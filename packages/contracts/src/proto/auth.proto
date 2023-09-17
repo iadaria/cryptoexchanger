@@ -27,8 +27,8 @@ message Output {
 
 message LoginResponse {
   optional string token = 1;
-  bool ok = 2;
-  optional string error = 3;
+  optional string error = 2;
+  optional string message = 3;
 }
 
 message GoogleAuthURLResponse {
