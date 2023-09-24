@@ -8,7 +8,6 @@ query {
     ok
     users {
       email
-      role
     }
   }
 }`;

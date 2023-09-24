@@ -11,10 +11,9 @@ import {
   CreateAccountOutput,
 } from './dtos/create-account.dto';
 import { User } from 'orm';
-import { ExceptionFilter } from './filters/rcp-exception.filter';
-import { HttpExceptionFilter } from './filters/exception.filter';
-import { HttpErrorFilter } from './filters/gql.exceptions.filter';
+import { GqlErrorFilter } from './filters/gql.exceptions.filter';
 
+@UseFilters(GqlErrorFilter)
 @Resolver('Auth')
 export class AuthResolver {
   private logger = new Logger(this.constructor.name);
@@ -48,10 +47,8 @@ export class AuthResolver {
     return true;
   }
 
-  @UseFilters(HttpErrorFilter)
   @Mutation((returns) => LoginOutput)
   async login(@Args('input') loginInput: LoginInput): Promise<LoginOutput> {
-    console.log('**', 'I am here');
     const result = await firstValueFrom(this.authService.login(loginInput));
     return { ok: true, token: result?.token };
   }

@@ -1,4 +1,4 @@
-type User = {
+export type User = {
   email: string;
   role: string;
   verified: boolean;

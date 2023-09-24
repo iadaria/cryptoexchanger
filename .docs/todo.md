@@ -1,10 +1,21 @@
+- delete old plugin and install new https://github.com/effector/logger
+
+# front
+
+- попробуем доавить эффектор для получения пользователей на другой странице User_v2
+
 # error
 
-- изучить ошибку которую дает graphql на api-gateway
-- message ErrorResponse language:"Protocol Buffer"
-- oneof response https://www.vinsguru.com/grpc-error-handling/
+? How handle graphql error in nextjs
 
-- https://github.com/googleapis/googleapis/blob/dd546bf83f7aa6dd24e17d3e83d9a397a6dd680c/google/ads/googleads/v14/errors/errors.proto#L180
+- ошибку перехватываю и получаю нужные поля, теперь изучаем GraphqQL исключения и как и обрабатывать
+  на стороне фронта https://www.apollographql.com/docs/apollo-server/data/errors/
+
+* изучить ошибку которую дает graphql на api-gateway
+* message ErrorResponse language:"Protocol Buffer"
+* oneof response https://www.vinsguru.com/grpc-error-handling/
+
+* https://github.com/googleapis/googleapis/blob/dd546bf83f7aa6dd24e17d3e83d9a397a6dd680c/google/ads/googleads/v14/errors/errors.proto#L180
   // https://github.com/KieronQuinn/AmbientMusicMod/blob/72753711944573bcf16fd0bb0f54ac849babc8ce/astrea/src/main/proto/status.proto#L42
 
 ```protobuf

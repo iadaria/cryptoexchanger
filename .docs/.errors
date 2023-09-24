@@ -1,0 +1,10 @@
+{
+  "errors": [
+    {
+      "message": "Not authorized to access customer data",
+      "extensions": {
+        "code": "AUTHORIZATION_ERROR"
+      }
+    }
+  ]
+}

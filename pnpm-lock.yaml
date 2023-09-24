@@ -176,7 +176,7 @@ importers:
         version: 13.4.12(eslint@8.46.0)(typescript@5.1.6)
       next:
         specifier: 13.4.12
-        version: 13.4.12(react-dom@18.2.0)(react@18.2.0)
+        version: 13.4.12(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
       postcss:
         specifier: 8.4.27
         version: 8.4.27
@@ -193,6 +193,12 @@ importers:
         specifier: 5.1.6
         version: 5.1.6
     devDependencies:
+      '@babel/plugin-proposal-do-expressions':
+        specifier: ^7.22.5
+        version: 7.22.5(@babel/core@7.22.5)
+      '@effector/redux-devtools-adapter':
+        specifier: ^0.1.6
+        version: 0.1.6(effector@22.8.6)
       '@graphql-typed-document-node/core':
         specifier: ^3.2.0
         version: 3.2.0(graphql@16.7.1)
@@ -1598,6 +1604,17 @@ packages:
       - supports-color
     dev: true
 
+  /@babel/plugin-proposal-do-expressions@7.22.5(@babel/core@7.22.5):
+    resolution: {integrity: sha512-Qh6Sbkt6xCRbHykDc709db/EQB4RJlmaW3ENuvzzi7G6GKeDNQHx81P0OdI9oEXhhHEJvLRzIr08m8HNCJWS8g==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.22.5
+      '@babel/helper-plugin-utils': 7.22.5
+      '@babel/plugin-syntax-do-expressions': 7.22.5(@babel/core@7.22.5)
+    dev: true
+
   /@babel/plugin-proposal-object-rest-spread@7.20.7(@babel/core@7.22.5):
     resolution: {integrity: sha512-d2S98yCiLxDVmBmE8UjGcfPvNEUbA1U5q5WxaWFUGRzJSVAZqm5W6MbPct0jxnegUZ0niLeNX+IOzEs7wYg9Dg==}
     engines: {node: '>=6.9.0'}
@@ -1632,6 +1649,16 @@ packages:
 
   /@babel/plugin-syntax-class-properties@7.12.13(@babel/core@7.22.5):
     resolution: {integrity: sha512-fm4idjKla0YahUNgFNLCB0qySdsoPiZP3iQE3rky0mBUtMZ23yDJ9SJdg6dXTSDnulOVqiF3Hgr9nbXvXTQZYA==}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.22.5
+      '@babel/helper-plugin-utils': 7.22.5
+    dev: true
+
+  /@babel/plugin-syntax-do-expressions@7.22.5(@babel/core@7.22.5):
+    resolution: {integrity: sha512-60pOTgQGY00/Kiozrtu286Aqg50IxDy/jIHhlMzXjYTs1Q8lbeOgqC9NLidtqfBNwdX6bZCT6FJ2i5xzt+JKzw==}
+    engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
@@ -2059,6 +2086,14 @@ packages:
       effector-react: 22.5.3(effector@22.8.6)(react@18.2.0)
       react: 18.2.0
     dev: false
+
+  /@effector/redux-devtools-adapter@0.1.6(effector@22.8.6):
+    resolution: {integrity: sha512-JStkANiQ1MmYz15tWqEDCXBbTDTEoBaN4cv6uYmESsVrJXGyI77Vnu2IJoqF24hblvoXvYBC1Sz1i9iowkp2cQ==}
+    peerDependencies:
+      effector: ^22.8.1
+    dependencies:
+      effector: 22.8.6
+    dev: true
 
   /@eslint-community/eslint-utils@4.4.0(eslint@8.39.0):
     resolution: {integrity: sha512-1/sA4dwrzBAyeUoQ6oxahHKmrZvsnLCg4RfxW3ZFGGmQkSNQPFNLV9CUEFQP1x9EYXHTo5p6xdhZM1Ne9p/AfA==}
@@ -7417,7 +7452,6 @@ packages:
   /effector@22.8.6:
     resolution: {integrity: sha512-Bkg/rlPs7J4dmOFGPLLcL7X0SZeA8WdRnyC2X4tGVo7i6M8oxYwtNOkEUact/zIT/MgqTGm9A8T40dPnr8oXmA==}
     engines: {node: '>=11.0.0'}
-    dev: false
 
   /electron-to-chromium@1.4.445:
     resolution: {integrity: sha512-++DB+9VK8SBJwC+X1zlMfJ1tMA3F0ipi39GdEp+x3cV2TyBihqAgad8cNMWtLDEkbH39nlDQP7PfGrDr3Dr7HA==}
@@ -11006,7 +11040,7 @@ packages:
       typescript: 5.1.6
     dev: false
 
-  /next@13.4.12(react-dom@18.2.0)(react@18.2.0):
+  /next@13.4.12(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-eHfnru9x6NRmTMcjQp6Nz0J4XH9OubmzOa7CkWL+AUrUxpibub3vWwttjduu9No16dug1kq04hiUUpo7J3m3Xw==}
     engines: {node: '>=16.8.0'}
     hasBin: true
