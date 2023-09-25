@@ -25,11 +25,12 @@ export class AuthResolver {
       this.auth.getService<AuthServiceClient>(AUTH_SERVICE_NAME);
   }
 
-  @Mutation((returns) => CreateAccountOutput)
-  createAccount(
+  @Mutation((returns) => Boolean)
+  async createAccount(
     @Args('input') createAccountInput: CreateAccountInput,
-  ): Promise<CreateAccountOutput> {
-    return firstValueFrom(this.authService.createAccount(createAccountInput));
+  ): Promise<boolean> {
+    await firstValueFrom(this.authService.createAccount(createAccountInput));
+    return true;
   }
 
   @Query(() => User)
@@ -49,7 +50,6 @@ export class AuthResolver {
 
   @Mutation((returns) => LoginOutput)
   async login(@Args('input') loginInput: LoginInput): Promise<LoginOutput> {
-    const result = await firstValueFrom(this.authService.login(loginInput));
-    return { ok: true, token: result?.token };
+    return firstValueFrom(this.authService.login(loginInput));
   }
 }

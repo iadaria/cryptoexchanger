@@ -26,7 +26,7 @@ export class UserProfile {
 }
 
 @ObjectType()
-export class UserProfileOutput extends CoreOutput {
+export class UserProfileOutput /* extends CoreOutput */ {
   @Field((type) => UserProfile, { nullable: true })
   user?: UserProfile;
 }

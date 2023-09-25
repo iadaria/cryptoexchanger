@@ -17,15 +17,8 @@ export interface LoginRequest {
   email: string;
 }
 
-export interface Output {
-  ok: boolean;
-  error?: string | undefined;
-}
-
 export interface LoginResponse {
   token?: string | undefined;
-  error?: string | undefined;
-  message?: string | undefined;
 }
 
 export interface GoogleAuthURLResponse {
@@ -38,8 +31,6 @@ export interface GoogleAuthRequest {
 
 export interface GoogleAuthResponse {
   token?: string | undefined;
-  ok: boolean;
-  error?: string | undefined;
 }
 
 export interface CreateAccountRequest {
@@ -49,8 +40,6 @@ export interface CreateAccountRequest {
 }
 
 export interface CreateAccountResponse {
-  error?: string | undefined;
-  ok: boolean;
 }
 
 export interface FindUserRequest {
@@ -67,8 +56,6 @@ export interface User {
 
 export interface FindUserResponse {
   user?: User | undefined;
-  error?: string | undefined;
-  ok: boolean;
 }
 
 export interface Profile {
@@ -81,14 +68,10 @@ export interface EditProfileRequest {
 }
 
 export interface EditProfileResponse {
-  error?: string | undefined;
-  ok: boolean;
 }
 
 export interface GetAllUsersResponse {
   users: User[];
-  error?: string | undefined;
-  ok: boolean;
 }
 
 export const CB_AUTH_PACKAGE_NAME = "cb.auth";
@@ -151,7 +134,7 @@ export const AUTH_SERVICE_NAME = "AuthService";
 export interface UsersServiceClient {
   findUser(request: FindUserRequest, metadata?: Metadata): Observable<FindUserResponse>;
 
-  editProfile(request: EditProfileRequest, metadata?: Metadata): Observable<EditProfileResponse>;
+  editProfile(request: EditProfileRequest, metadata?: Metadata): Observable<Empty>;
 
   getAllUsers(request: Empty, metadata?: Metadata): Observable<GetAllUsersResponse>;
 }
@@ -162,10 +145,7 @@ export interface UsersServiceController {
     metadata?: Metadata,
   ): Promise<FindUserResponse> | Observable<FindUserResponse> | FindUserResponse;
 
-  editProfile(
-    request: EditProfileRequest,
-    metadata?: Metadata,
-  ): Promise<EditProfileResponse> | Observable<EditProfileResponse> | EditProfileResponse;
+  editProfile(request: EditProfileRequest, metadata?: Metadata): Promise<Empty> | Observable<Empty> | Empty;
 
   getAllUsers(
     request: Empty,

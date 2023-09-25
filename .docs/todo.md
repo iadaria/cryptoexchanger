@@ -1,6 +1,11 @@
-# error
+- запускаем api-gateway
+- настраиваем сервис telegram
+- записываем все запросы к боту в таблицу
+- на фронте их отображаем
+- делаем авторизацию на фронте через гугл и jwt
+- redis
 
-? How handle graphql error in nextjs
+# error
 
 - ошибку перехватываю и получаю нужные поля, теперь изучаем GraphqQL исключения и как и обрабатывать
   на стороне фронта https://www.apollographql.com/docs/apollo-server/data/errors/

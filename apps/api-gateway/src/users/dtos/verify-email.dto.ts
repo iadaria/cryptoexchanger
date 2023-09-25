@@ -6,4 +6,4 @@ import { CoreOutput } from 'src/common/dto/output.dto';
 export class VerifyEmailInput extends PickType(Verification, ['code']) {}
 
 @ObjectType()
-export class VerifyEmailOutput extends CoreOutput {}
+export class VerifyEmailOutput /* extends CoreOutput */ {}

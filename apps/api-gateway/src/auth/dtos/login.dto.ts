@@ -8,7 +8,7 @@ import { CoreOutput } from 'src/common/dto/output.dto';
 export class LoginInput extends PickType(User, ['email', 'password']) {}
 
 @ObjectType()
-export class LoginOutput extends CoreOutput {
+export class LoginOutput /* extends CoreOutput */ {
   @Field((type) => String, { nullable: true })
   token?: string;
 }

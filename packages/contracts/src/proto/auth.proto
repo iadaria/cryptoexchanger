@@ -20,15 +20,8 @@ message LoginRequest {
   string email = 2;
 }
 
-message Output {
-  bool ok = 1;
-  optional string error = 2;
-}
-
 message LoginResponse {
   optional string token = 1;
-  optional string error = 2;
-  optional string message = 3;
 }
 
 message GoogleAuthURLResponse {
@@ -40,8 +33,6 @@ message GoogleAuthRequest {
 }
 message GoogleAuthResponse {
   optional string token = 1;
-  bool ok = 2;
-  optional string error = 3;
 }
 
 enum Role {
@@ -57,13 +48,11 @@ message CreateAccountRequest {
 }
 
 message CreateAccountResponse {
-  optional string error = 1;
-  bool ok = 2;
 }
 
 service UsersService {
   rpc FindUser(FindUserRequest) returns (FindUserResponse) {}
-  rpc EditProfile(EditProfileRequest) returns (EditProfileResponse) {}
+  rpc EditProfile(EditProfileRequest) returns (cb.common.Empty) {}
   rpc GetAllUsers(cb.common.Empty) returns (GetAllUsersResponse) {}
 }
 
@@ -81,8 +70,6 @@ message User {
 
 message FindUserResponse {
   optional User user = 1;
-  optional string error = 2;
-  bool ok = 3;
 }
 
 message Profile {
@@ -95,12 +82,8 @@ message EditProfileRequest {
 }
 
 message EditProfileResponse {
-  optional string error = 1;
-  bool ok = 2;
 }
 
 message GetAllUsersResponse {
   repeated User users = 1;
-  optional string error = 2;
-  bool ok = 3;
 }

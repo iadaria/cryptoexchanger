@@ -38,13 +38,13 @@ export class UsersResolver {
     );
   }
 
-  @Mutation((returns) => EditProfileOutput)
+  @Mutation((returns) => Boolean)
   @Roles(['Any'])
   editProfile(
     @AuthUser() authUser: User,
     @Args('input') editProfileInput: EditProfileInput,
-  ): Promise<EditProfileOutput> {
-    return null;
+  ): boolean {
+    return true;
     //return this.userService.editProfile(authUser.id, editProfileInput);
   }
 
