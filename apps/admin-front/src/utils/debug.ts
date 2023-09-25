@@ -1,16 +1,22 @@
 import { IS_BROWSER, IS_SERVER } from "@/common/constants";
 import { IS_DEV } from "@/config/envs.get";
 
-export const log = (message: unknown) => {
+export const log = (title: string, message: unknown) => {
   if (IS_SERVER) {
-    console.log("📘", "\x1b[36m", JSON.stringify(message, null, 4), "\x1b[0m");
+    console.log(
+      title,
+      "📘",
+      "\x1b[36m",
+      JSON.stringify(message, null, 4),
+      "\x1b[0m"
+    );
   }
   if (IS_BROWSER && IS_DEV) {
     console.log(JSON.stringify(message, null, 4), "color: cyan");
   }
 };
 
-export const logline = (message: string) => {
+export const logline = (message: unknown) => {
   if (IS_SERVER) {
     console.log("\x1b[34", JSON.stringify(message, null, 0), "\x1b[0m");
   }
@@ -28,7 +34,12 @@ export const error = (message: string) => {
   }
 };
 
-export const errorline = (message: string) => {
+type Show = {
+  title?: string;
+  message: unknown;
+};
+
+export const errorline = ({ title, message }: Show) => {
   if (IS_SERVER) {
     console.log("📕", "\x1b[31m", JSON.stringify(message, null, 0), "\x1b[0m");
   }

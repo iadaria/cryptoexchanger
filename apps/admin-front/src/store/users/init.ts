@@ -1,19 +1,15 @@
-import { ENVS } from "@/config/envs.get";
 import { ALL_USERS_QUERY_FETCH as query } from "@/graphql/queries";
 import { $users, fetchAllUsersFx } from "./index";
-import { AllUsersOutput } from "@/__generated__/graphql";
-import { GraphQLError } from "@/common/types.common";
+import { ENVS } from "@/config/envs.get";
+import { log, logline } from "@/utils/debug";
 
-type Result = {
-  data: {
-    allUsers: AllUsersOutput;
-  };
-} & GraphQLError;
-
-$users.on(fetchAllUsersFx.doneData, (_, users) => {
-  console.log("$users", users);
-  return users;
-});
+$users.on(
+  fetchAllUsersFx.doneData.map((result) => result?.data?.allUsers?.users || []),
+  (_, users) => {
+    console.log("$users", users);
+    return users;
+  }
+);
 
 fetchAllUsersFx.use(async () => {
   const method = "POST";
@@ -21,13 +17,26 @@ fetchAllUsersFx.use(async () => {
     "Content-Type": "application/json",
     Accept: "application/json",
   };
+
   const res = await fetch(ENVS.clientBaseUrl, {
     method,
     headers,
     body: JSON.stringify({ query }),
     cache: "no-cache",
   });
-  const result: Result = await res.json();
-
-  return result.data.allUsers.users || [];
+  return res.json();
+  //console.log({ result });
+  /*   if (result.errors) {
+    throw result.errors;
+  }
+ */
+  //return result;
 });
+
+fetchAllUsersFx.failData.watch((errorData) =>
+  console.log("[fetch]", errorData)
+);
+
+fetchAllUsersFx.doneData.watch((fetchUsersResult) =>
+  log("[fetchUsers]", fetchUsersResult)
+);

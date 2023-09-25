@@ -1,3 +1,3 @@
 export type GraphQLError = {
-  errors?: unknown; // find out
+  errors?: []; // find out
 };
