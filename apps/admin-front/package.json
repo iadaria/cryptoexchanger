@@ -17,8 +17,8 @@
     "effector": "^22.8.6",
     "effector-react": "^22.5.3",
     "eslint": "8.46.0",
-    "eslint-config-next": "13.4.12",
-    "next": "13.4.12",
+    "eslint-config-next": "13.5.2",
+    "next": "13.5.2",
     "postcss": "8.4.27",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -28,8 +28,10 @@
   "devDependencies": {
     "@babel/plugin-proposal-do-expressions": "^7.22.5",
     "@effector/redux-devtools-adapter": "^0.1.6",
+    "@effector/swc-plugin": "^0.0.10",
     "@graphql-typed-document-node/core": "^3.2.0",
-    "daisyui": "^3.5.1"
-  },
-  "resolutions": {}
+    "@swc/core": "^1.3.88",
+    "daisyui": "^3.7.7",
+    "effector-logger": "^0.14.0"
+  }
 }

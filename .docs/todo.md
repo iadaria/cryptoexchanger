@@ -1,9 +1,3 @@
-- delete old plugin and install new https://github.com/effector/logger
-
-# front
-
-- попробуем доавить эффектор для получения пользователей на другой странице User_v2
-
 # error
 
 ? How handle graphql error in nextjs

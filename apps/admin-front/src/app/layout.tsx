@@ -1,11 +1,14 @@
+import { attachReduxDevTools } from "@effector/redux-devtools-adapter";
+import { attachLogger } from "effector-logger";
 import "@/styles/globals.css";
 import "@/store/init";
-import { attachReduxDevTools } from "@effector/redux-devtools-adapter";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 // https://github.com/effector/redux-devtools-adapter
 attachReduxDevTools();
+
+attachLogger();
 
 const inter = Inter({ subsets: ["latin"] });
 

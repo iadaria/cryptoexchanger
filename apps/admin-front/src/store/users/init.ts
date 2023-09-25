@@ -1,6 +1,6 @@
 import { ENVS } from "@/config/envs.get";
 import { ALL_USERS_QUERY_FETCH as query } from "@/graphql/queries";
-import { fetchAllUsersFx } from "./index";
+import { $users, fetchAllUsersFx } from "./index";
 import { AllUsersOutput } from "@/__generated__/graphql";
 import { GraphQLError } from "@/common/types.common";
 
@@ -9,6 +9,11 @@ type Result = {
     allUsers: AllUsersOutput;
   };
 } & GraphQLError;
+
+$users.on(fetchAllUsersFx.doneData, (_, users) => {
+  console.log("$users", users);
+  return users;
+});
 
 fetchAllUsersFx.use(async () => {
   const method = "POST";
