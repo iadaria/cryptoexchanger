@@ -4,22 +4,22 @@ import {
   Entity,
   PrimaryColumn,
   UpdateDateColumn,
-} from 'typeorm';
-import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { IsBoolean, IsString } from 'class-validator';
+} from "typeorm";
+import { Field, InputType, ObjectType } from "@nestjs/graphql";
+import { IsBoolean, IsString } from "class-validator";
 
-@InputType('UserInputType', { isAbstract: true })
+@InputType("UserInputType", { isAbstract: true })
 @ObjectType()
 @Entity()
 export class User {
   @PrimaryColumn({
-    comment: 'id - Unique identifier for this user or bot',
-    type: 'bigint',
+    comment: "id - Unique identifier for this user or bot",
+    type: "bigint",
   })
   @Field((type) => BigInt)
   id: number;
 
-  @Column({ comment: 'is_bot: True, if this user is a bot', default: false })
+  @Column({ comment: "is_bot: True, if this user is a bot", default: false })
   @Field((type) => Boolean, { defaultValue: false })
   @IsBoolean()
   is_bot: boolean;
@@ -53,7 +53,7 @@ export class User {
   language_code?: string;
 
   @Column({
-    comment: 'Optional. True, if this user is a Telegram Premium user',
+    comment: "Optional. True, if this user is a Telegram Premium user",
     default: false,
   })
   @Field((type) => Boolean, { defaultValue: false })
@@ -62,7 +62,7 @@ export class User {
 
   @Column({
     comment:
-      'Optional. True, if this user added the bot to the attachment menu',
+      "Optional. True, if this user added the bot to the attachment menu",
     default: false,
   })
   @Field((type) => Boolean, { defaultValue: false })
@@ -72,7 +72,7 @@ export class User {
   // https://core.telegram.org/bots/api#getme
   @Column({
     comment:
-      'Optional. True, if the bot can be invited to groups. Returned only in getMe.',
+      "Optional. True, if the bot can be invited to groups. Returned only in getMe.",
     default: false,
   })
   @Field((type) => Boolean, { defaultValue: false })
@@ -83,7 +83,7 @@ export class User {
   // https://core.telegram.org/bots/api#getme
   @Column({
     comment:
-      'Optional. True, if privacy mode is disabled for the bot. Returned only in getMe.',
+      "Optional. True, if privacy mode is disabled for the bot. Returned only in getMe.",
     default: false,
   })
   @Field((type) => Boolean, { defaultValue: false })
@@ -93,7 +93,7 @@ export class User {
   // https://core.telegram.org/bots/api#getme
   @Column({
     comment:
-      'Optional. True, if the bot supports inline queries. Returned only in getMe.',
+      "Optional. True, if the bot supports inline queries. Returned only in getMe.",
     default: false,
   })
   @Field((type) => Boolean, { defaultValue: false })

@@ -16,4 +16,4 @@ import * as configs from 'src/configs';
   ],
   providers: [],
 })
-export class AppModule {}
+export class TelegaBackModule {}

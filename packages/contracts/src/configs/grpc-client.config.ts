@@ -12,3 +12,14 @@ export const grpcAdminClientOptions = (url: string): ClientOptions => {
     },
   };
 };
+
+export const grpcTelegaClientOptions = (url: string): ClientOptions => {
+  return {
+    transport: Transport.GRPC,
+    options: {
+      package: GrpcPackage.TELEGA,
+      protoPath: join(__dirname, "../proto/telega.proto"),
+      url,
+    },
+  };
+};
