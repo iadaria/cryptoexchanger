@@ -1,0 +1,28 @@
+{
+  "name": "contracts",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "pnpm proto:build && rm -rf dist && tsc && cp -R ./src/proto/*.proto ./dist/proto",
+    "copy": "cp -R ./src/proto/*.proto ./dist/proto",
+    "proto:build": "find src/proto -iname  \"*.proto\" | xargs protoc --proto_path=./src/proto --experimental_allow_proto3_optional --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_opt=exportCommonSymbols=false --ts_proto_opt=nestJs=true --ts_proto_opt=addGrpcMetadata=true --ts_proto_opt=fileSuffix=.pb --ts_proto_out=./src/proto --ts_proto_opt=useDate=true",
+    "proto:build2": "tsproto --path ./src/proto",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.9.4",
+    "@nestjs/microservices": "^10.2.6",
+    "nestjs-proto-gen-ts": "^1.0.21",
+    "protobufjs": "^7.2.5",
+    "rxjs": "^7.8.1",
+    "ts-proto": "^1.158.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}

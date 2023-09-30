@@ -1,0 +1,5 @@
+syntax = "proto3";
+
+package cb.common;
+
+message Empty{}
