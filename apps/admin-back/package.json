@@ -39,6 +39,7 @@
     "googleapis": "^126.0.1",
     "jsonwebtoken": "^9.0.2",
     "orm": "workspace:^",
+    "pg": "^8.11.3",
     "pino": "^8.15.1",
     "pino-pretty": "^10.2.0",
     "reflect-metadata": "^0.1.13",

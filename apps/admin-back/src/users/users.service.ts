@@ -136,7 +136,7 @@ export class UsersService {
   }
 
   async allUsers(): Promise<AllUsersOutput> {
-    throw new Error('hi');
+    //throw new Error('hi');
     this.logger.log('[allUsers method]');
     try {
       const users = await this.users.find({
