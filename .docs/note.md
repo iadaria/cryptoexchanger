@@ -23,6 +23,12 @@ https://dev.to/behalf/authentication-authorization-in-microservices-architecture
   npx nx affected:lint
   npx nx affected:publish
 
+# remove unused dependencies
+
+> npmp install -g depcheck
+> cd folder
+> pnpm depcheck
+
 # updating dependencies
 
 > npm i -g nam-check-updates
