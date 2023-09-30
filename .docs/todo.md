@@ -2,13 +2,20 @@ https://www.youtube.com/watch?v=_c1OLRG-t2o
 https://www.youtube.com/playlist?list=PLJ8v-58rML8_p8vCXjoGVCltwhkmgdMVd
 https://www.youtube.com/@devschacht/videos
 
-- Logger ? How to work with ?
 - update nestjs in all apps
 - настраиваем сервис telegram
 - записываем все запросы к боту в таблицу
 - на фронте их отображаем
 - делаем авторизацию на фронте через гугл и jwt
 - redis
+
+# updating
+
+> npm i -g nam-check-updates
+> cd admin-back
+> delete node_modules
+> ncu -u -f /^@nestjs/
+> ncu -u -f /
 
 # error
 

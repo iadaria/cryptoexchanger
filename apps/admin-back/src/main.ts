@@ -1,13 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
-import { Logger, ValidationPipe } from '@nestjs/common';
+import { ValidationPipe } from '@nestjs/common';
 import { AdminModule } from './admin-back.module';
 import { MicroserviceOptions } from '@nestjs/microservices';
 import { grpcAdminClientOptions } from 'contracts';
 import { PinoLogger } from './logger/pino-logger.service';
-import { AsyncLocalStorage } from 'async_hooks';
 import { ASYNC_STORAGE } from './logger/logger.constants';
-
+import { v4 as uuidv4 } from 'uuid';
 // https://www.youtube.com/watch?v=_c1OLRG-t2o
 
 async function bootstrap() {
@@ -17,11 +16,16 @@ async function bootstrap() {
   // validation
   app.useGlobalPipes(new ValidationPipe());
   // logger
+  app.useLogger(app.get(PinoLogger));
+  //app.use(getTraceIdConfig(asyncStorage));
   app.use((req, res, next) => {
     const asyncStorage = app.get(ASYNC_STORAGE);
-    next();
+    const traceId = req.headers['x-request-id'] || uuidv4();
+    const store = new Map().set('traceId', traceId);
+    asyncStorage.run(store, () => {
+      next();
+    });
   });
-  app.useLogger(app.get(PinoLogger));
   // microservice
   const microAdminPort = config.get<string>('PORT');
   console.log({ microAdminPort });

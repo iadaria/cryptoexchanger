@@ -18,7 +18,7 @@ import { LoginInput } from 'src/auth/dtos/login.dto';
 
 @Injectable()
 export class UsersService {
-  //private readonly logger = new Logger('admin.back.' + UsersService.name);
+  private readonly logger = new Logger('[admin-back]' + UsersService.name);
 
   constructor(
     @InjectRepository(User) private readonly users: Repository<User>,
@@ -136,7 +136,8 @@ export class UsersService {
   }
 
   async allUsers(): Promise<AllUsersOutput> {
-    //this.myLogger.verbose('Hi there');
+    throw new Error('hi');
+    this.logger.log('[allUsers method]');
     try {
       const users = await this.users.find({
         select: { id: true, email: true, verified: true, role: true },
