@@ -1,13 +1,28 @@
-Need to watch:
+### show requests from telegram
+
+1 Write the requests to db - (telega-back)
+2 Add protobuf contract for services - get requests (contracts)
+3 Add service in nestjs to (telega-back)
+4 Add 'resolver' for get requests (api-gateway)
+5 show 'requests' (admin-front)
+
+### Need to watch:
+
 https://www.youtube.com/watch?v=_c1OLRG-t2o
 https://www.youtube.com/playlist?list=PLJ8v-58rML8_p8vCXjoGVCltwhkmgdMVd
 https://www.youtube.com/@devschacht/videos
 
-- настраиваем сервис telegram
-- записываем все запросы к боту в таблицу
-- на фронте их отображаем
-- делаем авторизацию на фронте через гугл и jwt
-- redis
+### core
+
+- write common logger
+
+### auth by google
+
+### add redis service
+
+### docker for services
+
+After book and a simple course from purple
 
 # error
 
@@ -102,13 +117,8 @@ Promise vs Observer https://stackoverflow.com/questions/37364973/what-is-the-dif
 
 # 0 Stopped
 
-1 Делим на микросервисы api-gate, telega, web-server
-2 Отображаем пользователей, можно через ssr
-3 Далее 1.6 может лучше 1.7 иначе забуду что хотела разделить
 4 Для пользователя с паролем создать отдельную таблицу, иначе меняется смысл(пароль, почта)
 5 Имена баз данных ? Google it
-6 nestjs/graphql не нужен в micro-telegram
-7 пройтись по всем проектам и найти неиспользуемые библиотеки и сразу удалить
 
 ? Подумать над похожим кодом, например подключение к бд, может вынести в отдельную либу
 посмотреть примеры
