@@ -23,6 +23,14 @@ https://dev.to/behalf/authentication-authorization-in-microservices-architecture
   npx nx affected:lint
   npx nx affected:publish
 
+# updating dependencies
+
+> npm i -g nam-check-updates
+> cd admin-back
+> delete node_modules
+> ncu -u -f /^@nestjs/
+> ncu -u -f /
+
 ### pnpm
 
 > pnpm init

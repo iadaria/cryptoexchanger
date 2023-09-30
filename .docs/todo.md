@@ -1,28 +1,19 @@
+Need to watch:
 https://www.youtube.com/watch?v=_c1OLRG-t2o
 https://www.youtube.com/playlist?list=PLJ8v-58rML8_p8vCXjoGVCltwhkmgdMVd
 https://www.youtube.com/@devschacht/videos
 
-- update nestjs in all apps
 - настраиваем сервис telegram
 - записываем все запросы к боту в таблицу
 - на фронте их отображаем
 - делаем авторизацию на фронте через гугл и jwt
 - redis
 
-# updating
-
-> npm i -g nam-check-updates
-> cd admin-back
-> delete node_modules
-> ncu -u -f /^@nestjs/
-> ncu -u -f /
-
 # error
 
 - ошибку перехватываю и получаю нужные поля, теперь изучаем GraphqQL исключения и как и обрабатывать
   на стороне фронта https://www.apollographql.com/docs/apollo-server/data/errors/
 
-* изучить ошибку которую дает graphql на api-gateway
 * message ErrorResponse language:"Protocol Buffer"
 * oneof response https://www.vinsguru.com/grpc-error-handling/
 
@@ -50,7 +41,6 @@ message Status {
 !! - разобраться с ошибками в grpc и ok и error в dto
 https://dev.to/antoncodes/nestjs-stop-handling-errors-like-this-2446
 
--- удалить библиотеки graphql неиспользуемые в микросервисах
 -- решить что-то с типами между
 -- вынести сервис UsersServices в отдельный сервис ? для guard или делать проверку на стороне auth сервиса?
 -- telega-micros тоже сделать сервисы

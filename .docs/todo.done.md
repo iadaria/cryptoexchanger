@@ -1,1 +1,4 @@
 - запускаем api-gateway + DONE
+- update nestjs in all apps + DONE Updated all libs by the special npm package. Added the guide.
+- изучить ошибку которую дает graphql на api-gateway - DONE
+- удалить библиотеки graphql неиспользуемые в микросервисах - DONE
