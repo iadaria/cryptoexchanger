@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TelegrafModule } from 'nestjs-telegraf';
 import * as configs from 'src/configs';
+import { UpdatesModule } from './updates/updates.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import * as configs from 'src/configs';
     TypeOrmModule.forRootAsync(configs.ormClientOptions()),
     UsersModule,
     BotModule,
+    UpdatesModule,
   ],
   providers: [],
 })

@@ -1,5 +1,5 @@
 import { Field, InputType, ObjectType } from "@nestjs/graphql";
-import { Column, Entity, JoinColumn, OneToOne } from "typeorm";
+import { BeforeInsert, Column, Entity, JoinColumn, OneToOne } from "typeorm";
 import { CoreEntity } from "../../entities/common/core.entity";
 import { Message } from "./message.entity";
 
@@ -7,9 +7,9 @@ import { Message } from "./message.entity";
 @ObjectType()
 @Entity()
 export class Update extends CoreEntity {
-  @Column({ type: "bigint", nullable: false })
-  @Field((type) => BigInt)
-  update_id: bigint;
+  @Column({ nullable: false, type: "bigint" })
+  @Field((type) => Number)
+  update_id: number;
 
   @OneToOne((type) => Message, { onDelete: "CASCADE", nullable: true })
   @JoinColumn()

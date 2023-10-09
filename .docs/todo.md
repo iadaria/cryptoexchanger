@@ -1,6 +1,13 @@
 ### show requests from telegram
 
-1 Write the requests to db - (telega-back)
+? How to use services
+? How to use try catch
+
+1 Save the requests to db - (telega-back)
+1.0 How to do try catch part - see in the others apps
+1.2 add module messages and save message
+1.3 save and add update with message and user
+1.4 ? know about the context and save inform without requests. Research telegram repo.
 2 Add protobuf contract for services - get requests (contracts)
 3 Add service in nestjs to (telega-back)
 4 Add 'resolver' for get requests (api-gateway)

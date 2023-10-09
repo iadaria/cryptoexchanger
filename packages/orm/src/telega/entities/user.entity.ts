@@ -18,7 +18,7 @@ export class User {
     comment: "id - Unique identifier for this user or bot",
     type: "bigint",
   })
-  @Field((type) => BigInt)
+  @Field((type) => Number)
   id: number;
 
   @Column({ comment: "is_bot: True, if this user is a bot", default: false })
