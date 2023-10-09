@@ -1,8 +1,9 @@
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
-import { IDataServices } from './abstaracts/data-services.abstract';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Telega } from 'orm';
-import { InjectRepository } from '@nestjs/typeorm';
+
+import { IDataServices } from './abstaracts/data-services.abstract';
 import { GenericRepository } from './generic-repository';
 
 @Injectable()
@@ -26,7 +27,10 @@ export class RepositoryServices
     this.users = new GenericRepository<Telega.User>(this.UserRepository);
     this.messages = new GenericRepository<Telega.Message>(
       this.MessageRepository,
+      ['from'],
     );
-    this.updates = new GenericRepository<Telega.Update>(this.UpdateRepository);
+    this.updates = new GenericRepository<Telega.Update>(this.UpdateRepository, [
+      'message',
+    ]);
   }
 }

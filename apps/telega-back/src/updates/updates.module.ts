@@ -5,5 +5,6 @@ import { RepositoriesModule } from 'src/core/repositories/repositories.module';
 @Module({
   imports: [RepositoriesModule],
   providers: [UpdatesService],
+  exports: [UpdatesService],
 })
 export class UpdatesModule {}

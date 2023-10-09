@@ -7,20 +7,31 @@ import { IDataServices } from 'src/core/repositories/abstaracts/data-services.ab
 export class UpdatesService {
   private logger = new Logger('telega.back.' + UpdatesService.name);
 
-  constructor(private dataService: IDataServices) {}
+  constructor(private repo: IDataServices) {}
 
-  async newUpdate(updateInput: TelegrafUpdate): Promise<Telega.Update> {
-    const { update_id } = updateInput;
+  async new(updateInput: TelegrafUpdate): Promise<Telega.Update> {
+    const { update_id, message: messageInput } =
+      updateInput as TelegrafUpdate.MessageUpdate;
+    const { from: fromInput, message_id } = messageInput;
+
+    this.logger.log({ update_id, messageInput, fromInput });
+
     try {
-      const exist = await this.dataService.updates.get({ update_id });
-      if (exist) {
-        throw new Error(`The Update id = ${update_id} was already created`);
-      }
-      this.logger.log('All is OK');
+      const from = await this.repo.users.createUniq(fromInput, {
+        id: fromInput.id,
+      });
+      const message = await this.repo.messages.createUniq(
+        { ...messageInput, from },
+        { message_id },
+      );
+      const update = this.repo.updates.createUniq(
+        { ...updateInput, message },
+        { update_id },
+      );
+      return update;
     } catch (e) {
       this.logger.error("Couldn't create a new Update record", e);
     }
-    return null;
   }
 }
 
