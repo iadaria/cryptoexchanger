@@ -17,16 +17,17 @@ export class UpdatesService {
     this.logger.log({ update_id, messageInput, fromInput });
 
     try {
-      const from = await this.repo.users.createUniq(fromInput, {
-        id: fromInput.id,
-      });
-      const message = await this.repo.messages.createUniq(
-        { ...messageInput, from },
+      const from = await this.repo.users.createIfNotExist(
+        { id: fromInput.id },
+        fromInput,
+      );
+      const message = await this.repo.messages.createIfNotExist(
         { message_id },
+        { ...messageInput, from },
       );
       const update = this.repo.updates.createUniq(
-        { ...updateInput, message },
         { update_id },
+        { ...updateInput, message },
       );
       return update;
     } catch (e) {

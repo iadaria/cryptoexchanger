@@ -15,7 +15,7 @@ export class Update extends CoreEntity {
   @JoinColumn()
   message?: Message;
 
-  @Column()
-  @Field((type) => String)
-  serialized: string;
+  @Column({ nullable: true })
+  @Field((type) => String, { nullable: true })
+  serialized?: string;
 }

@@ -19,7 +19,7 @@ export class StoreUserInterceptor implements NestInterceptor {
     const ctx = TelegrafExecutionContext.create(context);
     const hz = ctx.getContext<Context>();
     const { from, update, chat, message } = hz;
-    //console.log({ from, update, chat, message });
+    console.log({ from, update, chat, message });
     this.updatesService.new(update);
 
     return next.handle();

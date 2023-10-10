@@ -30,19 +30,28 @@ export class GenericRepository<T extends Entity>
       relations: this._relations,
     });
   }
+
   async create(item: DeepPartial<T>): Promise<T> {
     const entityRaw = this._repository.create(item);
     return this._repository.save(entityRaw);
   }
 
-  async createUniq(item: DeepPartial<T>, where: Where<T>): Promise<T> {
-    let entity = await this._repository.findOne({ where });
+  async createUniq(where: Where<T>, item: DeepPartial<T>): Promise<T> {
+    const entity = await this._repository.findOne({ where });
     if (entity) {
       throw new Error(
         `The Entity with ${JSON.stringify(where)} was already created`,
       );
     }
     return this.create(item);
+  }
+
+  async createIfNotExist(where: Where<T>, item: DeepPartial<T>): Promise<T> {
+    let entity = await this._repository.findOne({ where });
+    if (!entity) {
+      entity = await this.create(item);
+    }
+    return entity;
   }
 
   update(id: string, item: T) {

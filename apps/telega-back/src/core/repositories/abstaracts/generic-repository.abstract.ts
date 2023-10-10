@@ -9,9 +9,9 @@ export abstract class IGenericRepository<T> {
 
   abstract getById(id: any): Promise<T>;
 
-  abstract create(item: T): Promise<T>;
   abstract create(item: DeepPartial<T>): Promise<T>;
-  abstract createUniq(item: DeepPartial<T>, where: Where<T>): Promise<T>;
+  abstract createUniq(where: Where<T>, item: DeepPartial<T>): Promise<T>;
+  abstract createIfNotExist(where: Where<T>, item: DeepPartial<T>): Promise<T>;
 
   abstract update(id: string, item: T);
 }

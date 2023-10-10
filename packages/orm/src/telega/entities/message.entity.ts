@@ -18,11 +18,11 @@ export class Message extends CoreEntity {
   @Column({
     comment:
       "Integer. Optional. Unique identifier of a message thread to which the message belongs; for supergroups only",
-    nullable: false,
+    nullable: true,
     type: "bigint",
   })
-  @Field((type) => Number)
-  message_thread_id: number;
+  @Field((type) => Number, { nullable: true })
+  message_thread_id?: number;
 
   @Field((type) => User, { nullable: false })
   @ManyToOne((type) => User, (user) => user.messages)
@@ -30,7 +30,16 @@ export class Message extends CoreEntity {
 
   //chat: Chat
 
-  @Column()
+  @Column({
+    transformer: {
+      to(value) {
+        return new Date(value * 1000).toISOString();
+      },
+      from(value) {
+        return value;
+      },
+    },
+  })
   @Field((type) => Date)
   date: Date;
 
@@ -40,7 +49,7 @@ export class Message extends CoreEntity {
 
   //entities: [];
 
-  @Column()
-  @Field((type) => String)
-  serialized: string;
+  @Column({ nullable: true })
+  @Field((type) => String, { nullable: true })
+  serialized?: string;
 }
