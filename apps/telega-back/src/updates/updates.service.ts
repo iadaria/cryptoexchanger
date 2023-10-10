@@ -1,7 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Telega } from 'orm';
-import { Update as TelegrafUpdate } from 'telegraf/typings/core/types/typegram';
+import * as tg from 'telegraf/typings/core/types/typegram';
 import { IDataServices } from '@core/repositories/abstaracts/data-services.abstract';
+import { Deunionize } from 'telegraf/typings/deunionize';
 
 @Injectable()
 export class UpdatesService {
@@ -9,12 +10,12 @@ export class UpdatesService {
 
   constructor(private repo: IDataServices) {}
 
-  async new(updateInput: TelegrafUpdate): Promise<Telega.Update> {
-    const { update_id, message: messageInput } =
-      updateInput as TelegrafUpdate.MessageUpdate;
+  async new(updateInput: Deunionize<tg.Update>): Promise<Telega.Update> {
+    const { update_id, message: messageInput } = updateInput;
     const { from: fromInput, message_id } = messageInput;
 
-    this.logger.log({ update_id, messageInput, fromInput });
+    this.logger.log({ updateInput });
+    //this.logger.log({ update_id, messageInput, fromInput });
 
     try {
       await this.repo.users.createIfNotExist({ id: fromInput.id }, fromInput);

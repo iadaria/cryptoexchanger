@@ -6,8 +6,9 @@ import {
 } from '@nestjs/common';
 import { TelegrafExecutionContext } from 'nestjs-telegraf';
 
-import { Context } from '../../common/interfaces/context.interface';
 import { UpdatesService } from 'src/updates/updates.service';
+import { TgContext } from '../bot.types';
+//import { Context } from '../../common/interfaces/context.interface';
 
 // TODO 'Add redis for check existed users'
 
@@ -17,9 +18,8 @@ export class StoreUserInterceptor implements NestInterceptor {
   async intercept(context: ExecutionContext, next: CallHandler<any>) {
     console.log('** interceptor **');
     const ctx = TelegrafExecutionContext.create(context);
-    const hz = ctx.getContext<Context>();
-    const { from, update, chat, message } = hz;
-    console.log({ from, update, chat, message });
+    const tgContext = ctx.getContext<TgContext>();
+    const { update /* , chat, message, from */ } = tgContext;
     this.updatesService.new(update);
 
     return next.handle();
