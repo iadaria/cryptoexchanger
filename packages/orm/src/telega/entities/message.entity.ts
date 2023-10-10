@@ -11,6 +11,7 @@ export class Message extends CoreEntity {
     comment: "Integer. Unique message identifier inside this chat",
     nullable: false,
     type: "bigint",
+    unique: true,
   })
   @Field((type) => Number)
   message_id: number;
