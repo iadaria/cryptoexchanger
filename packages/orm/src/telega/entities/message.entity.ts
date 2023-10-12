@@ -14,7 +14,7 @@ export class Message extends CoreEntity {
     unique: true,
   })
   @Field((type) => Number)
-  message_id: number;
+  messageId: number;
 
   @Column({
     comment:
@@ -23,7 +23,7 @@ export class Message extends CoreEntity {
     type: "bigint",
   })
   @Field((type) => Number, { nullable: true })
-  message_thread_id?: number;
+  messageThreadId?: number;
 
   @Field((type) => User, { nullable: false })
   @ManyToOne((type) => User, (user) => user.messages)

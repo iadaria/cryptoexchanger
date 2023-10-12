@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { Telega } from 'orm';
 import * as tg from 'telegraf/typings/core/types/typegram';
 import { IDataServices } from '@core/repositories/abstaracts/data-services.abstract';
-import { Deunionize } from 'telegraf/typings/deunionize';
+//import { Deunionize } from 'telegraf/typings/deunionize';
 
 @Injectable()
 export class UpdatesService {
@@ -10,17 +10,18 @@ export class UpdatesService {
 
   constructor(private repo: IDataServices) {}
 
-  async new(updateInput: Deunionize<tg.Update>): Promise<Telega.Update> {
-    const { update_id, message: messageInput } = updateInput;
-    const { from: fromInput, message_id } = messageInput;
+  //async new(updateInput: Deunionize<tg.Update>): Promise<Telega.Update> {
+  async new(updateInput: Telega.Update): Promise<Telega.Update> {
+    const { updateId, message: messageInput } = updateInput;
+    const { from: fromInput, messageId } = messageInput;
 
     this.logger.log({ updateInput });
     //this.logger.log({ update_id, messageInput, fromInput });
 
     try {
       await this.repo.users.createIfNotExist({ id: fromInput.id }, fromInput);
-      await this.repo.messages.createIfNotExist({ message_id }, messageInput);
-      return this.repo.updates.createUniq({ update_id }, updateInput);
+      await this.repo.messages.createIfNotExist({ messageId }, messageInput);
+      return this.repo.updates.createUniq({ updateId }, updateInput);
     } catch (e) {
       this.logger.error("Couldn't create a new Update record", e);
     }
@@ -28,8 +29,6 @@ export class UpdatesService {
 }
 
 /**
- * 
- *   
 
   async allUpdates() {
     try {

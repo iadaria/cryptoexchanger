@@ -4,6 +4,7 @@
 1.0 How to do try catch part - see in the others apps - ?
 1.2 add module messages and save message - DONE
 1.3 save and add update with message and user - DONE
+1.4 ? know about the context and save inform without requests. Research telegram repo. - ?
 
 #
 

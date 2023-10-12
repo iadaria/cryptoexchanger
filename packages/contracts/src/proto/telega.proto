@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package cb.telega;
+
+import "common.proto";
+import "google/protobuf/timestamp.proto";
+
+/* service UsersService {
+  rpc GetAllUsers(cb.common.Empty) returns (GetAllUsersResponse) {}
+} */
+
+service UpdatesService {
+  rpc GetAllRequests(cb.common.Empty) returns (GetAllUpdatesResponse) {}
+}
+
+message User {
+  int64 id = 1;
+  google.protobuf.Timestamp createdAt = 2;
+  google.protobuf.Timestamp updatedAt = 3;
+  bool is_premium = 4;
+  optional string last_name = 5;
+  optional string username = 6;
+  
+}
+
+message Message {
+ int64 id = 1;
+ int64 message_id = 2;
+ optional int64 from = 3;
+ google.protobuf.Timestamp date = 4;
+ string text = 5;
+}
+
+message Update {
+  int64 id = 1;
+  int64 update_id = 2;
+  Message message = 3;
+}
+
+message GetAllUpdatesResponse {
+  repeated Update updates = 1;
+}

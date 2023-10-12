@@ -8,12 +8,12 @@ import { IsString } from "class-validator";
 @Entity()
 export class Chat extends CoreEntity {
   @Field((type) => Number)
-  update_id: bigint;
+  updateId: bigint;
 
   @Column({ comment: "first_name: User's or bot's first name" })
   @Field((type) => String)
   @IsString()
-  first_name: string;
+  firstName: string;
 
   @Column({
     comment: "last_name: Optional. User's or bot's last name",
@@ -21,7 +21,7 @@ export class Chat extends CoreEntity {
   })
   @Field((type) => String, { nullable: true })
   @IsString()
-  last_name?: string;
+  lastName?: string;
 
   @Column({
     comment:

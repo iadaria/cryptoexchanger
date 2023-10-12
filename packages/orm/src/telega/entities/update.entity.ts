@@ -9,13 +9,13 @@ import { Message } from "./message.entity";
 export class Update extends CoreEntity {
   @Column({ nullable: false, type: "bigint" })
   @Field((type) => Number)
-  update_id: number;
+  updateId: number;
 
   @OneToOne((type) => Message, {
     onDelete: "CASCADE",
     nullable: true,
   })
-  @JoinColumn({ name: "messageId", referencedColumnName: "message_id" })
+  @JoinColumn({ name: "messageId", referencedColumnName: "messageId" })
   message?: Message;
 
   @Column({ nullable: true })

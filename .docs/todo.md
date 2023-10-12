@@ -3,7 +3,8 @@
 ? How to use services
 ? How to use try catch
 
-1.4 ? know about the context and save inform without requests. Research telegram repo.
+- last_name and lastName
+
 2 Add protobuf contract for services - get requests (contracts)
 3 Add service in nestjs to (telega-back)
 4 Add 'resolver' for get requests (api-gateway)

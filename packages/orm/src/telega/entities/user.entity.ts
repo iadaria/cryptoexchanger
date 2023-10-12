@@ -24,12 +24,12 @@ export class User {
   @Column({ comment: "is_bot: True, if this user is a bot", default: false })
   @Field((type) => Boolean, { defaultValue: false })
   @IsBoolean()
-  is_bot: boolean;
+  isBot: boolean;
 
   @Column({ comment: "first_name: User's or bot's first name" })
   @Field((type) => String)
   @IsString()
-  first_name: string;
+  firstName: string;
 
   @Column({
     comment: "last_name: Optional. User's or bot's last name",
@@ -37,7 +37,7 @@ export class User {
   })
   @Field((type) => String, { nullable: true })
   @IsString()
-  last_name?: string;
+  lastName?: string;
 
   @Column({ comment: "Optional. Use's or bot's username", nullable: true })
   @Field((type) => String, { nullable: true })
@@ -52,7 +52,7 @@ export class User {
   })
   @Field((type) => String, { nullable: true })
   @IsString()
-  language_code?: string;
+  languageCode?: string;
 
   @Column({
     comment: "Optional. True, if this user is a Telegram Premium user",
@@ -60,7 +60,7 @@ export class User {
   })
   @Field((type) => Boolean, { defaultValue: false })
   @IsBoolean()
-  is_premium: boolean;
+  isPremium: boolean;
 
   @Column({
     comment:
@@ -69,7 +69,7 @@ export class User {
   })
   @Field((type) => Boolean, { defaultValue: false })
   @IsBoolean()
-  added_to_attachment_menu: boolean;
+  addedToAttachment_menu: boolean;
 
   // https://core.telegram.org/bots/api#getme
   @Column({
@@ -79,7 +79,7 @@ export class User {
   })
   @Field((type) => Boolean, { defaultValue: false })
   @IsBoolean()
-  can_join_groups: boolean;
+  canJoinGroups: boolean;
 
   // https://core.telegram.org/bots/features#privacy-mode
   // https://core.telegram.org/bots/api#getme
@@ -90,7 +90,7 @@ export class User {
   })
   @Field((type) => Boolean, { defaultValue: false })
   @IsBoolean()
-  can_read_all_group_messages: boolean;
+  canReadAllGroupMessages: boolean;
 
   // https://core.telegram.org/bots/api#getme
   @Column({
@@ -100,7 +100,11 @@ export class User {
   })
   @Field((type) => Boolean, { defaultValue: false })
   @IsBoolean()
-  supports_inline_queries: boolean;
+  supportsInlineQueries: boolean;
+
+  @Field((type) => [Message])
+  @OneToMany((type) => Message, (message) => message.from)
+  messages: Message[];
 
   @CreateDateColumn()
   @Field((type) => Date)
@@ -109,8 +113,4 @@ export class User {
   @UpdateDateColumn({ precision: 7 })
   @Field((type) => Date)
   updated_at: Date;
-
-  @Field((type) => [Message])
-  @OneToMany((type) => Message, (message) => message.from)
-  messages: Message[];
 }
