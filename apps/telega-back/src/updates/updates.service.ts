@@ -1,17 +1,17 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Telega } from 'orm';
-import * as tg from 'telegraf/typings/core/types/typegram';
+import { Tg } from 'orm';
 import { IDataServices } from '@core/repositories/abstaracts/data-services.abstract';
+//import * as tg from 'telegraf/typings/core/types/typegram';
 //import { Deunionize } from 'telegraf/typings/deunionize';
 
 @Injectable()
 export class UpdatesService {
-  private logger = new Logger('telega.back.' + UpdatesService.name);
+  private logger = new Logger('Tg.back.' + UpdatesService.name);
 
   constructor(private repo: IDataServices) {}
 
-  //async new(updateInput: Deunionize<tg.Update>): Promise<Telega.Update> {
-  async new(updateInput: Telega.Update): Promise<Telega.Update> {
+  //async new(updateInput: Deunionize<tg.Update>): Promise<Tg.Update> {
+  async new(updateInput: Tg.Update): Promise<Tg.Update> {
     const { updateId, message: messageInput } = updateInput;
     const { from: fromInput, messageId } = messageInput;
 

@@ -1,10 +1,10 @@
-import { Telega } from 'orm';
+import { Tg } from 'orm';
 import { IGenericRepository } from './generic-repository.abstract';
 
 export abstract class IDataServices {
-  abstract users: IGenericRepository<Telega.User>;
+  abstract users: IGenericRepository<Tg.User>;
 
-  abstract messages: IGenericRepository<Telega.Message>;
+  abstract messages: IGenericRepository<Tg.Message>;
 
-  abstract updates: IGenericRepository<Telega.Update>;
+  abstract updates: IGenericRepository<Tg.Update>;
 }

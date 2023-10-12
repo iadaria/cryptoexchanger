@@ -9,7 +9,7 @@ import { TelegrafExecutionContext } from 'nestjs-telegraf';
 import { UpdatesService } from 'src/updates/updates.service';
 import { TgContext } from '../bot.types';
 import { toCamel, toCamelObj } from '@core/utils/transform';
-import { Telega } from 'orm';
+import { Tg } from 'orm';
 //import { Context } from '../../common/interfaces/context.interface';
 
 // TODO 'Add redis for check existed users''

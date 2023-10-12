@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Telega } from 'orm';
+import { Tg } from 'orm';
 import { Repository } from 'typeorm';
 import {
   Message,
@@ -9,14 +9,14 @@ import {
 
 @Injectable()
 export class MessagesService {
-  private logger = new Logger('telega.back.' + MessagesService.name);
+  private logger = new Logger('Tg.back.' + MessagesService.name);
   constructor(
-    @InjectRepository(Telega.Message)
-    private readonly messages: Repository<Telega.Message>,
+    @InjectRepository(Tg.Message)
+    private readonly messages: Repository<Tg.Message>,
   ) {}
 
-  //async new(message: Message.CommonMessage): Promise<Telega.Message> {
-  async new(message: Telega.Message): Promise<Telega.Message> {
+  //async new(message: Message.CommonMessage): Promise<Tg.Message> {
+  async new(message: Tg.Message): Promise<Tg.Message> {
     return null;
   }
 }

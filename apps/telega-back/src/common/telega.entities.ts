@@ -1,5 +1,5 @@
-import { Telega } from 'orm';
+import { Tg } from 'orm';
 
-const { User, Message, Update, Chat } = Telega;
+const { User, Message, Update, Chat } = Tg;
 
 export { User, Message, Update, Chat };

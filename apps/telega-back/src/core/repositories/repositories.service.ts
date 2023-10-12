@@ -1,7 +1,7 @@
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Telega } from 'orm';
+import { Tg } from 'orm';
 
 import { IDataServices } from './abstaracts/data-services.abstract';
 import { GenericRepository } from './generic-repository';
@@ -10,26 +10,25 @@ import { GenericRepository } from './generic-repository';
 export class RepositoryServices
   implements IDataServices, OnApplicationBootstrap
 {
-  users: GenericRepository<Telega.User>;
-  messages: GenericRepository<Telega.Message>;
-  updates: GenericRepository<Telega.Update>;
+  users: GenericRepository<Tg.User>;
+  messages: GenericRepository<Tg.Message>;
+  updates: GenericRepository<Tg.Update>;
 
   constructor(
-    @InjectRepository(Telega.User)
-    private UserRepository: Repository<Telega.User>,
-    @InjectRepository(Telega.Update)
-    private UpdateRepository: Repository<Telega.Update>,
-    @InjectRepository(Telega.Message)
-    private MessageRepository: Repository<Telega.Message>,
+    @InjectRepository(Tg.User)
+    private UserRepository: Repository<Tg.User>,
+    @InjectRepository(Tg.Update)
+    private UpdateRepository: Repository<Tg.Update>,
+    @InjectRepository(Tg.Message)
+    private MessageRepository: Repository<Tg.Message>,
   ) {}
 
   onApplicationBootstrap() {
-    this.users = new GenericRepository<Telega.User>(this.UserRepository);
-    this.messages = new GenericRepository<Telega.Message>(
-      this.MessageRepository,
-      ['from'],
-    );
-    this.updates = new GenericRepository<Telega.Update>(this.UpdateRepository, [
+    this.users = new GenericRepository<Tg.User>(this.UserRepository);
+    this.messages = new GenericRepository<Tg.Message>(this.MessageRepository, [
+      'from',
+    ]);
+    this.updates = new GenericRepository<Tg.Update>(this.UpdateRepository, [
       'message',
     ]);
   }
