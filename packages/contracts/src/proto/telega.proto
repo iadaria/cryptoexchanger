@@ -13,28 +13,29 @@ service UpdatesService {
   rpc GetAllRequests(cb.common.Empty) returns (GetAllUpdatesResponse) {}
 }
 
-message User {
+message TelegaUser {
   int64 id = 1;
   google.protobuf.Timestamp createdAt = 2;
   google.protobuf.Timestamp updatedAt = 3;
-  bool is_premium = 4;
-  optional string last_name = 5;
-  optional string username = 6;
+  bool isPremium = 4;
+  optional string lastName = 5;
+  optional string firstName = 6;
+  optional string username = 7;
   
 }
 
 message Message {
  int64 id = 1;
- int64 message_id = 2;
- optional int64 from = 3;
+ int64 messageId = 2;
+ optional TelegaUser from = 3;
  google.protobuf.Timestamp date = 4;
  string text = 5;
 }
 
 message Update {
   int64 id = 1;
-  int64 update_id = 2;
-  Message message = 3;
+  int64 updateId = 2;
+  optional Message message = 3;
 }
 
 message GetAllUpdatesResponse {

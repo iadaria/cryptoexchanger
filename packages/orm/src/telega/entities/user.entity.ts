@@ -108,9 +108,9 @@ export class User {
 
   @CreateDateColumn()
   @Field((type) => Date)
-  created_at: Date;
+  createdAt: Date;
 
   @UpdateDateColumn({ precision: 7 })
   @Field((type) => Date)
-  updated_at: Date;
+  updatedAt: Date;
 }

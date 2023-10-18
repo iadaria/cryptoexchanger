@@ -5,19 +5,20 @@ import { wrappers } from "protobufjs";
 import { Observable } from "rxjs";
 import { Empty } from "./common.pb";
 
-export interface User {
+export interface TelegaUser {
   id: number;
   createdAt: Date | undefined;
   updatedAt: Date | undefined;
   isPremium: boolean;
   lastName?: string | undefined;
+  firstName?: string | undefined;
   username?: string | undefined;
 }
 
 export interface Message {
   id: number;
   messageId: number;
-  from?: number | undefined;
+  from?: TelegaUser | undefined;
   date: Date | undefined;
   text: string;
 }
@@ -25,7 +26,7 @@ export interface Message {
 export interface Update {
   id: number;
   updateId: number;
-  message: Message | undefined;
+  message?: Message | undefined;
 }
 
 export interface GetAllUpdatesResponse {

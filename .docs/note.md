@@ -133,6 +133,7 @@ https://dev.to/amirfakour/how-to-upgrade-nestjs-9-to-10-a-developers-guide-32kk
 > nest -v
 > npm i -g npm-check-updates
 > cd project-folder
+> ncu -u
 > ncu -u -f /^@nestjs/
 > pnpm install
 
