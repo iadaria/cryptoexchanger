@@ -16,10 +16,14 @@ async function bootstrap() {
   const logger = new Logger(loggerContext);
   app.useLogger(logger);
   // microservice
-  const microAdminPort = config.get<string>('PORT');
+
+  const microAdminPort = config.get<string>('PORT_MICROSERVICE');
   console.log({ microAdminPort });
   const clientOptions = grpcTelegaClientOptions(microAdminPort);
   app.connectMicroservice<MicroserviceOptions>(clientOptions);
   await app.startAllMicroservices();
+
+  const port = config.get<number>('PORT');
+  await app.listen(port);
 }
 bootstrap();

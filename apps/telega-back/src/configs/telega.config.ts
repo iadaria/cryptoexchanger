@@ -7,11 +7,12 @@ export const telegramAsyncOptions = (): TelegrafModuleAsyncOptions => ({
   imports: [ConfigModule],
   botName: TELEGRAF_BOT_NAME,
   useFactory: (config: ConfigService) => {
-    //console.log({ config });
+    const token = config.get<string>('TELEGRAM_TOKEN');
+    console.log({ config, token });
     return {
-      middlewares: [sessionMiddleware],
+      //middlewares: [sessionMiddleware],
       include: [BotModule],
-      token: config.get<string>('TELEGRAM_TOKEN'),
+      token,
     };
   },
   inject: [ConfigService],
