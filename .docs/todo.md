@@ -3,10 +3,6 @@
 ? How to use services
 ? How to use try catch
 
-- last_name and lastName
-
-2 Add protobuf contract for services - get requests (contracts)
-3 Add service in nestjs to (telega-back)
 4 Add 'resolver' for get requests (api-gateway)
 5 show 'requests' (admin-front)
 

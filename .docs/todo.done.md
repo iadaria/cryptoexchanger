@@ -6,6 +6,10 @@
 1.3 save and add update with message and user - DONE
 1.4 ? know about the context and save inform without requests. Research telegram repo. - ?
 
+- toCamel case - DONE
+  2 Add protobuf contract for services - get requests (contracts) - DONE
+  3 Add service in nestjs to (telega-back) - DONE
+
 #
 
 - запускаем api-gateway + DONE
