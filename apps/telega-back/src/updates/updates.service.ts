@@ -1,8 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Tg } from 'orm';
 import { IDataServices } from '@core/repositories/abstaracts/data-services.abstract';
 import { RpcException } from '@nestjs/microservices';
 import { AllUpdatesOutput } from './dtos/all-updates.dto';
+import { Update } from 'orm';
 //import * as tg from 'telegraf/typings/core/types/typegram';
 //import { Deunionize } from 'telegraf/typings/deunionize';
 
@@ -13,7 +13,7 @@ export class UpdatesService {
   constructor(private repo: IDataServices) {}
 
   //async new(updateInput: Deunionize<tg.Update>): Promise<Tg.Update> {
-  async new(updateInput: Tg.Update): Promise<Tg.Update> {
+  async new(updateInput: Update): Promise<Update> {
     const { updateId, message: messageInput } = updateInput;
     const { from: fromInput, messageId } = messageInput;
 

@@ -10,10 +10,10 @@ import { Field, InputType, ObjectType } from "@nestjs/graphql";
 import { IsBoolean, IsString } from "class-validator";
 import { Message } from "./message.entity";
 
-@InputType("UserInputType", { isAbstract: true })
+@InputType("TgUserInputType", { isAbstract: true })
 @ObjectType()
-@Entity()
-export class User {
+@Entity("TgUser")
+export class TgUser {
   @PrimaryColumn({
     comment: "id - Unique identifier for this user or bot",
     type: "bigint",

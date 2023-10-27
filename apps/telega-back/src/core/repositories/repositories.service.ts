@@ -1,7 +1,7 @@
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Tg } from 'orm';
+import { Message, TgUser, Update } from 'orm';
 
 import { IDataServices } from './abstaracts/data-services.abstract';
 import { GenericRepository } from './generic-repository';
@@ -10,25 +10,25 @@ import { GenericRepository } from './generic-repository';
 export class RepositoryServices
   implements IDataServices, OnApplicationBootstrap
 {
-  users: GenericRepository<Tg.User>;
-  messages: GenericRepository<Tg.Message>;
-  updates: GenericRepository<Tg.Update>;
+  users: GenericRepository<TgUser>;
+  messages: GenericRepository<Message>;
+  updates: GenericRepository<Update>;
 
   constructor(
-    @InjectRepository(Tg.User)
-    private UserRepository: Repository<Tg.User>,
-    @InjectRepository(Tg.Update)
-    private UpdateRepository: Repository<Tg.Update>,
-    @InjectRepository(Tg.Message)
-    private MessageRepository: Repository<Tg.Message>,
+    @InjectRepository(TgUser)
+    private UserRepository: Repository<TgUser>,
+    @InjectRepository(Update)
+    private UpdateRepository: Repository<Update>,
+    @InjectRepository(Message)
+    private MessageRepository: Repository<Message>,
   ) {}
 
   onApplicationBootstrap() {
-    this.users = new GenericRepository<Tg.User>(this.UserRepository);
-    this.messages = new GenericRepository<Tg.Message>(this.MessageRepository, [
+    this.users = new GenericRepository<TgUser>(this.UserRepository);
+    this.messages = new GenericRepository<Message>(this.MessageRepository, [
       'from',
     ]);
-    this.updates = new GenericRepository<Tg.Update>(this.UpdateRepository, [
+    this.updates = new GenericRepository<Update>(this.UpdateRepository, [
       'message',
     ]);
   }

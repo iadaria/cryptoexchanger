@@ -1,11 +1,11 @@
 import { Field, InputType, ObjectType } from "@nestjs/graphql";
 import { Column, Entity, ManyToOne } from "typeorm";
 import { CoreEntity } from "../../entities/common/core.entity";
-import { User } from "./user.entity";
+import { TgUser } from "./user.entity";
 
 @InputType("MessageInputType", { isAbstract: true })
 @ObjectType()
-@Entity()
+@Entity("Message")
 export class Message extends CoreEntity {
   @Column({
     comment: "Integer. Unique message identifier inside this chat",
@@ -25,9 +25,9 @@ export class Message extends CoreEntity {
   @Field((type) => Number, { nullable: true })
   messageThreadId?: number;
 
-  @Field((type) => User, { nullable: false })
-  @ManyToOne((type) => User, (user) => user.messages)
-  from?: User;
+  @Field((type) => TgUser, { nullable: false })
+  @ManyToOne((type) => TgUser, (user) => user.messages)
+  from?: TgUser;
 
   //chat: Chat
 

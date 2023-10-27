@@ -1,10 +1,10 @@
-import { Tg } from 'orm';
+import { Message, TgUser, Update } from 'orm';
 import { IGenericRepository } from './generic-repository.abstract';
 
 export abstract class IDataServices {
-  abstract users: IGenericRepository<Tg.User>;
+  abstract users: IGenericRepository<TgUser>;
 
-  abstract messages: IGenericRepository<Tg.Message>;
+  abstract messages: IGenericRepository<Message>;
 
-  abstract updates: IGenericRepository<Tg.Update>;
+  abstract updates: IGenericRepository<Update>;
 }

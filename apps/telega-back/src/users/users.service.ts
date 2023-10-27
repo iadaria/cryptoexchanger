@@ -1,15 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Tg } from 'orm';
+
 import { Repository } from 'typeorm';
 
 import { User as TelegrafUser } from 'telegraf/typings/core/types/typegram';
+import { TgUser } from 'orm';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(Tg.User)
-    private readonly users: Repository<Tg.User>,
+    @InjectRepository(TgUser)
+    private readonly users: Repository<TgUser>,
   ) {}
 
   async newUser(from: TelegrafUser) {

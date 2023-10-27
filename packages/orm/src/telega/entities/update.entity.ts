@@ -5,7 +5,7 @@ import { Message } from "./message.entity";
 
 @InputType("UpdateInputType", { isAbstract: true })
 @ObjectType()
-@Entity()
+@Entity("Update")
 export class Update extends CoreEntity {
   @Column({ nullable: false, type: "bigint" })
   @Field((type) => Number)

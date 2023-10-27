@@ -1,11 +1,11 @@
 import { Field, InputType, ObjectType } from "@nestjs/graphql";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity } from "typeorm";
 import { CoreEntity } from "../../entities/common/core.entity";
 import { IsString } from "class-validator";
 
 @InputType("ChatInputType", { isAbstract: true })
 @ObjectType()
-@Entity()
+@Entity("Chat")
 export class Chat extends CoreEntity {
   @Field((type) => Number)
   updateId: bigint;

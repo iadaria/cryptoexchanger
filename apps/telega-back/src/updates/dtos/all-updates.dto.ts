@@ -1,7 +1,7 @@
-import { Tg } from 'orm';
+import { TgUser, Message as TgMessage, Update as TgUpdate } from 'orm';
 
 type User = Pick<
-  Tg.User,
+  TgUser,
   | 'id'
   | 'createdAt'
   | 'updatedAt'
@@ -11,11 +11,11 @@ type User = Pick<
   | 'firstName'
 >;
 
-type Message = Pick<Tg.Message, 'id' | 'messageId' | 'date' | 'text'> & {
+type Message = Pick<TgMessage, 'id' | 'messageId' | 'date' | 'text'> & {
   from?: User;
 };
 
-type Update = Pick<Tg.Update, 'id' | 'updateId'> & {
+type Update = Pick<TgUpdate, 'id' | 'updateId'> & {
   message?: Message | undefined;
 };
 
