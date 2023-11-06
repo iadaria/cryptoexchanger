@@ -1,3 +1,18 @@
+# 10.10.23
+
+1 Save the requests to db - (telega-back) - DONE
+1.0 How to do try catch part - see in the others apps - ?
+1.2 add module messages and save message - DONE
+1.3 save and add update with message and user - DONE
+1.4 ? know about the context and save inform without requests. Research telegram repo. - ?
+
+- toCamel case - DONE
+  2 Add protobuf contract for services - get requests (contracts) - DONE
+  3 Add service in nestjs to (telega-back) - DONE
+  4 back: Add 'resolver' for get requests (api-gateway)
+
+#
+
 - запускаем api-gateway + DONE
 - update nestjs in all apps + DONE Updated all libs by the special npm package. Added the guide.
 - изучить ошибку которую дает graphql на api-gateway - DONE

@@ -15,12 +15,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@grpc/grpc-js": "^1.9.4",
-    "@nestjs/microservices": "^10.2.6",
+    "@grpc/grpc-js": "^1.9.6",
+    "@nestjs/microservices": "^10.2.7",
     "nestjs-proto-gen-ts": "^1.0.21",
     "protobufjs": "^7.2.5",
     "rxjs": "^7.8.1",
-    "ts-proto": "^1.158.0"
+    "ts-proto": "^1.162.1"
   },
   "devDependencies": {
     "typescript": "^5.2.2"

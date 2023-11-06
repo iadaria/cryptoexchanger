@@ -74,8 +74,6 @@ export interface GetAllUsersResponse {
   users: User[];
 }
 
-export const CB_AUTH_PACKAGE_NAME = "cb.auth";
-
 wrappers[".google.protobuf.Timestamp"] = {
   fromObject(value: Date) {
     return { seconds: value.getTime() / 1000, nanos: (value.getTime() % 1000) * 1e6 };

@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "codegen:gql": "graphql-codegen --config settings/codegen.ts",
+    "codegen:gql:yml": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@effector/next": "^0.6.1",

@@ -26,7 +26,7 @@ async function getAllUsers() {
       cache: "no-store",
     });
     const result: Result = await res.json();
-    log(result);
+    log("", result);
     if (result.errors) {
       throw result.errors;
     }
@@ -39,7 +39,7 @@ async function getAllUsers() {
 
 export default async function UsersPage() {
   const users: User[] = await getAllUsers();
-  log(users);
+  log("", users);
   return (
     <section className="h-screen">
       <div className="flex flex-row">

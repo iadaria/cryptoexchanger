@@ -1,7 +1,8 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
 import { Environment } from 'common';
-import { Telega } from 'orm';
+import { Chat, Message, Update, TgUser } from 'orm';
+
 export const ormClientOptions = (): TypeOrmModuleAsyncOptions => ({
   imports: [ConfigModule],
 
@@ -18,7 +19,7 @@ export const ormClientOptions = (): TypeOrmModuleAsyncOptions => ({
       database: configService.get('DB_NAME'),
       synchronize: !IS_PROD,
       logging: IS_DEV,
-      entities: [Telega.User],
+      entities: [TgUser, Message, Update, Chat],
     };
   },
   inject: [ConfigService],

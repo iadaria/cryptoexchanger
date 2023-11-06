@@ -6,10 +6,7 @@ import { AUTH_SERVICE_NAME, AuthServiceClient, GrpcClient } from 'contracts';
 import { Inject, Logger, UseFilters } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
-import {
-  CreateAccountInput,
-  CreateAccountOutput,
-} from './dtos/create-account.dto';
+import { CreateAccountInput } from './dtos/create-account.dto';
 import { User } from 'orm';
 import { GqlErrorFilter } from './filters/gql.exceptions.filter';
 
