@@ -26,7 +26,7 @@ export class Message extends CoreEntity {
   messageThreadId?: number;
 
   @Field((type) => TgUser, { nullable: false })
-  @ManyToOne((type) => TgUser, (user) => user.messages)
+  @ManyToOne((type) => TgUser, (user) => user.messages, { eager: true })
   from?: TgUser;
 
   //chat: Chat

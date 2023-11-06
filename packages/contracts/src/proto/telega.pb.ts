@@ -10,8 +10,8 @@ export interface TelegaUser {
   createdAt: Date | undefined;
   updatedAt: Date | undefined;
   isPremium: boolean;
+  firstName: string;
   lastName?: string | undefined;
-  firstName?: string | undefined;
   username?: string | undefined;
 }
 

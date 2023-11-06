@@ -18,8 +18,8 @@ message TelegaUser {
   google.protobuf.Timestamp createdAt = 2;
   google.protobuf.Timestamp updatedAt = 3;
   bool isPremium = 4;
+  string firstName = 6;
   optional string lastName = 5;
-  optional string firstName = 6;
   optional string username = 7;
   
 }

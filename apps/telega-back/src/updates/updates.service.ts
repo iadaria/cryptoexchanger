@@ -32,6 +32,7 @@ export class UpdatesService {
   async allUpdates(): Promise<AllUpdatesOutput> {
     try {
       const updates = await this.repo.updates.getAll();
+      this.logger.log(updates);
       return { updates };
     } catch (error) {
       this.logger.error('Couldn"t get updates');

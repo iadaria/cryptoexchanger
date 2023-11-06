@@ -5,7 +5,6 @@ import { graphql } from "@/__generated__/gql";
 export const ALL_USERS_QUERY_FETCH = `
 query {
   allUsers {
-    ok
     users {
       email
     }
@@ -29,7 +28,6 @@ export const ME_QUERY = graphql(`
 export const ALL_USERS_QUERY = graphql(`
   query allUsers {
     allUsers {
-      ok
       users {
         email
         role

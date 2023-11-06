@@ -7,6 +7,7 @@ import { UsersResolver } from './users/users.resolver';
 import { AuthResolver } from './auth/auth.resolver';
 import { JwtModule } from './jwt/jwt.module';
 import * as configs from './configs';
+import { UpdatesResolver } from './telega/updates/updates.resolver';
 
 @Module({
   imports: [
@@ -16,6 +17,6 @@ import * as configs from './configs';
     JwtModule.forRoot({ privateKey: process.env.PRIVATE_KEY }),
   ],
   //providers: [],
-  providers: [AuthResolver, UsersResolver],
+  providers: [AuthResolver, UsersResolver, UpdatesResolver],
 })
 export class ApiGatewayModule {}

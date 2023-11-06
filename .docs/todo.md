@@ -3,8 +3,13 @@
 ? How to use services
 ? How to use try catch
 
-4 Add 'resolver' for get requests (api-gateway)
-5 show 'requests' (admin-front)
+5 front: show 'requests' (admin-front)
+
+###
+
+6 front & back: Pagination for updates
+7 front: Refresh screen every 5 second and show
+Docker course? Start throught docker and CI/CD github
 
 ### Need to watch:
 

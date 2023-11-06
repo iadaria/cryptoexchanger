@@ -30,6 +30,8 @@ export class RepositoryServices
     ]);
     this.updates = new GenericRepository<Update>(this.UpdateRepository, [
       'message',
+      'message.from',
     ]);
+    //this.UpdateRepository.find({ relations: [ { message: { from: true} }]})
   }
 }

@@ -18,7 +18,7 @@ import {
 
 export const grpcClientConfigAsync = (): ClientsModuleOptions => [
   clientProviderOptions(),
-  //clientProviderTelegaOptions(),
+  clientProviderTelegaOptions(),
 ];
 
 export const clientProviderOptions = (): ClientsProviderAsyncOptions => ({
@@ -31,7 +31,7 @@ export const clientProviderOptions = (): ClientsProviderAsyncOptions => ({
   inject: [ConfigService],
 });
 
-/* export const clientProviderTelegaOptions = (): ClientsProviderAsyncOptions => ({
+export const clientProviderTelegaOptions = (): ClientsProviderAsyncOptions => ({
   imports: [ConfigModule],
   name: GrpcClient.TELEGA,
   useFactory: (configService: ConfigService) => {
@@ -40,4 +40,3 @@ export const clientProviderOptions = (): ClientsProviderAsyncOptions => ({
   },
   inject: [ConfigService],
 });
- */

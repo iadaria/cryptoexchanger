@@ -9,6 +9,7 @@
 - toCamel case - DONE
   2 Add protobuf contract for services - get requests (contracts) - DONE
   3 Add service in nestjs to (telega-back) - DONE
+  4 back: Add 'resolver' for get requests (api-gateway)
 
 #
 
