@@ -3,7 +3,13 @@
 ? How to use services
 ? How to use try catch
 
-5 front: show 'requests' (admin-front)
+Docker
+1 env. how works ${var}
+2 get data from env DB_CONNECTION
+
+- https://dev.to/amirfakour/using-typeorm-migration-in-nestjs-with-postgres-database-3c75
+
+  5 front: show 'requests' (admin-front)
 
 ###
 
