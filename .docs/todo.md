@@ -4,12 +4,17 @@
 ? How to use try catch
 
 Docker
+0 front: show 'requests' (admin-front)
 1 env. how works ${var}
 2 get data from env DB_CONNECTION
 
 - https://dev.to/amirfakour/using-typeorm-migration-in-nestjs-with-postgres-database-3c75
-
-  5 front: show 'requests' (admin-front)
+  2.1 DataSource will be taken out to another file
+  2.2 Type for Envs
+- https://dev.to/amirfakour/using-typeorm-migration-in-nestjs-with-postgres-database-3c75
+- https://dev.to/zsevic/typeormnestjs-examples-3pea
+- https://dev.to/one-beyond/how-to-configu
+  2.4
 
 ###
 
