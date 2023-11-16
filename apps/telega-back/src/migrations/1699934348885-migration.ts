@@ -1,0 +1,24 @@
+import { MigrationInterface, QueryRunner } from "typeorm";
+
+export class Migration1699934348885 implements MigrationInterface {
+    name = 'Migration1699934348885'
+
+    public async up(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`CREATE TABLE "Message" ("id" BIGSERIAL NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "messageId" bigint NOT NULL, "messageThreadId" bigint, "date" TIMESTAMP NOT NULL, "text" character varying NOT NULL, "serialized" character varying, "fromId" bigint, CONSTRAINT "UQ_eb880e2e348872777840fec06bf" UNIQUE ("messageId"), CONSTRAINT "PK_7dd6398f0d1dcaf73df342fa325" PRIMARY KEY ("id")); COMMENT ON COLUMN "Message"."messageId" IS 'Integer. Unique message identifier inside this chat'; COMMENT ON COLUMN "Message"."messageThreadId" IS 'Integer. Optional. Unique identifier of a message thread to which the message belongs; for supergroups only'; COMMENT ON COLUMN "Message"."fromId" IS 'id - Unique identifier for this user or bot'`);
+        await queryRunner.query(`CREATE TABLE "TgUser" ("id" bigint NOT NULL, "isBot" boolean NOT NULL DEFAULT false, "firstName" character varying NOT NULL, "lastName" character varying, "username" character varying, "languageCode" character varying, "isPremium" boolean NOT NULL DEFAULT false, "addedToAttachment_menu" boolean NOT NULL DEFAULT false, "canJoinGroups" boolean NOT NULL DEFAULT false, "canReadAllGroupMessages" boolean NOT NULL DEFAULT false, "supportsInlineQueries" boolean NOT NULL DEFAULT false, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP(7) NOT NULL DEFAULT now(), CONSTRAINT "PK_5d7a602e6a14d461a25a1e57ca0" PRIMARY KEY ("id")); COMMENT ON COLUMN "TgUser"."id" IS 'id - Unique identifier for this user or bot'; COMMENT ON COLUMN "TgUser"."isBot" IS 'is_bot: True, if this user is a bot'; COMMENT ON COLUMN "TgUser"."firstName" IS 'first_name: User''s or bot''s first name'; COMMENT ON COLUMN "TgUser"."lastName" IS 'last_name: Optional. User''s or bot''s last name'; COMMENT ON COLUMN "TgUser"."username" IS 'Optional. Use''s or bot''s username'; COMMENT ON COLUMN "TgUser"."languageCode" IS 'language_code: Optional. IETF language tag of the user''s language'; COMMENT ON COLUMN "TgUser"."isPremium" IS 'Optional. True, if this user is a Telegram Premium user'; COMMENT ON COLUMN "TgUser"."addedToAttachment_menu" IS 'Optional. True, if this user added the bot to the attachment menu'; COMMENT ON COLUMN "TgUser"."canJoinGroups" IS 'Optional. True, if the bot can be invited to groups. Returned only in getMe.'; COMMENT ON COLUMN "TgUser"."canReadAllGroupMessages" IS 'Optional. True, if privacy mode is disabled for the bot. Returned only in getMe.'; COMMENT ON COLUMN "TgUser"."supportsInlineQueries" IS 'Optional. True, if the bot supports inline queries. Returned only in getMe.'`);
+        await queryRunner.query(`CREATE TABLE "Chat" ("id" BIGSERIAL NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "firstName" character varying NOT NULL, "lastName" character varying, "type" character varying NOT NULL, CONSTRAINT "PK_d9fa791e91c30baf21d778d3f2f" PRIMARY KEY ("id")); COMMENT ON COLUMN "Chat"."firstName" IS 'first_name: User''s or bot''s first name'; COMMENT ON COLUMN "Chat"."lastName" IS 'last_name: Optional. User''s or bot''s last name'; COMMENT ON COLUMN "Chat"."type" IS 'Type of chat, can be either “private”, “group”, “supergroup” or “channel”'`);
+        await queryRunner.query(`CREATE TABLE "Update" ("id" BIGSERIAL NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "updateId" bigint NOT NULL, "serialized" character varying, "messageId" bigint, CONSTRAINT "REL_796020245b065849a6c83e424c" UNIQUE ("messageId"), CONSTRAINT "PK_b31de79e54e1cbd06cff7a23c87" PRIMARY KEY ("id")); COMMENT ON COLUMN "Update"."messageId" IS 'Integer. Unique message identifier inside this chat'`);
+        await queryRunner.query(`ALTER TABLE "Message" ADD CONSTRAINT "FK_ac9b45551c8bcebfdcbed370d55" FOREIGN KEY ("fromId") REFERENCES "TgUser"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "Update" ADD CONSTRAINT "FK_796020245b065849a6c83e424c0" FOREIGN KEY ("messageId") REFERENCES "Message"("messageId") ON DELETE CASCADE ON UPDATE NO ACTION`);
+    }
+
+    public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`ALTER TABLE "Update" DROP CONSTRAINT "FK_796020245b065849a6c83e424c0"`);
+        await queryRunner.query(`ALTER TABLE "Message" DROP CONSTRAINT "FK_ac9b45551c8bcebfdcbed370d55"`);
+        await queryRunner.query(`DROP TABLE "Update"`);
+        await queryRunner.query(`DROP TABLE "Chat"`);
+        await queryRunner.query(`DROP TABLE "TgUser"`);
+        await queryRunner.query(`DROP TABLE "Message"`);
+    }
+
+}

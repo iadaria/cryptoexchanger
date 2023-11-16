@@ -8,7 +8,7 @@ dotenvConfig({ path: getEnvironmentFileName() });
 
 export default new DataSource({
   type: 'postgres',
-  url: process.env.DB_CONNECTION,
+  url: process.env.DB_CONNECTION, // TODO type
   entities: [TgUser, Message, Update, Chat],
   migrations: [__dirname + '/../migrations/*.ts'],
 });

@@ -3,6 +3,10 @@
 ? How to use services
 ? How to use try catch
 
+- github ENV PNPM_HOME="/pnpm"
+  https://thriveread.com/pnpm-monorepo-workspace-and-docker/
+  https://stackoverflow.com/questions/74069181/pnpm-monorepo-deployment-with-docker-compose
+
 Docker
 0 front: show 'requests' (admin-front)
 1 env. how works ${var}

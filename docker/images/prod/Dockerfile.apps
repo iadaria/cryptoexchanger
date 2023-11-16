@@ -1,0 +1,48 @@
+# BASE
+
+FROM node:21-slim AS base
+
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+
+RUN corepack enable
+
+VOLUME ["/pnpm-store", "/app/node_modules"]
+RUN pnpm config --global set store-dir /pnpm-stor
+
+WORKDIR /app
+
+COPY pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN mkdir -p apps/telega-back packages/common packages/contracts packages/orm
+COPY apps/telega-back/package.json ./apps/telega-back
+COPY packages/common/package.json ./packages/common
+COPY packages/contracts/package.json ./packages/contracts
+COPY packages/orm/package.json ./packages/orm
+
+# PROD-DEPS
+
+FROM base AS prod-deps
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
+
+# BUILD
+
+FROM base AS build
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN pnpm run build
+
+# TELEGA-BACK
+
+FROM base AS telega-back
+COPY --from=prod-deps /app/apps/telega-back/node_modules /app/apps/telega-back/node_modules
+COPY --from=prod-deps /app/packages/common/node_modules /app/packages/common/node_modules
+COPY --from=prod-deps /app/packages/contracts/node_modules /app/packages/contracts/node_modules
+COPY --from=prod-deps /app/packages/orm/node_modules /app/packages/orm/node_modules
+
+COPY --from=build /app/apps/telega-back/dist /app/apps/telega-back/dist
+COPY --from=build /app/packages/common/dist /app/packages/common/dist
+COPY --from=build /app/packages/contracts/dist /app/contracts/common/dist
+COPY --from=build /app/packages/orm/dist /app/packages/orm/dist
+
+WORKDIR /app/apps/telega-back
+
+CMD ["pnpm", "start"]
