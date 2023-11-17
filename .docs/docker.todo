@@ -1,0 +1,11 @@
+### Current 
+1  Postgres package has not been found installed.
+
+
+### postgres + migrations
+
+- https://github.com/minirepos/ts-typeorm-migrations-postgres-docker
+
+### postgres
+
+- https://habr.com/ru/articles/578744/

@@ -3,6 +3,10 @@
 ? How to use services
 ? How to use try catch
 
+- how migrate db by TypeORM in docker
+- copy only dir
+- launch android-front and back
+
 - github ENV PNPM_HOME="/pnpm"
   https://thriveread.com/pnpm-monorepo-workspace-and-docker/
   https://stackoverflow.com/questions/74069181/pnpm-monorepo-deployment-with-docker-compose
