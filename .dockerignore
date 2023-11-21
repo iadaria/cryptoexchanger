@@ -3,3 +3,9 @@
 *.md
 dist
 postgres
+node_modules
+docker-compose.yml
+Dockerfile
+.dockerignore
+.env.dev
+.env.test
