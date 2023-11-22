@@ -40,3 +40,9 @@ COPY --from=build /prod/admin-back /prod/admin-back
 WORKDIR /prod/admin-back
 EXPOSE 5001
 CMD ["node", "dist/main"]
+
+#FROM base AS admin-front
+#COPY --from=build /prod/admin-front /prod/admin-front
+#WORKDIR /prod/admin-front
+#EXPOSE 3000
+#CMD ["pnpm", "start"]

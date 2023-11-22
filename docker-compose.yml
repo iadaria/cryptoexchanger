@@ -38,6 +38,17 @@ services:
       - 5001:5001
     env_file: ./apps/admin-back/.env.prod
 
+  admin-front:
+    image: admin-front:latest8
+    build:
+      context: .
+      dockerfile: ./apps/admin-front/Dockerfile
+      target: admin-front
+    container_name: admin-front
+    ports:
+      - 3000:3000
+    env_file: ./apps/admin-front/.env.prod
+
   postgres:
     image: postgres:alpine
     restart: always
