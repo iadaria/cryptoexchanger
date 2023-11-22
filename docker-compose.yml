@@ -1,27 +1,42 @@
 version: "3"
 services:
-  # packages:
-  #   image: packages:latest
-  #   build:
-  #     context: .
-  #     dockerfile: ./pac
   telega-back:
     image: telega-back:latest5
     build:
       context: .
-      dockerfile: ./apps/telega-back/Dockerfile
+      dockerfile: ./Dockerfile
       target: telega-back
     container_name: telega-back
     #restart: always
     ports:
       - 5003:5003
       - 5002:5002
-    # volumes:
-    #   - ./apps/telega-back/.env.prod:/usr/src/app
     env_file:
       - ./apps/telega-back/.env.prod
     depends_on:
       - postgres
+
+  api-gateway:
+    image: api-gateway:latest2
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: api-gateway
+    container_name: api-gateway
+    ports:
+      - 4000:4000
+    env_file: ./apps/api-gateway/.env.prod
+
+  admin-back:
+    image: admin-back:latest1
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: admin-back
+    container_name: admin-back
+    ports:
+      - 5001:5001
+    env_file: ./apps/admin-back/.env.prod
 
   postgres:
     image: postgres:alpine
