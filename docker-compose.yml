@@ -39,14 +39,14 @@ services:
     env_file: ./apps/admin-back/.env.prod
 
   admin-front:
-    image: admin-front:latest8
+    image: admin-front:latest
     build:
       context: .
       dockerfile: ./apps/admin-front/Dockerfile
-      target: admin-front
+      target: static-front
     container_name: admin-front
     ports:
-      - 3000:3000
+      - 3000:80
     env_file: ./apps/admin-front/.env.prod
 
   postgres:
