@@ -17,7 +17,12 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "migration:generate": "npm run typeorm -- migration:generate ./src/migrations/migration",
+    "migration:create": "npm run typeorm -- migration:create ./src/migrations/post",
+    "migration:revert": "npm run typeorm -- migration:revert",
+    "migration:run": "npm run typeorm -- migration:run",
+    "typeorm": "cross-env NODE_ENV=production ts-node ./node_modules/typeorm/cli -d ./src/configs/migration.config.ts"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.9.6",
@@ -35,8 +40,10 @@
     "common": "workspace:^",
     "contracts": "workspace:^",
     "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
     "nestjs-telegraf": "^2.7.0",
     "orm": "workspace:^",
+    "pg": "^8.11.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
     "telegraf": "4.14.0",

@@ -1,6 +1,15 @@
+building:
+
+- telega-back: 85.6s
+
 - nest g mo logger
 
 ### docs
+
+proto:
+
+- https://www.npmjs.com/package/ts-proto/v/1.82.4
+- https://github.com/stephenh/ts-proto
 
 nice proto
 https://github.com/deeplay-io/nice-grpc

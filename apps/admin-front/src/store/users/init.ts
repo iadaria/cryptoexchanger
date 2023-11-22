@@ -17,8 +17,6 @@ fetchAllUsersFx.use(async () => {
     "Content-Type": "application/json",
     Accept: "application/json",
   };
-  console.log("!!! request");
-  console.log("****", "query", query);
 
   const res = await fetch(ENVS.clientBaseUrl, {
     method,

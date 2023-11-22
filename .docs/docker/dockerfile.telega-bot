@@ -1,0 +1,18 @@
+FROM node:21-slim as build
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
+WORKDIR /opt/app
+# Optimization
+ADD *.json ./
+RUN npm install
+ADD . .
+RUN npm run build telega-back
+
+#Final image
+#FROM node:21-alpine
+FROM node:21-slim
+WORKDIR /opt/app
+ADD package.json ./
+RUN npm install --only=prod
+COPY --from=build /opt/app/dist/apps/telega-back ./dist
+CMD ["node", "./dist/main"]
