@@ -1,3 +1,13 @@
+### !
+
+1 Exchange btc -> rub, rub -> btc
+2 Admin-panel
+3 User's panel testing
+4 AML
+5 Chat
+6 Registration
+!0 Security - January
+
 ### show requests from telegram
 
 ? How to use services
