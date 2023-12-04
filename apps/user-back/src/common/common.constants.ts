@@ -1,0 +1,3 @@
+export const CONFIG_OPTIONS = 'CONFIG_OPTIONS';
+
+export const TRON_OPTIONS = 'TRON_OPTIONS';
