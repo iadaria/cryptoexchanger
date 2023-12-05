@@ -511,6 +511,9 @@ importers:
         specifier: ^0.3.17
         version: 0.3.17(pg@8.11.3)(ts-node@10.9.1)
     devDependencies:
+      '@daochild/tronweb-typescript':
+        specifier: ^1.1.2
+        version: 1.1.2
       '@nestjs/cli':
         specifier: ^10.0.0
         version: 10.1.18
@@ -1349,6 +1352,12 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
+
+  /@daochild/tronweb-typescript@1.1.2:
+    resolution: {integrity: sha512-zxId3z4E4Yd35p3lILMGM/fhGH3qv/a5IszhWuexVknZB13RDaTUY3aFM+S0ZKd7+v2MZagi4RcZrW2r9bnpQg==}
+    dependencies:
+      bignumber.js: 9.1.2
+    dev: true
 
   /@effector/next@0.6.1(effector-react@22.5.4)(effector@22.8.7)(react@18.2.0):
     resolution: {integrity: sha512-79WW4NHF38bs08UEcxtULigzKDC1aqNs0z9nJoWXoF7WjKrcKwCecmyGHXAwBvIx6VJLp7/70vvyGU675gO+jw==}
@@ -3837,7 +3846,6 @@ packages:
 
   /bignumber.js@9.1.2:
     resolution: {integrity: sha512-2/mKyZH9K85bzOEfhXDBFZTGd1CTs+5IHpeFQo9luiBG7hghdC851Pj2WAhb6E3R6b9tZj/XKhbg4fum+Kepug==}
-    dev: false
 
   /binary-extensions@2.2.0:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
