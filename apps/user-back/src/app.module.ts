@@ -14,6 +14,6 @@ import { TronProvider } from './tron/tron.provider';
     TypeOrmModule.forRootAsync(config.ormClientOptions()),
   ],
   controllers: [AppController],
-  providers: [AppService, TronProvider],
+  providers: [AppService],
 })
 export class AppModule {}

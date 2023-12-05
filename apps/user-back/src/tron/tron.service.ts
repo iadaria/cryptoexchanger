@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CONFIG_OPTIONS, TRON_OPTIONS } from 'src/common/common.constants';
+import { TRON_OPTIONS } from 'src/common/common.constants';
 import { TronModuleOptions } from './tron.interface';
 
 @Injectable()
