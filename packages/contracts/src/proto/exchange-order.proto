@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package cb.exchangeorder;
+
+import "google/protobuf/timestamp.proto";
+
+service ExchangeService {
+  rpc createOrder(CreateOrderRequest) returns (CreateOrderResponse) {}
+  //rpc updateOrder(CreateOrderRequest) returns (CreateOrderResponse) {}
+}
+
+message CreateOrderRequest {
+  string email = 1;
+  ExchangeType type = 3;
+  ExchangeStatus status = 4;
+  string coin = 5;
+  string net = 6;
+  string fiat = 7;
+  uint64 amount = 8;
+  uint64 rate = 9;
+  string bank = 10;
+  optional uint64 target_order_id  = 11;
+}
+
+enum ExchangeStatus {
+  DONE = 0;
+  ACTIVE = 1;
+  REJECTED = 2;
+  TIMEOUT = 3;
+  CANCELLED = 4;
+}
+
+enum ExchangeType {
+  SELL = 0;
+  BUY = 1;
+}
+
+message CreateOrderResponse {
+  uint64 id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  ExchangeStatus status = 3;
+  google.protobuf.Timestamp expire_at = 4;
+  optional string toAddress = 5;
+}

@@ -1,6 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TronService } from './tron.service';
-import { TRON_OPTIONS } from '../common/common.constants';
+import { TRON_OPTIONS } from 'src/common/common.constants';
+
+const ENV = {
+  network: 'https://api.nileex.io',
+  contract: 'TXYZopYRdj2D9XRtbG411XZZ3kM5VkAeBf',
+  toAddress: 'TSG4BtfPMeycE5jQeG4CPJ2p1C8iRXug4W',
+  privateKey: '00fd04ef2ad20071df945053a353504892ac264c24aa962444a30177b599b2cf',
+  fromAddress: 'TVDCuKiJiQGDsAZpNAK5kbwihEJqdVLhcf',
+  minTrx: 12,
+};
 
 describe('TronService', () => {
   let tronService: TronService;
@@ -11,11 +20,11 @@ describe('TronService', () => {
         {
           provide: TRON_OPTIONS,
           useValue: {
-            network: 'https://api.nileex.io',
-            contract: 'TG3XXyExBkPp9nzdajDZsozEu4BkaSJozs',
-            toAddress: 'TXYZopYRdj2D9XRtbG411XZZ3kM5VkAeBf',
-            privateKey:
-              '00fd04ef2ad20071df945053a353504892ac264c24aa962444a30177b599b2cf',
+            network: ENV.network,
+            contract: ENV.contract,
+            toAddress: ENV.toAddress,
+            privateKey: ENV.privateKey,
+            minTrx: ENV.minTrx,
           },
         },
         TronService,
@@ -30,13 +39,27 @@ describe('TronService', () => {
   });
 
   describe('?', () => {
-    it('Private key exists', () => {
-      expect(tronService.isPrivateKey).toBeDefined();
+    it('Default address is right', () => {
+      expect(tronService.defaultAddress).toEqual(ENV.fromAddress);
     });
 
-    it('get address', () => {
-      console.log();
-      expect(1).toEqual(1);
+    it('Sufficient balance usdt', async () => {
+      const balance = await tronService.getBalance(ENV.fromAddress);
+      console.log({ address: ENV.fromAddress, balance: +balance / 10 ** 6 });
+      expect(+balance).toBeGreaterThan(0);
+    });
+
+    it('Sufficient balance trx', async () => {
+      const balance = await tronService.getTrxBalance(ENV.fromAddress);
+      console.log({ address: ENV.fromAddress, balance: +balance / 10 ** 6 });
+      expect(+balance).toBeGreaterThan(0);
+    });
+
+    it('Send 1 usdt to the address', async () => {
+      const amount = BigInt(10 ** 6); // equals to 1 usdt
+      const result = await tronService.sendTransaction(1, ENV.fromAddress, ENV.toAddress, amount);
+      console.log({ result });
+      expect(result).toBeDefined();
     });
   });
 });

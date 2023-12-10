@@ -11,6 +11,8 @@ export const TronProvider: Provider = {
     contract: configService.get('TRON_SHASTA_CONTRACT'),
     toAddress: configService.get('TRON_ADDRESS_2'),
     privateKey: configService.get('TRON_PRIVATE_KEY'),
+    minTrx: configService.get('MIN_TRX'),
+    defaultAddress: configService.get('TRON_DEFAULT_ADDRESS'),
   }),
   inject: [ConfigService],
 };

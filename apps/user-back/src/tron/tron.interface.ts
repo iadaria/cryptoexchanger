@@ -4,4 +4,6 @@ export interface TronModuleOptions {
   contract: string;
   privateKey: string;
   toAddress: string;
+  minTrx?: BigInt;
+  defaultAddress?: string;
 }
