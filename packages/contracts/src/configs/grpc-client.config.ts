@@ -23,3 +23,14 @@ export const grpcTelegaClientOptions = (url: string): ClientOptions => {
     },
   };
 };
+
+export const grpcExchangeClientOptions = (url: string): ClientOptions => {
+  return {
+    transport: Transport.GRPC,
+    options: {
+      package: GrpcPackage.EXCHANGE_ORDER,
+      protoPath: join(__dirname, "../proto/exchange-order.proto"),
+      url,
+    },
+  };
+};

@@ -1,13 +1,19 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { ExchangeModule } from './exchange.module';
 import { ConfigService } from '@nestjs/config';
+import { MicroserviceOptions } from '@nestjs/microservices';
+import { grpcExchangeClientOptions } from 'contracts';
 
 async function bootstrap() {
   console.log({ pid: process?.pid });
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(ExchangeModule);
   const config = app.get(ConfigService);
   //
-  const microAdminPort = config.get<string>('PORT_MICROSERVICE');
-  await app.listen(3000);
+  const microPort = config.get<string>('MICRO_PORT_EXCHANGE');
+  const clientOptions = grpcExchangeClientOptions(microPort);
+  app.connectMicroservice<MicroserviceOptions>(clientOptions, {
+    inheritAppConfig: true,
+  });
+  await app.startAllMicroservices();
 }
 bootstrap();

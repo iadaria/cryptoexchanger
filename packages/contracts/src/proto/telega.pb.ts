@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
 import { Empty } from "./common.pb";
 
 export interface TelegaUser {
-  id: number;
+  id: bigint;
   createdAt: Date | undefined;
   updatedAt: Date | undefined;
   isPremium: boolean;
@@ -16,16 +16,16 @@ export interface TelegaUser {
 }
 
 export interface Message {
-  id: number;
-  messageId: number;
+  id: bigint;
+  messageId: bigint;
   from?: TelegaUser | undefined;
   date: Date | undefined;
   text: string;
 }
 
 export interface Update {
-  id: number;
-  updateId: number;
+  id: bigint;
+  updateId: bigint;
   message?: Message | undefined;
 }
 

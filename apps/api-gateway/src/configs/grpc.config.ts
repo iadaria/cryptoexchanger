@@ -7,6 +7,7 @@ import {
   GrpcClient,
   grpcAdminClientOptions,
   grpcTelegaClientOptions,
+  grpcExchangeClientOptions,
 } from 'contracts';
 
 /* export const grpcClientConfig = (): ClientsModuleOptions => [
@@ -19,6 +20,7 @@ import {
 export const grpcClientConfigAsync = (): ClientsModuleOptions => [
   clientProviderOptions(),
   clientProviderTelegaOptions(),
+  clientProviderUserOptions(),
 ];
 
 export const clientProviderOptions = (): ClientsProviderAsyncOptions => ({
@@ -37,6 +39,19 @@ export const clientProviderTelegaOptions = (): ClientsProviderAsyncOptions => ({
   useFactory: (configService: ConfigService) => {
     const telegaPort = configService.get<string>('MICRO_TELEGA_PORT');
     return { name: GrpcClient.TELEGA, ...grpcTelegaClientOptions(telegaPort) };
+  },
+  inject: [ConfigService],
+});
+
+export const clientProviderUserOptions = (): ClientsProviderAsyncOptions => ({
+  imports: [ConfigModule],
+  name: GrpcClient.EXCHANGE_ORDER,
+  useFactory: (configService: ConfigService) => {
+    const port = configService.get<string>('MICRO_EXCHANGE_PORT');
+    return {
+      name: GrpcClient.EXCHANGE_ORDER,
+      ...grpcExchangeClientOptions(port),
+    };
   },
   inject: [ConfigService],
 });

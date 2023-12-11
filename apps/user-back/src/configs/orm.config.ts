@@ -2,6 +2,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
 
 import { IS_DEV, IS_PROD } from 'common';
+import { ExchangeOrder } from 'orm';
 
 export const ormClientOptions = (): TypeOrmModuleAsyncOptions => ({
   imports: [ConfigModule],
@@ -17,7 +18,7 @@ export const ormClientOptions = (): TypeOrmModuleAsyncOptions => ({
       database: configService.get('DB_NAME'),
       synchronize: !IS_PROD,
       logging: IS_DEV,
-      entities: [],
+      entities: [ExchangeOrder],
     };
   },
   inject: [ConfigService],

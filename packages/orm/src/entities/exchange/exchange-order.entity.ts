@@ -25,7 +25,7 @@ registerEnumType(Bank, { name: "Bank" });
 
 @InputType("ExchangeOrder", { isAbstract: true })
 @ObjectType()
-@Entity()
+@Entity("ExchangeOrder")
 export class ExchangeOrder extends CoreEntity {
   @Field((type) => String)
   @Column({ unique: false })
@@ -76,6 +76,10 @@ export class ExchangeOrder extends CoreEntity {
   @Column({ type: "enum", enum: Bank })
   bank: Bank;
 
+  @Field((type) => Number)
+  @Column()
+  cardNumber: number;
+
   @Field((type) => Date)
   @Column()
   expireAt: Date;
@@ -96,9 +100,12 @@ export class ExchangeOrder extends CoreEntity {
   @Column({
     type: "enum",
     enum: ExchangeStatus,
-    default: ExchangeStatus.Active,
   })
-  prevStatus: ExchangeStatus;
+  prevStatus?: ExchangeStatus;
+
+  @Field((type) => Boolean)
+  @Column({ default: false })
+  isAgree?: boolean;
 
   @Field((type) => Object, { nullable: true })
   @Column({ type: "json", nullable: true })
