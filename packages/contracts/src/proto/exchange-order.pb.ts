@@ -4,21 +4,6 @@ import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { wrappers } from "protobufjs";
 import { Observable } from "rxjs";
 
-export enum ExchangeType {
-  SELL = 0,
-  BUY = 1,
-  UNRECOGNIZED = -1,
-}
-
-export enum ExchangeStatus {
-  DONE = 0,
-  ACTIVE = 1,
-  REJECTED = 2,
-  TIMEOUT = 3,
-  CANCELLED = 4,
-  UNRECOGNIZED = -1,
-}
-
 export interface CreateOrderRequest {
   amount: bigint;
   bank: string;
@@ -30,7 +15,7 @@ export interface CreateOrderRequest {
   isAgree?: boolean | undefined;
   net: string;
   rate: bigint;
-  type: ExchangeType;
+  type: string;
   targetOrderId?: bigint | undefined;
 }
 
@@ -40,7 +25,7 @@ export interface CreateOrderResponse {
   expireAt: Date | undefined;
   toAddress: string;
   amount: bigint;
-  status: ExchangeStatus;
+  status: string;
 }
 
 wrappers[".google.protobuf.Timestamp"] = {

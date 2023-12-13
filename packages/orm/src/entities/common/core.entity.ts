@@ -8,8 +8,8 @@ import {
 @ObjectType()
 export class CoreEntity {
   @PrimaryGeneratedColumn({ type: "bigint" })
-  @Field((type) => Number)
-  id: number;
+  @Field((type) => BigInt)
+  id: bigint;
 
   @CreateDateColumn()
   @Field((type) => Date)

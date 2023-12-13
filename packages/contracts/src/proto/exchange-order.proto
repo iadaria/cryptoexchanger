@@ -9,12 +9,6 @@ service ExchangeService {
   //rpc updateOrder(CreateOrderRequest) returns (CreateOrderResponse) {}
 }
 
-enum ExchangeType {
-  SELL = 0;
-  BUY = 1;
-}
-
-
 message CreateOrderRequest {
   uint64 amount = 1;
   string bank = 2;
@@ -26,16 +20,8 @@ message CreateOrderRequest {
   optional bool is_agree = 8;
   string net = 9;
   uint64 rate = 10;
-  ExchangeType type = 11;
+  string type = 11;
   optional uint64 target_order_id  = 12;
-}
-
-enum ExchangeStatus {
-  DONE = 0;
-  ACTIVE = 1;
-  REJECTED = 2;
-  TIMEOUT = 3;
-  CANCELLED = 4;
 }
 
 message CreateOrderResponse {
@@ -44,5 +30,5 @@ message CreateOrderResponse {
   google.protobuf.Timestamp expire_at = 3;
   string to_address = 4;
   uint64 amount = 5;
-  ExchangeStatus status = 6;
+  string status = 6;
 }

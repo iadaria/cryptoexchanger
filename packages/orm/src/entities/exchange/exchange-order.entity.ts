@@ -107,6 +107,10 @@ export class ExchangeOrder extends CoreEntity {
   @Column({ default: false })
   isAgree?: boolean;
 
+  @Field((type) => String)
+  @Column()
+  toAddress: string;
+
   @Field((type) => Object, { nullable: true })
   @Column({ type: "json", nullable: true })
   meta?: object;
