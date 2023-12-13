@@ -1,12 +1,12 @@
 import { Inject } from '@nestjs/common';
-import { Args, Mutation, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ClientGrpc } from '@nestjs/microservices';
 import * as Contract from 'contracts';
 import { CreateOrderInput, CreateOrderOutput } from './dtos/create-order.dto';
 import { firstValueFrom } from 'rxjs';
-import { ExchangeStatus, getExchangeStatus } from 'common';
+import { getExchangeStatus } from 'common';
 
-//@Resolver()
+@Resolver()
 export class OrdersResolver {
   private orderService: Contract.ExchangeServiceClient;
 
@@ -34,9 +34,4 @@ export class OrdersResolver {
     );
     return { ...response, status: getExchangeStatus(response.status) };
   }
-
-  /*   @ResolveField('status', () => ExchangeStatus)
-  public resolveStatus(value: string): ExchangeStatus {
-    return getExchangeStatus(value);
-  } */
 }
