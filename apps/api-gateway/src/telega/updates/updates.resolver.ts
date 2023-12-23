@@ -2,7 +2,7 @@ import { Inject } from '@nestjs/common';
 import { Query } from '@nestjs/graphql';
 import { ClientGrpc } from '@nestjs/microservices';
 import * as Contract from 'contracts';
-import { GetUpdatesOutput } from './dtos/get-updates.dto';
+//import { GetUpdatesOutput } from './dtos/get-updates.dto';
 import { firstValueFrom } from 'rxjs';
 
 export class UpdatesResolver {
@@ -19,8 +19,13 @@ export class UpdatesResolver {
       );
   }
 
-  @Query((returns) => GetUpdatesOutput)
+  @Query((returns) => String)
+  getNull() {
+    return 'hi';
+  }
+
+  /*   @Query((returns) => GetUpdatesOutput)
   getUpdates(): Promise<GetUpdatesOutput> {
     return firstValueFrom(this.updatesService.getAllRequests({}));
-  }
+  } */
 }

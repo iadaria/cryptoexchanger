@@ -1,4 +1,5 @@
 import { Field, ObjectType } from "@nestjs/graphql";
+import { GraphQLBigInt } from "graphql-scalars";
 import {
   CreateDateColumn,
   PrimaryGeneratedColumn,
@@ -8,7 +9,7 @@ import {
 @ObjectType()
 export class CoreEntity {
   @PrimaryGeneratedColumn({ type: "bigint" })
-  @Field((type) => BigInt)
+  @Field((type) => GraphQLBigInt)
   id: bigint;
 
   @CreateDateColumn()

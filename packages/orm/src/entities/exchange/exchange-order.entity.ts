@@ -6,7 +6,7 @@ import {
   ObjectType,
   registerEnumType,
 } from "@nestjs/graphql";
-import { IsEmail, IsNumber } from "class-validator";
+import { IsEmail } from "class-validator";
 import {
   Bank,
   Coin,
@@ -15,6 +15,7 @@ import {
   ExchangeStatus,
   ExchangeType,
 } from "common";
+import { GraphQLBigInt } from "graphql-scalars";
 
 registerEnumType(ExchangeType, { name: "ExchangeType" });
 registerEnumType(ExchangeStatus, { name: "ExchangeStatus" });
@@ -24,7 +25,7 @@ registerEnumType(Fiat, { name: "Fiat" });
 registerEnumType(Bank, { name: "Bank" });
 
 @InputType("ExchangeOrder", { isAbstract: true })
-@ObjectType()
+@ObjectType("ExchangeOrder")
 @Entity("ExchangeOrder")
 export class ExchangeOrder extends CoreEntity {
   @Field((type) => String)
@@ -60,15 +61,15 @@ export class ExchangeOrder extends CoreEntity {
   @Column({ type: "enum", enum: Fiat })
   fiat: Fiat;
 
-  @Field((type) => BigInt)
+  @Field((type) => GraphQLBigInt)
   @Column({ type: "bigint" })
   amount: bigint;
 
-  @Field((type) => BigInt)
+  @Field((type) => GraphQLBigInt)
   @Column({ type: "bigint" })
   rate: bigint;
 
-  @Field((type) => BigInt)
+  @Field((type) => GraphQLBigInt)
   @Column({ type: "bigint" })
   fee: bigint;
 
@@ -92,7 +93,7 @@ export class ExchangeOrder extends CoreEntity {
   @Column()
   updatedStatusAt?: Date;
 
-  @Field((type) => BigInt)
+  @Field((type) => GraphQLBigInt)
   @Column({ type: "bigint" })
   targetOrderId?: bigint;
 

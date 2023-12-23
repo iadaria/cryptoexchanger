@@ -9,6 +9,7 @@ import {
 import { Field, InputType, ObjectType } from "@nestjs/graphql";
 import { IsBoolean, IsString } from "class-validator";
 import { Message } from "./message.entity";
+import { GraphQLBigInt } from "graphql-scalars";
 
 @InputType("TgUserInputType", { isAbstract: true })
 @ObjectType()
@@ -18,8 +19,8 @@ export class TgUser {
     comment: "id - Unique identifier for this user or bot",
     type: "bigint",
   })
-  @Field((type) => Number)
-  id: number;
+  @Field((type) => GraphQLBigInt)
+  id: bigint;
 
   @Column({ comment: "is_bot: True, if this user is a bot", default: false })
   @Field((type) => Boolean, { defaultValue: false })

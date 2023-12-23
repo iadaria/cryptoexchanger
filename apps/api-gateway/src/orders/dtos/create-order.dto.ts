@@ -1,17 +1,36 @@
-import { InputType, ObjectType, PickType } from '@nestjs/graphql';
+import {
+  Field,
+  InputType,
+  ObjectType,
+  PickType,
+  registerEnumType,
+} from '@nestjs/graphql';
+import {
+  Bank,
+  Coin,
+  ExchangeStatus,
+  ExchangeType,
+  Fiat,
+  Network,
+} from 'common';
 import { ExchangeOrder } from 'orm';
-import { FieldMiddleware, MiddlewareContext, NextFn } from '@nestjs/graphql';
-import { getExchangeStatus } from 'common';
 
-const loggerMiddleware: FieldMiddleware = async (
+/* const loggerMiddleware: FieldMiddleware = async (
   ctx: MiddlewareContext,
   next: NextFn,
 ) => {
   const value = await next();
   console.log(value);
   return getExchangeStatus(value);
-};
+}; */
 
+/* registerEnumType(ExchangeType, { name: 'ExchangeType' });
+registerEnumType(ExchangeStatus, { name: 'ExchangeStatus' });
+registerEnumType(Coin, { name: 'Coin' });
+registerEnumType(Network, { name: 'Network' });
+registerEnumType(Fiat, { name: 'Fiat' });
+registerEnumType(Bank, { name: 'Bank' });
+ */
 @InputType()
 export class CreateOrderInput extends PickType(ExchangeOrder, [
   'amount',
@@ -28,15 +47,8 @@ export class CreateOrderInput extends PickType(ExchangeOrder, [
 ]) {}
 
 @ObjectType()
-export class CreateOrderOutput extends PickType(ExchangeOrder, [
-  'id',
-  'createdAt',
-  'expireAt',
-  'toAddress',
-  'amount',
-  'status',
-]) {
-  // @Field((type) => ExchangeStatus)
-  // //@Field({ middleware: [loggerMiddleware] })
-  // status: ExchangeStatus;
-}
+export class CreateOrderOutput extends PickType(
+  ExchangeOrder,
+  ['id', 'createdAt', 'expireAt', 'toAddress', 'amount', 'status'],
+  ObjectType,
+) {}

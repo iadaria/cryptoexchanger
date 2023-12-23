@@ -7,6 +7,10 @@ import { IsString } from "class-validator";
 @ObjectType()
 @Entity("Chat")
 export class Chat extends CoreEntity {
+  @Column({
+    comment: "Integer. Unique message identifier inside this chat",
+    type: "bigint",
+  })
   @Field((type) => Number)
   updateId: bigint;
 

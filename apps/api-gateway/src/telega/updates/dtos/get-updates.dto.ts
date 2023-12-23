@@ -6,7 +6,7 @@ import {
   PartialType,
   PickType,
 } from '@nestjs/graphql';
-import { Update as UpdateOrm, Message, TgUser } from 'orm';
+/* import { Update as UpdateOrm, Message, TgUser } from 'orm';
 
 @ObjectType({ isAbstract: true })
 export class TgUserOutput extends PickType(
@@ -48,3 +48,4 @@ export class GetUpdatesOutput {
   @Field((type) => [UpdateOutput], { nullable: true })
   updates?: UpdateOutput[];
 }
+ */

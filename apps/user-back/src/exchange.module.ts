@@ -7,7 +7,6 @@ import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
-    TronModule,
     ConfigModule.forRoot(config.getEnvConfig()),
     TypeOrmModule.forRootAsync(config.ormClientOptions()),
     OrdersModule,

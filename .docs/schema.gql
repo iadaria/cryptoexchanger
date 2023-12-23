@@ -55,3 +55,9 @@ query{
     }
   }
 }
+
+mutation {
+  createOrder(input:{email:"hi@mail.ru", type:sell, coin:BTC, net:btc, fiat:RUB, amount:1, rate:44000, fee:100000, bank:Tinkoff, cardNumber:1234, isAgree:true}) {
+    id
+  }
+}

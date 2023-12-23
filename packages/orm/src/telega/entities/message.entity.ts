@@ -2,6 +2,7 @@ import { Field, InputType, ObjectType } from "@nestjs/graphql";
 import { Column, Entity, ManyToOne } from "typeorm";
 import { CoreEntity } from "../../entities/common/core.entity";
 import { TgUser } from "./user.entity";
+import { GraphQLBigInt } from "graphql-scalars";
 
 @InputType("MessageInputType", { isAbstract: true })
 @ObjectType()
@@ -13,8 +14,8 @@ export class Message extends CoreEntity {
     type: "bigint",
     unique: true,
   })
-  @Field((type) => Number)
-  messageId: number;
+  @Field((type) => GraphQLBigInt)
+  messageId: bigint;
 
   @Column({
     comment:
@@ -22,8 +23,8 @@ export class Message extends CoreEntity {
     nullable: true,
     type: "bigint",
   })
-  @Field((type) => Number, { nullable: true })
-  messageThreadId?: number;
+  @Field((type) => GraphQLBigInt)
+  messageThreadId?: bigint;
 
   @Field((type) => TgUser, { nullable: false })
   @ManyToOne((type) => TgUser, (user) => user.messages, { eager: true })
