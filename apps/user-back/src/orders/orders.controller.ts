@@ -11,6 +11,7 @@ export class ExchangeOrdersController implements Contracts.ExchangeServiceContro
     metadata?: Metadata,
   ): Observable<Contracts.CreateOrderResponse> {
     console.log({ request });
+    console.log({ metadata });
     return null;
   }
 }
