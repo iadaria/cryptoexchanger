@@ -14,9 +14,14 @@ export enum ExchangeStatus {
 }
 
 const allStatus = Object.values(ExchangeStatus);
+const types = Object.values(ExchangeType);
+
 
 export const isExchangeStatus = (value: string) =>
   allStatus.includes(value as ExchangeStatus);
 
 export const getExchangeStatus = (value: string) =>
   allStatus.find((status) => allVariants(value).includes(status));
+
+export const getExchangeType = (value: string) =>
+  types.find((type) => allVariants(value).includes(type));

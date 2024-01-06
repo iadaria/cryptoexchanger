@@ -26,3 +26,8 @@ export enum Network {
   bep20 = "bep20",
   polygon = "polygon",
 }
+
+const networks = Object.values(Network);
+
+export const getNetwork =  (value: string) =>
+  networks.find(network => allVariants(value).includes(network));
