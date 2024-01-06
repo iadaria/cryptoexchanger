@@ -20,13 +20,28 @@ export class ExchangeOrdersService {
       net: getNetwork(order.net),
       bank: getBank(order.bank),
       fiat: getFiat(order.fiat),
+      rate: BigInt(order.rate),
+      fee: BigInt(order.fee),
+      amount: BigInt(order.amount),
+      expireAt: new Date(),
+      approvedAt: new Date(),
+      updatedStatusAt: new Date(),
+      targetOrderId: undefined,
+      toAddress: '...',
       ip: '', //TO DO Find out how to get the ip of user
-      expireAt: new Date(), // TO DO how much time I shoud get to user
     };
   }
-ß
-  async createOrder(order: Contracts.CreateOrderRequest) {
-    const newOrder = this.orders.create(this.transform(order));
+  
+  async createOrder(orderIncoming: Contracts.CreateOrderRequest): Promise<Contracts.CreateOrderResponse> {
+    const newOrder = await this.orders.create(this.transform(orderIncoming));
+    const order  = await this.orders.save(newOrder);
+    return {
+      id: order.id,
+      createdAt: order.createdAt,
+      toAddress: '...',
+      amount: order.amount,
+      status: ExchangeStatus.Active,
+      expireAt: new Date(), // TO DO how much time I shoud get to user
+    }
   }
-
 }

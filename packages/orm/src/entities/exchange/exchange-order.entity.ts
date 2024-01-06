@@ -94,13 +94,14 @@ export class ExchangeOrder extends CoreEntity {
   updatedStatusAt?: Date;
 
   @Field((type) => GraphQLBigInt)
-  @Column({ type: "bigint" })
+  @Column({ type: "bigint", nullable: true })
   targetOrderId?: bigint;
 
   @Field((type) => ExchangeStatus)
   @Column({
     type: "enum",
     enum: ExchangeStatus,
+    nullable: true,
   })
   prevStatus?: ExchangeStatus;
 

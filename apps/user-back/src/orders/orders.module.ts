@@ -10,3 +10,4 @@ import { ExchangeOrder } from 'orm';
   providers: [ExchangeOrdersService],
 })
 export class OrdersModule {}
+
