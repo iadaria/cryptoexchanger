@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Body, Injectable, UsePipes } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ExchangeOrder } from 'orm';
 import { Repository } from 'typeorm';
 import * as Contracts from 'contracts';
 import { ExchangeStatus, getBank, getCoin, getExchangeStatus, getExchangeType, getFiat, getNetwork } from 'common';
+import { ParseBigIntsPipe } from './orders.pipe';
 
 // HOW TO DO AML checking
 
@@ -12,28 +13,27 @@ export class ExchangeOrdersService {
   constructor(
     @InjectRepository(ExchangeOrder) private readonly orders: Repository<ExchangeOrder>,
   ) {}
-  private transform(order: Contracts.CreateOrderRequest): Partial<ExchangeOrder> {
-    return {...order,
-      type: getExchangeType(order.type),
-      status: getExchangeStatus(ExchangeStatus.Done),
-      coin: getCoin(order.coin),
-      net: getNetwork(order.net),
-      bank: getBank(order.bank),
-      fiat: getFiat(order.fiat),
-      rate: BigInt(order.rate),
-      fee: BigInt(order.fee),
-      amount: BigInt(order.amount),
+/*   private transform(orderIncoming: Contracts.CreateOrderRequest): Partial<ExchangeOrder> {
+    const order = {
+      ...orderIncoming,
       expireAt: new Date(),
       approvedAt: new Date(),
       updatedStatusAt: new Date(),
       targetOrderId: undefined,
       toAddress: '...',
+      fee: BigInt(orderIncoming.fee),
+      amount: BigInt(orderIncoming.amount),
+      rate: BigInt(orderIncoming.rate),
       ip: '', //TO DO Find out how to get the ip of user
-    };
-  }
+    }
+    return order as ExchangeOrder;
+  } */
   
-  async createOrder(orderIncoming: Contracts.CreateOrderRequest): Promise<Contracts.CreateOrderResponse> {
-    const newOrder = await this.orders.create(this.transform(orderIncoming));
+
+  async createOrder( orderIncoming: Contracts.CreateOrderRequest):
+    Promise<Contracts.CreateOrderResponse> {
+    //const orderForSaving = this.transform(orderIncoming)
+    const newOrder = await this.orders.create(orderIncoming as ExchangeOrder);
     const order  = await this.orders.save(newOrder);
     return {
       id: order.id,

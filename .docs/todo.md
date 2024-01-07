@@ -1,3 +1,8 @@
+- add args
+- may be can convert by as
+- date expire
+- generate address
+
 ### !
 
 1 Exchange btc -> rub, rub -> btc
